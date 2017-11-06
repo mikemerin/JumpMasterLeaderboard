@@ -3,7 +3,7 @@ import { Statistic } from 'semantic-ui-react'
 
 export default function Data(props) {
 
-  const { scores, easy, medium, hard, hardest, runs, jumps, deaths } = props.sums
+  const { scores, easy, medium, hard, hardest, runs, jumps, deaths, sum_of_best } = props.sums
 
   return (
     <div>
@@ -29,7 +29,7 @@ export default function Data(props) {
           <Statistic.Value>{hardest}</Statistic.Value>
         </Statistic>
       </Statistic.Group>
-      <Statistic.Group widths='three'>
+      <Statistic.Group widths='four'>
         <Statistic size='mini'>
           <Statistic.Label>Runs</Statistic.Label>
           <Statistic.Value>{runs}</Statistic.Value>
@@ -41,6 +41,10 @@ export default function Data(props) {
         <Statistic size='mini'>
           <Statistic.Label>Deaths</Statistic.Label>
           <Statistic.Value>{deaths}</Statistic.Value>
+        </Statistic>
+        <Statistic size='mini'>
+          <Statistic.Label>Sum of Bests</Statistic.Label>
+          <Statistic.Value>{sum_of_best}</Statistic.Value>
         </Statistic>
       </Statistic.Group>
     </div>
