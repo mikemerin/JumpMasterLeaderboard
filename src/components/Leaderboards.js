@@ -1,12 +1,8 @@
 import React from 'react';
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import { Icon, Menu, Table } from 'semantic-ui-react'
 
 
 export default function Leaderboards(props) {
-
-  console.log(props.scores)
-
-
 
   const scores = props.scores.map((x, i) => {
 
