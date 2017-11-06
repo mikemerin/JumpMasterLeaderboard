@@ -14,6 +14,7 @@ export default function Leaderboards(props) {
 
     return (
       <Table.Row key={i} >
+        <Table.Cell> { i+1 } </Table.Cell>
         <Table.Cell> { x.username } </Table.Cell>
       	<Table.Cell> { x.total } pts</Table.Cell>
       	<Table.Cell> { x.jumps } </Table.Cell>
@@ -25,12 +26,11 @@ export default function Leaderboards(props) {
     )
   })
 
-
-
   return (
-    <Table celled>
+    <Table celled color="blue" inverted compact size="small">
       <Table.Header>
         <Table.Row>
+          <Table.HeaderCell>Place</Table.HeaderCell>
           <Table.HeaderCell>Username</Table.HeaderCell>
           <Table.HeaderCell>Score</Table.HeaderCell>
           <Table.HeaderCell>Jumps</Table.HeaderCell>

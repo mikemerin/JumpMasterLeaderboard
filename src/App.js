@@ -19,6 +19,7 @@ export default class App extends Component {
   componentWillMount() {
     console.log("mounting");
     ScoreAdapter.all().then(data => {
+      data = data.sort((a, b) => a.longest < b.longest)
       this.setState({ scores: data })
     })
     // const callsign = this.context.router.history.location.pathname.split('/')[2]
