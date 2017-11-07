@@ -21,33 +21,24 @@ export default function Data(props) {
 
   if ( props.all_data.length > 0 ) {
 
-    // note: will add the following function to reduce repeating
-
-    // this.total = (type) => type.reduce((sum, x) => sum+x )
-    // this.hundredths = (type) => Math.round(type * 100 ) / 100
-    // var runs = props.all_data.length
-    //
-    // var total_score = this.hundredths(this.total(scores))
-    // var total_easy = this.hundredths(this.total(easy))
-    // var total_medium = this.hundredths(this.total(medium))
-    // var total_hard = this.hundredths(this.total(hard))
-    // var total_hardest = this.hundredths(this.total(hardest))
-
+    function total(type) { return type.reduce((sum, x) => sum+x ) }
+    function hundredths(type) { return Math.round(type * 100 ) / 100 }
     var runs = props.all_data.length
 
-    var total_score = Math.round(scores.reduce((sum, x) => sum+x ) * 100 ) / 100
-    var total_easy = Math.round(easy.reduce((sum, x) => sum+x ) * 100 ) / 100
-    var total_medium = Math.round(medium.reduce((sum, x) => sum+x ) * 100 ) / 100
-    var total_hard = Math.round(hard.reduce((sum, x) => sum+x ) * 100 ) / 100
-    var total_hardest = Math.round(hardest.reduce((sum, x) => sum+x ) * 100 ) / 100
+    var total_score = hundredths(total(scores))
+        sum_of_best = hundredths(total(props.each_jump.map(x => Math.max(...x))))
 
-    var avg_easy = Math.round(total_easy * 100 / runs ) / 100
-    var avg_medium = Math.round(total_medium * 100 / runs ) / 100
-    var avg_hard = Math.round(total_hard * 100 / runs ) / 100
-    var avg_hardest = Math.round(total_hardest * 100 / runs ) / 100
+    var total_easy = hundredths(total(easy))
+    var avg_easy = hundredths(total_easy / runs )
 
+    var total_medium = hundredths(total(medium))
+    var avg_medium = hundredths(total_medium / runs )
 
-    var sum_of_best = Math.round( props.each_jump.map(x => Math.max(...x)).reduce((sum, x) => sum+x ) * 100 ) / 100
+    var total_hard = hundredths(total(hard))
+    var avg_hard = hundredths(total_hard / runs )
+
+    var total_hardest = hundredths(total(hardest))
+    var avg_hardest = hundredths(total_hardest / runs )
 
   }
 

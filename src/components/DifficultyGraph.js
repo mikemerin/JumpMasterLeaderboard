@@ -22,6 +22,11 @@ export const RunGraph = (props) => {
 
     const data_jumps = {
       labels: labels,
+      options: {
+        legend: {
+          display: false
+        }
+      },
       scale: {
         gridLines: {
           color: [ "black", "red", "orange", "yellow", "green" ]

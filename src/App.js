@@ -3,8 +3,9 @@ import './App.css';
 // import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react'
 
-import DifficultyGraph from './components/DifficultyGraph'
 import Data from './components/Data'
+import DifficultyGraph from './components/DifficultyGraph'
+import Navbar from './components/Navbar'
 import RunGraph from './components/RunGraph'
 import Leaderboards from './components/Leaderboards'
 
@@ -90,15 +91,12 @@ export default class App extends Component {
   // }
 
   render() {
+
     return (
       <div>
-        <div className="App">
-          <header className="App-header">
-            <h1 className="App-title">The IWBT Jump Master Leaderboards</h1>
-          </header>
-        </div>
-        <Grid columns={3} textAlign="center" verticalAlign="middle">
-          <Grid.Row>
+        <Navbar />
+        <Grid columns='equal' relaxed textAlign="center" verticalAlign="middle">
+          <Grid.Row stretched >
             <Grid.Column>
               <DifficultyGraph each_jump={ this.state.each_jump } />
             </Grid.Column>
