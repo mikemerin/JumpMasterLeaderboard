@@ -3,8 +3,8 @@ import './App.css';
 // import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react'
 
-import DifficultyGraph from './components/DifficultyGraph'
 import Data from './components/Data'
+import DifficultyGraph from './components/DifficultyGraph'
 import RunGraph from './components/RunGraph'
 import Leaderboards from './components/Leaderboards'
 
@@ -18,7 +18,10 @@ export default class App extends Component {
     this.state = {
       scores: [],
       sums: { scores: 0, easy: 0, medium: 0, hard: 0, hardest: 0, jumps: 0, deaths: 0},
-      each_jump: [],
+      jumps: { gate: [], diagonal: [], fjump: [], sgate: [], platform: [],
+               cascade: [], tbone: [], mjump2: [], shuriken: [], hdiamond: [],
+               mjump2: [], diamond: [], bubble: [], vortex: [], hourglass: [],
+               plane: [], corner: [], valve: [], ninejump: [], ddiamond: [] },
       type: "all",
       person: "all"
     }
@@ -41,42 +44,45 @@ export default class App extends Component {
         deaths += x.deaths
       })
 
-      var each_jump = [ [], [], [], [], [],
-                    [], [], [], [], [],
-                    [], [], [], [], [],
-                    [], [], [], [], [] ]
+      var jumps = { gate: [], diagonal: [], fjump: [], sgate: [], platform: [],
+          cascade: [], tbone: [], mjump2: [], shuriken: [], hdiamond: [],
+          mjump1: [], diamond: [], bubble: [], vortex: [], hourglass: [],
+          plane: [], corner: [], valve: [], ninejump: [], ddiamond: [] }
 
       data.forEach(x => {
 
-        each_jump[0].push(x.gate_points)
-        each_jump[1].push(x.diagonal_points)
-        each_jump[2].push(x.fjump_points)
-        each_jump[3].push(x.sgate_points)
-        each_jump[4].push(x.platform_points)
+        jumps["gate"].push(x.gate_points)
+        jumps["diagonal"].push(x.diagonal_points)
+        jumps["fjump"].push(x.fjump_points)
+        jumps["sgate"].push(x.sgate_points)
+        jumps["platform"].push(x.platform_points)
 
-        each_jump[5].push(x.cascade_points)
-        each_jump[6].push(x.tbone_points)
-        each_jump[7].push(x.mjump2_points)
-        each_jump[8].push(x.shuriken_points)
-        each_jump[9].push(x.hdiamond_points)
+        jumps["cascade"].push(x.cascade_points)
+        jumps["tbone"].push(x.tbone_points)
+        jumps["mjump2"].push(x.mjump2_points)
+        jumps["shuriken"].push(x.shuriken_points)
+        jumps["hdiamond"].push(x.hdiamond_points)
 
-        each_jump[10].push(x.mjump1_points)
-        each_jump[11].push(x.diamond_points)
-        each_jump[12].push(x.bubble_points)
-        each_jump[13].push(x.vortex_points)
-        each_jump[14].push(x.hourglass_points)
+        jumps["mjump1"].push(x.mjump1_points)
+        jumps["diamond"].push(x.diamond_points)
+        jumps["bubble"].push(x.bubble_points)
+        jumps["vortex"].push(x.vortex_points)
+        jumps["hourglass"].push(x.hourglass_points)
 
-        each_jump[15].push(x.plane_points)
-        each_jump[16].push(x.corner_points)
-        each_jump[17].push(x.valve_points)
-        each_jump[18].push(x.ninejump_points)
-        each_jump[19].push(x.ddiamond_points)
+        jumps["plane"].push(x.plane_points)
+        jumps["corner"].push(x.corner_points)
+        jumps["valve"].push(x.valve_points)
+        jumps["ninejump"].push(x.ninejump_points)
+        jumps["ddiamond"].push(x.ddiamond_points)
 
       })
 
-      var sum_of_best = Math.round( each_jump.map(x => (
-                                            x.reduce((sum, x) => sum+x )
-                                           )).reduce((sum, x) => sum+x ) * 100 ) / 100
+      debugger
+
+      var sum_of_best = gate_points + diagonal_points + fjump_points + sgate_points + platform_points +
+          cascade_points + tbone_points + mjump2_points + shuriken_points + hdiamond_points +
+          mjump1_points + diamond_points + bubble_points + vortex_points + hourglass_points +
+          plane_points + corner_points + valve_points + ninejump_points + ddiamond_points
 
         scores = Math.round(scores)
         easy = Math.round(easy)
@@ -85,7 +91,7 @@ export default class App extends Component {
         hardest = Math.round(hardest)
         sum_of_best = Math.round(sum_of_best)
 
-      this.setState({ scores: data, sums: {scores: scores, easy: easy, medium: medium, hard: hard, hardest: hardest, jumps: jumps, deaths: deaths, sum_of_best: sum_of_best }, each_jump: each_jump })
+      this.setState({ scores: data, sums: {scores: scores, easy: easy, medium: medium, hard: hard, hardest: hardest, jumps: jumps, deaths: deaths, sum_of_best: sum_of_best} })
     })
     // const callsign = this.context.router.history.location.pathname.split('/')[2]
     // if (callsign !== undefined)
@@ -123,10 +129,10 @@ export default class App extends Component {
         <Grid columns={3} celled='internally' textAlign="center" verticalAlign="middle">
           <Grid.Row>
             <Grid.Column>
-              <DifficultyGraph each_jump={ this.state.each_jump } />
+              <Data scores={ this.state.scores } sums={ this.state.sums }/>
             </Grid.Column>
             <Grid.Column>
-              <Data scores={ this.state.scores } sums={ this.state.sums }/>
+              <DifficultyGraph scores={ this.state.scores } sums={ this.state.sums }/>
             </Grid.Column>
             <Grid.Column>
               <RunGraph scores={ this.state.scores } />

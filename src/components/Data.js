@@ -3,48 +3,44 @@ import { Statistic } from 'semantic-ui-react'
 
 export default function Data(props) {
 
-  const { scores, easy, medium, hard, hardest, runs, jumps, deaths, sum_of_best } = props.sums
+  const { scores, easy, medium, hard, hardest, jumps, deaths, sum_of_best } = props.sums
 
   return (
     <div>
       <Statistic.Group widths='five'>
         <Statistic size='mini'>
           <Statistic.Label>Total</Statistic.Label>
-          <Statistic.Value>{scores}</Statistic.Value>
+          {scores}
         </Statistic>
         <Statistic size='mini'>
           <Statistic.Label>Easy</Statistic.Label>
-          <Statistic.Value>{easy}</Statistic.Value>
+          {easy}
         </Statistic>
         <Statistic size='mini'>
           <Statistic.Label>Medium</Statistic.Label>
-          <Statistic.Value>{medium}</Statistic.Value>
+          {medium}
         </Statistic>
         <Statistic size='mini'>
           <Statistic.Label>Hard</Statistic.Label>
-          <Statistic.Value>{hard}</Statistic.Value>
+          {hard}
         </Statistic>
         <Statistic size='mini'>
           <Statistic.Label>Hardest</Statistic.Label>
-          <Statistic.Value>{hardest}</Statistic.Value>
+          {hardest}
         </Statistic>
       </Statistic.Group>
-      <Statistic.Group widths='four'>
-        <Statistic size='mini'>
-          <Statistic.Label>Runs</Statistic.Label>
-          <Statistic.Value>{runs}</Statistic.Value>
-        </Statistic>
+      <Statistic.Group widths='three'>
         <Statistic size='mini'>
           <Statistic.Label>Jumps</Statistic.Label>
-          <Statistic.Value>{jumps}</Statistic.Value>
+          {jumps}
         </Statistic>
         <Statistic size='mini'>
           <Statistic.Label>Deaths</Statistic.Label>
-          <Statistic.Value>{deaths}</Statistic.Value>
+          {deaths}
         </Statistic>
         <Statistic size='mini'>
           <Statistic.Label>Sum of Bests</Statistic.Label>
-          <Statistic.Value>{sum_of_best}</Statistic.Value>
+          {sum_of_best}
         </Statistic>
       </Statistic.Group>
     </div>
