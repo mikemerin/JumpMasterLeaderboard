@@ -1,5 +1,5 @@
 import React from 'react';
-import { Statistic } from 'semantic-ui-react'
+import { Statistic, Divider } from 'semantic-ui-react'
 
 export default function Data(props) {
 
@@ -7,37 +7,43 @@ export default function Data(props) {
 
   return (
     <div>
-      <Statistic.Group widths='five'>
+      <h4>All Run Stats</h4>
+      <Divider />
+      <Statistic.Group widths={3}>
         <Statistic size='mini'>
-          <Statistic.Label>Total</Statistic.Label>
+          <Statistic.Label>Total Points</Statistic.Label>
           {scores}
         </Statistic>
         <Statistic size='mini'>
-          <Statistic.Label>Easy</Statistic.Label>
-          {easy}
-        </Statistic>
-        <Statistic size='mini'>
-          <Statistic.Label>Medium</Statistic.Label>
-          {medium}
-        </Statistic>
-        <Statistic size='mini'>
-          <Statistic.Label>Hard</Statistic.Label>
-          {hard}
-        </Statistic>
-        <Statistic size='mini'>
-          <Statistic.Label>Hardest</Statistic.Label>
-          {hardest}
-        </Statistic>
-      </Statistic.Group>
-      <Statistic.Group widths='three'>
-        <Statistic size='mini'>
-          <Statistic.Label>Jumps</Statistic.Label>
+          <Statistic.Label>Total Jumps</Statistic.Label>
           {jumps}
         </Statistic>
         <Statistic size='mini'>
-          <Statistic.Label>Deaths</Statistic.Label>
+          <Statistic.Label>Total Deaths</Statistic.Label>
           {deaths}
         </Statistic>
+      </Statistic.Group>
+      <Divider />
+      <Statistic.Group widths={4}>
+        <Statistic size='mini'>
+          <Statistic.Label>Total Easy</Statistic.Label>
+          {easy}
+        </Statistic>
+        <Statistic size='mini'>
+          <Statistic.Label>Total Medium</Statistic.Label>
+          {medium}
+        </Statistic>
+        <Statistic size='mini'>
+          <Statistic.Label>Total Hard</Statistic.Label>
+          {hard}
+        </Statistic>
+        <Statistic size='mini'>
+          <Statistic.Label>Total Hardest</Statistic.Label>
+          {hardest}
+        </Statistic>
+      </Statistic.Group>
+      <Divider />
+      <Statistic.Group widths={1}>
         <Statistic size='mini'>
           <Statistic.Label>Sum of Bests</Statistic.Label>
           {sum_of_best}

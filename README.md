@@ -4,13 +4,19 @@ This is an API for the fangame I Wanna Be the Jump Master, storing user informat
 
 # To be added:
 
-* Sorting of data
-* Routes
-* Click on individual runs
-* filter one per person
-* click on a person's runs
-* filter all/daily/weekly/monthly
-* fix layout
-* * better graph
-* * fix sizing on data
-* * search for a user's runs (maybe)
+* * Radar graph
+* remove grid numbers
+* jump images instead of names
+* * Data
+* better layout for totals / averages
+* fix to correct data
+
+* Top: stack if window width < 1200
+
+* * Leaderboards
+* Sort by all / daily / weekly / monthly
+* click on an individual run
+* filter by one person (will have dropdown list to choose from, use station selector from WC)
+
+* * Routes
+* Set up routes for each score, each user

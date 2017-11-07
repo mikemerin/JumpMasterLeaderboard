@@ -4,7 +4,7 @@ import { Icon, Menu, Table } from 'semantic-ui-react'
 
 export default function Leaderboards(props) {
 
-  const scores = props.scores.map((x, i) => {
+  const all_data = props.all_data.map((x, i) => {
 
     const created_at = `${x.created_at.slice(0,10)} - ${x.created_at.slice(11,19)} UTC`
 
@@ -12,11 +12,10 @@ export default function Leaderboards(props) {
       <Table.Row key={i} >
         <Table.Cell> { i+1 } </Table.Cell>
         <Table.Cell> { x.username } </Table.Cell>
-      	<Table.Cell> { x.total } pts</Table.Cell>
+      	<Table.Cell> { x.total } </Table.Cell>
       	<Table.Cell> { x.jumps } </Table.Cell>
       	<Table.Cell> { x.deaths } </Table.Cell>
-      	<Table.Cell> { x.longest_streak } </Table.Cell>
-      	<Table.Cell> { x.bestjump_type } - { x.bestjump_points } pts</Table.Cell>
+      	<Table.Cell> { x.bestjump_type } - { x.bestjump_points } </Table.Cell>
       	<Table.Cell> { created_at } </Table.Cell>
       </Table.Row>
     )
@@ -31,14 +30,13 @@ export default function Leaderboards(props) {
           <Table.HeaderCell>Score</Table.HeaderCell>
           <Table.HeaderCell>Jumps</Table.HeaderCell>
           <Table.HeaderCell>Deaths</Table.HeaderCell>
-          <Table.HeaderCell>Longest Streak</Table.HeaderCell>
           <Table.HeaderCell>Best Jump</Table.HeaderCell>
           <Table.HeaderCell>Run Time</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
 
       <Table.Body>
-        { scores }
+        { all_data }
       </Table.Body>
 
       <Table.Footer>

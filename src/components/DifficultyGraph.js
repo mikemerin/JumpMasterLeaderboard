@@ -23,14 +23,17 @@ export const RunGraph = (props) => {
     const data_jumps = {
       labels: labels,
       scale: {
-         ticks: {
-            display: false,
-            maxTicksLimit: 2
-         }
+        gridLines: {
+          color: [ "black", "red", "orange", "yellow", "green" ]
+        },
+        ticks: {
+          display: false,
+          maxTicksLimit: 2
+        }
       },
       datasets: [
         {
-          label: "Average Points Per Jump",
+          label: "Average Points",
           fill: true,
           backgroundColor: 'rgba(14,110,184,0.4)',
           borderColor: 'rgba(14,110,184,1)',

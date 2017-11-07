@@ -16,7 +16,7 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      scores: [],
+      all_data: [],
       sums: { scores: 0, easy: 0, medium: 0, hard: 0, hardest: 0, jumps: 0, deaths: 0},
       each_jump: [],
       type: "all",
@@ -83,9 +83,8 @@ export default class App extends Component {
         medium = Math.round(medium)
         hard = Math.round(hard)
         hardest = Math.round(hardest)
-        sum_of_best = Math.round(sum_of_best)
 
-      this.setState({ scores: data, sums: {scores: scores, easy: easy, medium: medium, hard: hard, hardest: hardest, jumps: jumps, deaths: deaths, sum_of_best: sum_of_best }, each_jump: each_jump })
+      this.setState({ all_data: data, sums: {scores: scores, easy: easy, medium: medium, hard: hard, hardest: hardest, jumps: jumps, deaths: deaths, sum_of_best: sum_of_best }, each_jump: each_jump })
     })
     // const callsign = this.context.router.history.location.pathname.split('/')[2]
     // if (callsign !== undefined)
@@ -120,20 +119,20 @@ export default class App extends Component {
             <h1 className="App-title">The IWBT Jump Master Leaderboards</h1>
           </header>
         </div>
-        <Grid columns={3} celled='internally' textAlign="center" verticalAlign="middle">
+        <Grid columns={3} textAlign="center" verticalAlign="middle">
           <Grid.Row>
             <Grid.Column>
               <DifficultyGraph each_jump={ this.state.each_jump } />
             </Grid.Column>
             <Grid.Column>
-              <Data scores={ this.state.scores } sums={ this.state.sums }/>
+              <Data all_data={ this.state.all_data } sums={ this.state.sums }/>
             </Grid.Column>
             <Grid.Column>
-              <RunGraph scores={ this.state.scores } />
+              <RunGraph all_data={ this.state.all_data } />
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <Leaderboards scores={ this.state.scores } />
+        <Leaderboards all_data={ this.state.all_data } />
       </div>
     );
   }

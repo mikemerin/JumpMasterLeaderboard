@@ -5,8 +5,8 @@ export const RunGraph = (props) => {
 
     var labels = [], totals = []
 
-    if (props.scores.length > 0) {
-      props.scores.forEach((x, i) => {
+    if (props.all_data.length > 0) {
+      props.all_data.forEach((x, i) => {
         labels.push(i+1)
         totals.push(x.total)
       })
@@ -23,7 +23,7 @@ export const RunGraph = (props) => {
       },
       datasets: [
         {
-          label: `Total Runs (${props.scores.length})`,
+          label: `Total Runs (${props.all_data.length})`,
           type: 'line',
           fill: true,
           lineTension: 0.1,
