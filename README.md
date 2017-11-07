@@ -7,9 +7,6 @@ This is an API for the fangame I Wanna Be the Jump Master, storing user informat
 * * Radar graph
 * remove grid numbers
 * jump images instead of names
-* * Data
-* better layout for totals / averages
-* fix to correct data
 
 * Top: stack if window width < 1200
 

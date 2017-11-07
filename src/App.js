@@ -17,7 +17,6 @@ export default class App extends Component {
     super(props)
     this.state = {
       all_data: [],
-      sums: { scores: 0, easy: 0, medium: 0, hard: 0, hardest: 0, jumps: 0, deaths: 0},
       each_jump: [],
       type: "all",
       person: "all"
@@ -29,17 +28,6 @@ export default class App extends Component {
     ScoreAdapter.all().then(data => {
 
       data = data.sort((a, b) => a.longest < b.longest)
-      var scores = 0, easy = 0, medium = 0, hard = 0, hardest = 0, jumps = 0, deaths = 0
-
-      data.forEach(x => {
-        scores += x.total
-        easy += x.easy
-        medium += x.medium
-        hard += x.hard
-        hardest += x.hardest
-        jumps += x.jumps
-        deaths += x.deaths
-      })
 
       var each_jump = [ [], [], [], [], [],
                     [], [], [], [], [],
@@ -74,17 +62,7 @@ export default class App extends Component {
 
       })
 
-      var sum_of_best = Math.round( each_jump.map(x => (
-                                            x.reduce((sum, x) => sum+x )
-                                           )).reduce((sum, x) => sum+x ) * 100 ) / 100
-
-        scores = Math.round(scores)
-        easy = Math.round(easy)
-        medium = Math.round(medium)
-        hard = Math.round(hard)
-        hardest = Math.round(hardest)
-
-      this.setState({ all_data: data, sums: {scores: scores, easy: easy, medium: medium, hard: hard, hardest: hardest, jumps: jumps, deaths: deaths, sum_of_best: sum_of_best }, each_jump: each_jump })
+      this.setState({ all_data: data, each_jump: each_jump })
     })
     // const callsign = this.context.router.history.location.pathname.split('/')[2]
     // if (callsign !== undefined)
@@ -125,7 +103,7 @@ export default class App extends Component {
               <DifficultyGraph each_jump={ this.state.each_jump } />
             </Grid.Column>
             <Grid.Column>
-              <Data all_data={ this.state.all_data } sums={ this.state.sums }/>
+              <Data all_data={ this.state.all_data } each_jump={ this.state.each_jump }/>
             </Grid.Column>
             <Grid.Column>
               <RunGraph all_data={ this.state.all_data } />
