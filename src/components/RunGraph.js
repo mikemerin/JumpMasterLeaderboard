@@ -12,8 +12,7 @@ export const RunGraph = (props) => {
       })
     }
 
-    const data_runs = {
-      labels: labels,
+    const options = {
       options: {
         scales: {
           xAxes: [{
@@ -21,6 +20,10 @@ export const RunGraph = (props) => {
           }]
         }
       },
+    }
+
+    const data_runs = {
+      labels: labels,
       datasets: [
         {
           label: `Total Runs (${props.all_data.length})`,
@@ -49,7 +52,7 @@ export const RunGraph = (props) => {
 
     return (
       <div>
-        <Line data={data_runs} height={200} />
+        <Line data={data_runs} height={200} options={options} />
       </div>
     );
 

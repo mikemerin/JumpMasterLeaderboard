@@ -1,5 +1,5 @@
 import React from 'react';
-import { Radar } from 'react-chartjs-2'
+import { Bar } from 'react-chartjs-2'
 
 export const RunGraph = (props) => {
 
@@ -22,39 +22,79 @@ export const RunGraph = (props) => {
       highest_jump = props.each_jump.map(x => Math.max(...x) )
     }
 
+    // <Radar data={data_jumps} height={200} />
+
+    // const data_jumps = {
+    //   labels: labels,
+    //   options: {
+    //     legend: {
+    //       display: false
+    //     }
+    //   },
+    //   scale: {
+    //     gridLines: {
+    //       color: [ "black", "red", "orange", "yellow", "green" ]
+    //     },
+    //     ticks: {
+    //       display: false,
+    //       maxTicksLimit: 2
+    //     }
+    //   },
+    //   datasets: [
+    //     {
+    //       label: "Average Points",
+    //       fill: true,
+    //       backgroundColor: 'rgba(87,153,203,0.3)',
+    //       borderColor: 'rgba(87,153,203,.6)',
+    //       pointBackgroundColor:  'rgba(87,153,203,.6)',
+    //       pointBorderColor: 'rgba(20,20,20,.2)',
+    //       data: each_jump
+    //     },
+    //     {
+    //       label: "Highest Score",
+    //       fill: '-1',
+    //       backgroundColor: 'rgba(14,110,184,0.4)',
+    //       borderColor: 'rgba(14,110,184,1)',
+    //       pointBackgroundColor:  'rgba(14,110,184,1)',
+    //       pointBorderColor: 'rgba(20,20,20,.2)',
+    //       data: highest_jump
+    //     }
+    //   ]
+    // }
+
+    const options = {
+      scales: {
+        xAxes: [{
+          stacked: true
+        }],
+        yAxes: [{
+          stacked: true,
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+
     const data_jumps = {
       labels: labels,
-      options: {
-        legend: {
-          display: false
-        }
-      },
-      scale: {
-        gridLines: {
-          color: [ "black", "red", "orange", "yellow", "green" ]
-        },
-        ticks: {
-          display: false,
-          maxTicksLimit: 2
-        }
-      },
       datasets: [
         {
           label: "Average Points",
-          fill: true,
           backgroundColor: 'rgba(87,153,203,0.3)',
           borderColor: 'rgba(87,153,203,.6)',
-          pointBackgroundColor:  'rgba(87,153,203,.6)',
-          pointBorderColor: 'rgba(20,20,20,.2)',
+          borderWidth: 2,
+          hoverBorderColor: 'rgba(87,153,203,1)',
+          hoverBackgroundColor: '#fff',
           data: each_jump
         },
         {
           label: "Highest Score",
-          fill: '-1',
           backgroundColor: 'rgba(14,110,184,0.4)',
           borderColor: 'rgba(14,110,184,1)',
-          pointBackgroundColor:  'rgba(14,110,184,1)',
-          pointBorderColor: 'rgba(20,20,20,.2)',
+          borderWidth: 2,
+          hoverBackgroundColor:  'rgba(14,110,184,1)',
+          hoverBorderColor: 'rgba(20,20,20,.2)',
           data: highest_jump
         }
       ]
@@ -62,7 +102,7 @@ export const RunGraph = (props) => {
 
     return (
       <div>
-        <Radar data={data_jumps} height={200} />
+        <Bar data={data_jumps} height={200} options={options} />
       </div>
     );
 
