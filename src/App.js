@@ -5,6 +5,7 @@ import { Grid } from 'semantic-ui-react'
 
 import Data from './components/Data'
 import DifficultyGraph from './components/DifficultyGraph'
+import JumpImages from './components/JumpImages'
 import Navbar from './components/Navbar'
 import RunGraph from './components/RunGraph'
 import Leaderboards from './components/Leaderboards'
@@ -99,6 +100,7 @@ export default class App extends Component {
           <Grid.Row stretched >
             <Grid.Column>
               <DifficultyGraph each_jump={ this.state.each_jump } />
+              <JumpImages />
             </Grid.Column>
             <Grid.Column>
               <Data all_data={ this.state.all_data } each_jump={ this.state.each_jump }/>

@@ -16,7 +16,7 @@ export const RunGraph = (props) => {
       options: {
         scales: {
           xAxes: [{
-            barThickness: 1
+            display: false
           }]
         }
       },
@@ -29,7 +29,7 @@ export const RunGraph = (props) => {
           label: `Total Runs (${props.all_data.length})`,
           type: 'line',
           fill: true,
-          lineTension: 0.1,
+          lineTension: 0,
           backgroundColor: 'rgba(14,110,184,0.4)',
           borderColor: 'rgba(14,110,184,1)',
           borderCapStyle: 'butt',

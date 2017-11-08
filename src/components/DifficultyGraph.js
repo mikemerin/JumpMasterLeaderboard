@@ -3,12 +3,10 @@ import { Bar } from 'react-chartjs-2'
 
 export const RunGraph = (props) => {
 
-    // const gate = require(`../images/Gate.png`)
-
-    var labels = ["gate", "diagonal", "fjump", "sgate", "platform",
-        "cascade", "tbone", "mjump2", "shuriken", "hdiamond",
-        "mjump1", "diamond", "bubble", "vortex", "hourglass",
-        "plane", "corner", "valve", "ninejump", "ddiamond"]
+    var labels = ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump",
+        "Cascade", "T-Bone", "M-Jump 2", "Shuriken", "Half Diamond",
+        "M-Jump1 ", "Diamond", "Bubble", "Vortex", "Hourglass",
+        "Plane", "Corner", "Valve", "9-jump", "Double Diamond"]
 
     var each_jump = [], highest_jump = []
 
@@ -63,12 +61,19 @@ export const RunGraph = (props) => {
     // }
 
     const options = {
+      tooltips: {
+        mode: 'x-axis'
+      },
+      // legend: {
+      //   display: false,
+      // },
       scales: {
         xAxes: [{
-          stacked: true
+          stacked: true,
+          display: false
         }],
         yAxes: [{
-          stacked: true,
+          position: "right",
           ticks: {
             beginAtZero: true
           }
@@ -80,30 +85,30 @@ export const RunGraph = (props) => {
       labels: labels,
       datasets: [
         {
-          label: "Average Points",
+          label: "Highest Score",
+          fill: true,
           backgroundColor: 'rgba(87,153,203,0.3)',
           borderColor: 'rgba(87,153,203,.6)',
           borderWidth: 2,
           hoverBorderColor: 'rgba(87,153,203,1)',
           hoverBackgroundColor: '#fff',
-          data: each_jump
+          data: highest_jump
         },
         {
-          label: "Highest Score",
+          label: "Average Points",
+          fill: true,
           backgroundColor: 'rgba(14,110,184,0.4)',
           borderColor: 'rgba(14,110,184,1)',
           borderWidth: 2,
           hoverBackgroundColor:  'rgba(14,110,184,1)',
           hoverBorderColor: 'rgba(20,20,20,.2)',
-          data: highest_jump
+          data: each_jump
         }
       ]
     }
 
     return (
-      <div>
-        <Bar data={data_jumps} height={200} options={options} />
-      </div>
+      <Bar data={data_jumps} height={170} options={options} />
     );
 
 }
