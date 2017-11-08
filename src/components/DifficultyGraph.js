@@ -3,6 +3,8 @@ import { Radar } from 'react-chartjs-2'
 
 export const RunGraph = (props) => {
 
+    // const gate = require(`../images/Gate.png`)
+
     var labels = ["gate", "diagonal", "fjump", "sgate", "platform",
         "cascade", "tbone", "mjump2", "shuriken", "hdiamond",
         "mjump1", "diamond", "bubble", "vortex", "hourglass",
@@ -40,17 +42,19 @@ export const RunGraph = (props) => {
         {
           label: "Average Points",
           fill: true,
-          backgroundColor: 'rgba(14,110,184,0.4)',
-          borderColor: 'rgba(14,110,184,1)',
-          pointBackgroundColor:  'rgba(14,110,184,1)',
+          backgroundColor: 'rgba(87,153,203,0.3)',
+          borderColor: 'rgba(87,153,203,.6)',
+          pointBackgroundColor:  'rgba(87,153,203,.6)',
+          pointBorderColor: 'rgba(20,20,20,.2)',
           data: each_jump
         },
         {
           label: "Highest Score",
-          fill: true,
-          backgroundColor: 'rgba(87,153,203,0.3)',
-          borderColor: 'rgba(87,153,203,.6)',
-          pointBackgroundColor:  'rgba(87,153,203,.6)',
+          fill: '-1',
+          backgroundColor: 'rgba(14,110,184,0.4)',
+          borderColor: 'rgba(14,110,184,1)',
+          pointBackgroundColor:  'rgba(14,110,184,1)',
+          pointBorderColor: 'rgba(20,20,20,.2)',
           data: highest_jump
         }
       ]

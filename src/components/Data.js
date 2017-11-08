@@ -45,8 +45,6 @@ export default function Data(props) {
 
   return (
     <div>
-      <h4>All Run Stats</h4>
-      <Divider />
       <Statistic.Group widths={3}>
         <Statistic size='mini'>
           <Statistic.Label>Total Points</Statistic.Label>
@@ -62,48 +60,38 @@ export default function Data(props) {
         </Statistic>
       </Statistic.Group>
       <Divider />
-      <Statistic.Group widths={4}>
-        <Statistic size='mini'>
-          <Statistic.Label>Total Easy</Statistic.Label>
-          { total_easy }
-        </Statistic>
-        <Statistic size='mini'>
-          <Statistic.Label>Total Medium</Statistic.Label>
-          { total_medium }
-        </Statistic>
-        <Statistic size='mini'>
-          <Statistic.Label>Total Hard</Statistic.Label>
-          { total_hard }
-        </Statistic>
-        <Statistic size='mini'>
-          <Statistic.Label>Total Hardest</Statistic.Label>
-          { total_hardest }
-        </Statistic>
-      </Statistic.Group>
-      <Divider />
-      <Statistic.Group widths={4}>
-        <Statistic size='mini'>
-          <Statistic.Label>Avg. Easy</Statistic.Label>
-          { avg_easy }
-        </Statistic>
-        <Statistic size='mini'>
-          <Statistic.Label>Avg. Medium</Statistic.Label>
-          { avg_medium }
-        </Statistic>
-        <Statistic size='mini'>
-          <Statistic.Label>Avg. Hard</Statistic.Label>
-          { avg_hard }
-        </Statistic>
-        <Statistic size='mini'>
-          <Statistic.Label>Avg. Hardest</Statistic.Label>
-          { avg_hardest }
-        </Statistic>
-      </Statistic.Group>
-      <Divider />
       <Statistic.Group widths={1}>
         <Statistic size='mini'>
           <Statistic.Label>Sum of Bests from All Players</Statistic.Label>
           { sum_of_best }
+        </Statistic>
+      </Statistic.Group>
+      <Divider />
+      <Statistic.Group widths={5}>
+        <Statistic size='mini'>
+          { total_easy }
+          <Statistic.Label>Easy</Statistic.Label>
+          { avg_easy }
+        </Statistic>
+        <Statistic size='mini'>
+          { total_medium }
+          <Statistic.Label>Medium</Statistic.Label>
+          { avg_medium }
+        </Statistic>
+        <Statistic size='mini'>
+          Total
+          <Statistic.Label>   </Statistic.Label>
+          Average
+        </Statistic>
+        <Statistic size='mini'>
+          { total_hard }
+          <Statistic.Label>Hard</Statistic.Label>
+          { avg_hard }
+        </Statistic>
+        <Statistic size='mini'>
+          { total_hardest }
+          <Statistic.Label>Hardest</Statistic.Label>
+          { avg_hardest }
         </Statistic>
       </Statistic.Group>
     </div>
