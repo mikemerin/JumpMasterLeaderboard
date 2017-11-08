@@ -96,11 +96,15 @@ export default class App extends Component {
     return (
       <div>
         <Navbar />
-        <Grid columns='equal' relaxed textAlign="center" verticalAlign="middle">
+        <Grid columns='equal' relaxed padded textAlign="center" verticalAlign="middle">
           <Grid.Row stretched >
             <Grid.Column>
-              <DifficultyGraph each_jump={ this.state.each_jump } />
-              <JumpImages />
+              <Grid.Row>
+                <DifficultyGraph each_jump={ this.state.each_jump } />
+              </Grid.Row>
+              <Grid.Row>
+                <JumpImages />
+              </Grid.Row>
             </Grid.Column>
             <Grid.Column>
               <Data all_data={ this.state.all_data } each_jump={ this.state.each_jump }/>

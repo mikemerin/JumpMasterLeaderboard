@@ -108,7 +108,7 @@ export const RunGraph = (props) => {
     }
 
     return (
-      <Bar data={data_jumps} height={170} options={options} />
+      <Bar data={data_jumps} height={183} options={options} />
     );
 
 }

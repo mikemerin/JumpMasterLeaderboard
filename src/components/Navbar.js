@@ -26,7 +26,7 @@ export const Navbar = () => {
         </Grid.Column>
         <Grid.Column>
           <Segment color='blue' inverted>
-            <h1 className="item">IWBT Jump Master Leaderboards</h1>
+            <h2 className="item">IWBT Jump Master Leaderboards</h2>
           </Segment>
         </Grid.Column>
         <Grid.Column>

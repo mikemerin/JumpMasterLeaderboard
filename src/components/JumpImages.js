@@ -4,13 +4,13 @@ import { Grid, Image } from 'semantic-ui-react'
 export const JumpImages = () => {
 
 
-      const jumps1 = ["gate", "diagonal", "fjump", "sgate", "platform",
+      const jumps = ["gate_leading", "diagonal", "fjump", "sgate", "platform",
                       "cascade", "tbone", "mjump2", "shuriken", "hdiamond", "mjump1", "diamond", "bubble", "vortex", "hourglass",
                       "plane", "corner", "valve", "ninejump", "ddiamond" ]
 
-      function createImage(image) { return <Image src={require(`../images/${image}.png`)} width='3%' floated='left' /> }
+      function createImage(image) { return <Image src={require(`../images/${image}.png`)} width='2.81%' floated='left' /> }
 
-      const jump_images_1 = jumps1.map(jump => createImage(jump) )
+      const jump_images = jumps.map(jump => createImage(jump) )
       // const jump_images_2 = jumps2.map(jump => createImage(jump) )
 
 
@@ -20,18 +20,9 @@ export const JumpImages = () => {
 
 
   return (
-    <Grid.Column width={16}>
-      <Grid.Row>
-        <Grid.Column width={11}>
-          <Image.Group>
-            { jump_images_1 }
-          </Image.Group>
-        </Grid.Column>
-        <Grid.Column width={3}>
-          "hey"
-        </Grid.Column>
-      </Grid.Row>
-    </Grid.Column>
+    <Image.Group>
+      { jump_images }
+    </Image.Group>
   )
 
 }
