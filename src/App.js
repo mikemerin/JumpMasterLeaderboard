@@ -10,10 +10,16 @@ import Navbar from './components/Navbar'
 import RunGraph from './components/RunGraph'
 import Leaderboards from './components/Leaderboards'
 
+import PropTypes from 'prop-types';
+
 import { ScoreAdapter } from './adapters'
 
 
 export default class App extends Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  }
 
   constructor(props) {
     super(props)
@@ -71,6 +77,11 @@ export default class App extends Component {
       // { this.setState({ station: { latitude: 0, longitude: 0 } }) }
   }
 
+  handleHome = (event) => {
+    event.preventDefault()
+    this.context.router.history.push('/')
+  }
+
   // componentDidUpdate(prevProps, prevState) {
   // // look to see if the type changed
   // debugger
@@ -95,7 +106,7 @@ export default class App extends Component {
 
     return (
       <div>
-        <Navbar />
+        <Navbar handleHome={ this.handleHome } />
         <Grid columns='equal' relaxed padded textAlign="center" verticalAlign="middle">
           <Grid.Row stretched >
             <Grid.Column>
