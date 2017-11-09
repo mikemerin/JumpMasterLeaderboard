@@ -62,7 +62,7 @@ export default function Data(props) {
       <Divider />
       <Statistic.Group widths={1}>
         <Statistic size='mini'>
-          <Statistic.Label>Sum of Bests from All Players</Statistic.Label>
+          <Statistic.Label>Sum of Bests</Statistic.Label>
           { sum_of_best }
         </Statistic>
       </Statistic.Group>

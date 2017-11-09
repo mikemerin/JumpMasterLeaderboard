@@ -10,7 +10,7 @@ export const RunGraph = (props) => {
         "Plane", "Corner", "Valve", "9-Jump", "Double Diamond"]
 
     var filtered_jumps = [], highest_jump = []
-    
+
     if (props.filtered_jumps[0].length > 0) {
 
       filtered_jumps = props.filtered_jumps.map(x => {
@@ -26,9 +26,9 @@ export const RunGraph = (props) => {
         mode: 'x-axis',
         position: 'nearest'
       },
-      legend: {
-        display: false
-      },
+      // legend: {
+      //   display: false
+      // },
       plugins: {
          datalabels: {
             display: true,
@@ -110,7 +110,7 @@ export const RunGraph = (props) => {
     }
 
     return (
-      <Bar data={data_jumps} height={190} options={options} />
+      <Bar data={data_jumps} height={205} options={options} />
     );
 
 }

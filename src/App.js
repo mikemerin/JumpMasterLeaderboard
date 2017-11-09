@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 // import PropTypes from 'prop-types';
-import { Grid } from 'semantic-ui-react'
+import { Grid, Divider, Statistic } from 'semantic-ui-react'
 
 import Data from './components/Data'
 import DifficultyGraph from './components/DifficultyGraph'
@@ -27,7 +27,7 @@ export default class App extends Component {
     this.state = {
       all_data: [],
       type: "all",
-      username: "all users"
+      username: "All Users"
     }
   }
 
@@ -57,7 +57,7 @@ export default class App extends Component {
 
   filterData() {
     return this.state.all_data.filter(x => (
-      this.state.username === "all users" ? x : x.username === this.state.username
+      this.state.username === "All Users" ? x : x.username === this.state.username
     ))
   }
 
@@ -122,14 +122,23 @@ export default class App extends Component {
     return (
       <div>
         <Navbar handleHome={ this.handleHome } />
-        <Grid columns='equal' relaxed padded textAlign="center" verticalAlign="middle">
-          <Grid.Row stretched >
+        <Grid columns='equal' relaxed padded textAlign="center" verticalAlign="middle" >
+          <Grid.Row stretched>
             <Grid.Column>
               <DifficultyGraph filtered_jumps={ filtered_jumps } />
             </Grid.Column>
             <Grid.Column>
+              <Statistic.Group widths={3}>
+                <Statistic size='mini'>
+                </Statistic>
+                <Statistic size='mini'>
+                  <SearchPerson all_data={ this.state.all_data } handleNameChange={ this.handleNameChange } />
+                </Statistic>
+                <Statistic size='mini'>
+                </Statistic>
+              </Statistic.Group>
+              <Divider />
               <Data filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } />
-              <SearchPerson all_data={ this.state.all_data } handleNameChange={ this.handleNameChange } />
             </Grid.Column>
             <Grid.Column>
               <RunGraph filtered_data={ filtered_data } />

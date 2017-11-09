@@ -9,12 +9,19 @@ export const SearchPerson = (props) => {
   var person_hash = {}
   var person_list = props.all_data.map(x => x.username)
   person_list.forEach(x => { if (person_hash[x] === undefined) { person_hash[x] = 1 } } )
-  person_list = Object.keys(person_hash).sort().map((x, i) => ({key: i, value: x, text: x }) )
+  person_list = Object.keys(person_hash).sort().map((x, i) => ({key: i+1, value: x, text: x }) )
+  person_list.unshift({key: 0, value: "All Users", text: "All Users" })
 
   return (
-    <Dropdown placeholder='Choose a Person'
+    <Dropdown fluid search selection labeled
+
+              placeholder="All Users"
               selected="custom"
-              fluid search selection options={ person_list }
+              scrolling={true}
+              compact={true}
+              noResultsMessage="No Users Found"
+
+              options={ person_list }
               onChange={ props.handleNameChange } />
   )
 
