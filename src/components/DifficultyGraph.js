@@ -9,16 +9,16 @@ export const RunGraph = (props) => {
         "M-Jump1", "Diamond", "Bubble", "Vortex", "Hourglass",
         "Plane", "Corner", "Valve", "9-Jump", "Double Diamond"]
 
-    var each_jump = [], highest_jump = []
+    var filtered_jumps = [], highest_jump = []
+    
+    if (props.filtered_jumps[0].length > 0) {
 
-    if (props.each_jump.length > 0) {
-
-      each_jump = props.each_jump.map(x => {
+      filtered_jumps = props.filtered_jumps.map(x => {
       	var runs = x.length
       	return Math.round(x.reduce((sum, x) => sum + x) * 100 / runs) / 100
       })
 
-      highest_jump = props.each_jump.map(x => Math.max(...x) )
+      highest_jump = props.filtered_jumps.map(x => Math.max(...x) )
     }
 
     const options = {
@@ -104,7 +104,7 @@ export const RunGraph = (props) => {
           borderWidth: 2,
           hoverBackgroundColor: averages,
           hoverBorderColor: 'rgba(100,100,100,.5)',
-          data: each_jump
+          data: filtered_jumps
         }
       ]
     }

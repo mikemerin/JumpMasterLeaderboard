@@ -5,8 +5,8 @@ export const RunGraph = (props) => {
 
     var labels = [], totals = []
 
-    if (props.all_data.length > 0) {
-      props.all_data.forEach((x, i) => {
+    if (props.filtered_data.length > 0) {
+      props.filtered_data.forEach((x, i) => {
         labels.push(i+1)
         totals.push(x.total)
       })
@@ -21,12 +21,12 @@ export const RunGraph = (props) => {
           display: false
         }
       },
-      options: {
+
         scales: {
           xAxes: [{
             display: false
           }]
-        }
+
       },
     }
 
@@ -34,7 +34,7 @@ export const RunGraph = (props) => {
       labels: labels,
       datasets: [
         {
-          label: `Total Runs (${props.all_data.length})`,
+          label: `Total Runs (${props.filtered_data.length})`,
           type: 'line',
           fill: true,
           lineTension: 0,

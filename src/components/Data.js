@@ -5,11 +5,11 @@ export default function Data(props) {
 
   // debugger
 
-  // const { all_data } = props
+  // const { filtered_data } = props
 
   var scores = [], easy = [], medium = [], hard = [], hardest = [], total_jumps = 0, total_deaths = 0, sum_of_best = 0
 
-  props.all_data.forEach(x => {
+  props.filtered_data.forEach(x => {
     scores.push(x.total)
     easy.push(x.easy)
     medium.push(x.medium)
@@ -19,14 +19,14 @@ export default function Data(props) {
     total_deaths += x.deaths
   })
 
-  if ( props.all_data.length > 0 ) {
+  if ( props.filtered_data.length > 0 ) {
 
     function total(type) { return type.reduce((sum, x) => sum+x ) }
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
-    var runs = props.all_data.length
+    var runs = props.filtered_data.length
 
     var total_score = hundredths(total(scores))
-        sum_of_best = hundredths(total(props.each_jump.map(x => Math.max(...x))))
+        sum_of_best = hundredths(total(props.filtered_jumps.map(x => Math.max(...x))))
 
     var total_easy = hundredths(total(easy))
     var avg_easy = hundredths(total_easy / runs )
