@@ -6,8 +6,8 @@ export const RunGraph = (props) => {
 
     var labels = ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump",
         "Cascade", "T-Bone", "M-Jump 2", "Shuriken", "Half Diamond",
-        "M-Jump1 ", "Diamond", "Bubble", "Vortex", "Hourglass",
-        "Plane", "Corner", "Valve", "9-jump", "Double Diamond"]
+        "M-Jump1", "Diamond", "Bubble", "Vortex", "Hourglass",
+        "Plane", "Corner", "Valve", "9-Jump", "Double Diamond"]
 
     var each_jump = [], highest_jump = []
 
@@ -21,50 +21,13 @@ export const RunGraph = (props) => {
       highest_jump = props.each_jump.map(x => Math.max(...x) )
     }
 
-    // <Radar data={data_jumps} height={200} />
-
-    // const data_jumps = {
-    //   labels: labels,
-    //   options: {
-    //     legend: {
-    //       display: false
-    //     }
-    //   },
-    //   scale: {
-    //     gridLines: {
-    //       color: [ "black", "red", "orange", "yellow", "green" ]
-    //     },
-    //     ticks: {
-    //       display: false,
-    //       maxTicksLimit: 2
-    //     }
-    //   },
-    //   datasets: [
-    //     {
-    //       label: "Average Points",
-    //       fill: true,
-    //       backgroundColor: 'rgba(87,153,203,0.3)',
-    //       borderColor: 'rgba(87,153,203,.6)',
-    //       pointBackgroundColor:  'rgba(87,153,203,.6)',
-    //       pointBorderColor: 'rgba(20,20,20,.2)',
-    //       data: each_jump
-    //     },
-    //     {
-    //       label: "Highest Score",
-    //       fill: '-1',
-    //       backgroundColor: 'rgba(14,110,184,0.4)',
-    //       borderColor: 'rgba(14,110,184,1)',
-    //       pointBackgroundColor:  'rgba(14,110,184,1)',
-    //       pointBorderColor: 'rgba(20,20,20,.2)',
-    //       data: highest_jump
-    //     }
-    //   ]
-    // }
-
     const options = {
       tooltips: {
         mode: 'x-axis',
         position: 'nearest'
+      },
+      legend: {
+        display: false
       },
       plugins: {
          datalabels: {
@@ -73,39 +36,52 @@ export const RunGraph = (props) => {
             anchor: 'start',
             align: 'right',
             font: {
-              size: 7
+              size: 8
             },
+            offset: 0,
             formatter: function(value, context) {
-                return context.dataset._meta[0].data[context.dataIndex]._model.label
+              var label_hash = {"Gate" : "Gate", "Diagonal" : "Diag", "F-Jump" : "F-Jump", "Sideways Gate": "S. Gate", "Platform Jump" : "Platform",
+                 "Cascade": "Cascade", "T-Bone" : "t-bone", "M-Jump 2" : "M-2", "Shuriken" : "Shuriken", "Half Diamond" : "H. Dmnd",
+                 "M-Jump1" : "M-1", "Diamond" : "Diamond", "Bubble" : "Bubble", "Vortex" : "Vortex", "Hourglass" : "Hour",
+                 "Plane" : "Plane", "Corner" : "Corner", "Valve" : "Valve", "9-Jump" : "9-Jump", "Double Diamond" : "D. Dmnd"}
+              // var image = "n/a"
+              // var image_src = label_hash[context.dataset._meta[0].data[context.dataIndex]._model.label]
+              // image = require(`../images/${image_src}.png`)
+              // console.log(<img src={image} />)
+              // return <img src={image} />
+              return label_hash[context.dataset._meta[0].data[context.dataIndex]._model.label]
             }
          }
       },
-      // legend: {
-      //   display: false,
-      // },
       scales: {
         xAxes: [{
           stacked: true,
           ticks: {
             display: false
-            // fontSize: '7',
-            // minRotation: 90,
-            // mirror: true
           }
         }],
         yAxes: [{
+          steps: 10,
           position: "right",
           ticks: {
-            beginAtZero: true
+            beginAtZero: true,
+            fontSize: 10
           }
         }]
       }
     }
 
-    const easy = 'rgba(87,153,203,0.3)'
-    const medium = 'rgba(87,153,203,0.3)'
-    const hard = 'rgba(87,153,203,0.3)'
-    const hardest = 'rgba(87,153,203,0.3)'
+    const easy = 'rgba(40,140,214,0.6)'
+    const easya = 'rgba(70,190,255,0.6)'
+    const medium = 'rgba(23,107,172,0.6)'
+    const mediuma = 'rgba(36,160,245,0.6)'
+    const hard = 'rgba(224,99,99,0.6)'
+    const harda = 'rgba(255,160,160,0.6)'
+    const hardest = 'rgba(186,33,33,0.6)'
+    const hardesta = 'rgba(224,86,86,0.6)'
+
+    const highs = [easy, easy, easy, easy, easy, medium, medium, medium, medium, medium, hard, hard, hard, hard, hard, hardest, hardest, hardest, hardest, hardest]
+    const averages = [easya, easya, easya, easya, easya, mediuma, mediuma, mediuma, mediuma, mediuma, harda, harda, harda, harda, harda, hardesta, hardesta, hardesta, hardesta, hardesta]
 
     const data_jumps = {
       labels: labels,
@@ -113,21 +89,21 @@ export const RunGraph = (props) => {
         {
           label: "Highest Score",
           fill: true,
-          backgroundColor: [],
-          borderColor: 'rgba(87,153,203,.6)',
+          backgroundColor: highs,
+          borderColor: 'rgba(100,100,100,.5)',
           borderWidth: 2,
-          hoverBorderColor: 'rgba(87,153,203,1)',
-          hoverBackgroundColor: '#fff',
+          hoverBackgroundColor: highs,
+          hoverBorderColor: 'rgba(100,100,100,.5)',
           data: highest_jump
         },
         {
           label: "Average Points",
           fill: true,
-          backgroundColor: 'rgba(14,110,184,0.4)',
-          borderColor: 'rgba(14,110,184,1)',
+          backgroundColor: averages,
+          borderColor: 'rgba(100,100,100,.5)',
           borderWidth: 2,
-          hoverBackgroundColor:  'rgba(14,110,184,1)',
-          hoverBorderColor: 'rgba(20,20,20,.2)',
+          hoverBackgroundColor: averages,
+          hoverBorderColor: 'rgba(100,100,100,.5)',
           data: each_jump
         }
       ]
