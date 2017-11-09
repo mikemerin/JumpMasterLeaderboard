@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2'
+import 'chartjs-plugin-datalabels'
 
 export const RunGraph = (props) => {
 
@@ -62,7 +63,22 @@ export const RunGraph = (props) => {
 
     const options = {
       tooltips: {
-        mode: 'x-axis'
+        mode: 'x-axis',
+        position: 'nearest'
+      },
+      plugins: {
+         datalabels: {
+            display: true,
+            rotation: -90,
+            anchor: 'start',
+            align: 'right',
+            font: {
+              size: 7
+            },
+            formatter: function(value, context) {
+                return context.dataset._meta[0].data[context.dataIndex]._model.label
+            }
+         }
       },
       // legend: {
       //   display: false,
@@ -70,7 +86,12 @@ export const RunGraph = (props) => {
       scales: {
         xAxes: [{
           stacked: true,
-          display: false
+          ticks: {
+            display: false
+            // fontSize: '7',
+            // minRotation: 90,
+            // mirror: true
+          }
         }],
         yAxes: [{
           position: "right",
@@ -81,13 +102,18 @@ export const RunGraph = (props) => {
       }
     }
 
+    const easy = 'rgba(87,153,203,0.3)'
+    const medium = 'rgba(87,153,203,0.3)'
+    const hard = 'rgba(87,153,203,0.3)'
+    const hardest = 'rgba(87,153,203,0.3)'
+
     const data_jumps = {
       labels: labels,
       datasets: [
         {
           label: "Highest Score",
           fill: true,
-          backgroundColor: 'rgba(87,153,203,0.3)',
+          backgroundColor: [],
           borderColor: 'rgba(87,153,203,.6)',
           borderWidth: 2,
           hoverBorderColor: 'rgba(87,153,203,1)',
@@ -108,7 +134,7 @@ export const RunGraph = (props) => {
     }
 
     return (
-      <Bar data={data_jumps} height={183} options={options} />
+      <Bar data={data_jumps} height={190} options={options} />
     );
 
 }

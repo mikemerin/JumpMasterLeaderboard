@@ -13,6 +13,14 @@ export const RunGraph = (props) => {
     }
 
     const options = {
+      tooltips: {
+        position: 'nearest'
+      },
+      plugins: {
+        datalabels: {
+          display: false
+        }
+      },
       options: {
         scales: {
           xAxes: [{
