@@ -5,7 +5,6 @@ import { Grid, Divider, Statistic } from 'semantic-ui-react'
 
 import Data from './components/Data'
 import DifficultyGraph from './components/DifficultyGraph'
-// import JumpImages from './components/JumpImages'
 import Navbar from './components/Navbar'
 import RunGraph from './components/RunGraph'
 import Leaderboards from './components/Leaderboards'
@@ -34,25 +33,16 @@ export default class App extends Component {
   componentWillMount() {
     console.log("mounting");
     ScoreAdapter.all().then(data => {
-
-      data = data.sort((a, b) => a.total < b.total)
-
       this.setState({ all_data: data })
-
-    // const callsign = this.context.router.history.location.pathname.split('/')[2]
-    // if (callsign !== undefined)
-      // { this.setState({ station: { latitude: 0, longitude: 0 } }) }
     })
   }
 
   componentDidUpdate(prevProps, prevState) {
-  // look to see if the type changed
     if ( prevState.username !== this.state.username )
-      { this.context.router.history.push(`/username/${this.state.username}`) }
-    // debugger
-    // const callsign = this.context.router.history.location.pathname.split('/')[2]
-    // if (callsign !== undefined && )
-    //   { this.setState({ station: { latitude: 0, longitude: 0 } }) }
+      if ( this.state.username === "All Users" )
+        { this.context.router.history.push('/') }
+      else
+        { this.context.router.history.push(`/username/${this.state.username}`) }
   }
 
   filterData() {
@@ -110,7 +100,6 @@ export default class App extends Component {
 
   typeHandler = (event, result) => {
     event.preventDefault()
-    // this.context.router.history.push('/')
     this.setState({ type: result.value })
   }
 

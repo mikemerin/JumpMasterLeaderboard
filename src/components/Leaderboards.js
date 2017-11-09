@@ -4,7 +4,7 @@ import { Icon, Menu, Table } from 'semantic-ui-react'
 
 export default function Leaderboards(props) {
 
-  const filtered_data = props.filtered_data.map((x, i) => {
+  const filtered_data = props.filtered_data.sort((a, b) => a.total < b.total).map((x, i) => {
 
     const created_at = `${x.created_at.slice(0,10)} - ${x.created_at.slice(11,19)} UTC`
 
