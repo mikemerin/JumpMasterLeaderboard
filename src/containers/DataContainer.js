@@ -20,7 +20,7 @@ export default class DataContainer extends Component {
             <DifficultyGraph filtered_jumps={ filtered_jumps } />
           </Grid.Column>
           <Grid.Column>
-            <SearchPerson all_data={ all_data } handleNameChange={ handleNameChange } handleHome={ handleHome } username={ username } />
+            <SearchPerson all_data={ all_data } user_list={ user_list } handleNameChange={ handleNameChange } handleHome={ handleHome } username={ username } />
             <Divider />
             <Data user_list={ user_list } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } />
           </Grid.Column>

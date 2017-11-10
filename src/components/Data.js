@@ -7,7 +7,7 @@ export default function Data(props) {
 
   var scores = [], easy = [], medium = [], hard = [], hardest = []
 
-  var runs = filtered_data.length, total_jumps = 0, total_deaths = 0
+  var runs = filtered_data.length, total_jumps = 0, total_deaths = 0, avg_runs = 0
 
   filtered_data.forEach(x => {
     scores.push(x.total)
@@ -25,6 +25,7 @@ export default function Data(props) {
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
 
     var total_points = hundredths(total(scores))
+    avg_runs = runs / user_list.length
 
     var avg_points = hundredths(total_points / runs )
     var avg_jumps = hundredths(total_jumps / runs )
@@ -74,7 +75,7 @@ export default function Data(props) {
           { runs }
           <Statistic.Label>Runs</Statistic.Label>
           <Popup position='bottom center' trigger={
-              <div>{ runs / user_list.length }</div>
+              <div>{ avg_runs }</div>
           } content='average runs per user' />
         </Statistic>
 
