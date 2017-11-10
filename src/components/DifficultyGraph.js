@@ -9,11 +9,10 @@ export const RunGraph = (props) => {
         "M-Jump1", "Diamond", "Bubble", "Vortex", "Hourglass",
         "Plane", "Corner", "Valve", "9-Jump", "Double Diamond"]
 
-    var filtered_jumps = [], highest_jump = [], difficulties = []
+    var filtered_jumps = [], highest_jump = []
+    // var difficulties = []
 
     if (props.filtered_jumps[0].length > 0) {
-
-      console.log(props.filtered_jumps)
 
       filtered_jumps = props.filtered_jumps.map(x => {
       	var runs = x.length
@@ -22,15 +21,15 @@ export const RunGraph = (props) => {
 
       highest_jump = props.filtered_jumps.map(x => Math.max(...x) )
 
-      var avg_easy = Math.round(filtered_jumps.slice(0,5).reduce((sum, x) => sum + x) / 5 * 100) / 100
-      var avg_medium = Math.round(filtered_jumps.slice(5,10).reduce((sum, x) => sum + x) / 5 * 100) / 100
-      var avg_hard = Math.round(filtered_jumps.slice(10,15).reduce((sum, x) => sum + x) / 5 * 100) / 100
-      var avg_hardest = Math.round(filtered_jumps.slice(15,20).reduce((sum, x) => sum + x) / 5 * 100) / 100
+      // will add once variable stepping is a chartjs option
 
-      difficulties = [avg_easy, avg_medium, avg_hard, avg_hardest]
+      // var avg_easy = Math.round(filtered_jumps.slice(0,5).reduce((sum, x) => sum + x) / 5 * 100) / 100
+      // var avg_medium = Math.round(filtered_jumps.slice(5,10).reduce((sum, x) => sum + x) / 5 * 100) / 100
+      // var avg_hard = Math.round(filtered_jumps.slice(10,15).reduce((sum, x) => sum + x) / 5 * 100) / 100
+      // var avg_hardest = Math.round(filtered_jumps.slice(15,20).reduce((sum, x) => sum + x) / 5 * 100) / 100
+
+      // difficulties = [avg_easy, avg_medium, avg_hard, avg_hardest]
     }
-
-
 
     const options = {
       tooltips: {
