@@ -14,7 +14,7 @@ export default class DataContainer extends Component {
     const { all_data, user_list, filtered_data, filtered_jumps, handleNameChange, handleHome, username } = this.props
 
     return(
-      <Grid columns='equal' relaxed padded textAlign="center" verticalAlign="middle" >
+      <Grid columns='equal' relaxed textAlign="center" verticalAlign="middle" >
         <Grid.Row stretched>
           <Grid.Column>
             <DifficultyGraph filtered_jumps={ filtered_jumps } />
