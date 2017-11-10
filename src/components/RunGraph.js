@@ -113,7 +113,7 @@ export const RunGraph = (props) => {
           data: trend
         },
         {
-          label: 'Average Score',
+          label: 'Avg Score',
           type: 'line',
           fill: false,
           lineTension: 0,

@@ -9,9 +9,11 @@ export const RunGraph = (props) => {
         "M-Jump1", "Diamond", "Bubble", "Vortex", "Hourglass",
         "Plane", "Corner", "Valve", "9-Jump", "Double Diamond"]
 
-    var filtered_jumps = [], highest_jump = []
+    var filtered_jumps = [], highest_jump = [], difficulties = []
 
     if (props.filtered_jumps[0].length > 0) {
+
+      console.log(props.filtered_jumps)
 
       filtered_jumps = props.filtered_jumps.map(x => {
       	var runs = x.length
@@ -19,7 +21,16 @@ export const RunGraph = (props) => {
       })
 
       highest_jump = props.filtered_jumps.map(x => Math.max(...x) )
+
+      var avg_easy = Math.round(filtered_jumps.slice(0,5).reduce((sum, x) => sum + x) / 5 * 100) / 100
+      var avg_medium = Math.round(filtered_jumps.slice(5,10).reduce((sum, x) => sum + x) / 5 * 100) / 100
+      var avg_hard = Math.round(filtered_jumps.slice(10,15).reduce((sum, x) => sum + x) / 5 * 100) / 100
+      var avg_hardest = Math.round(filtered_jumps.slice(15,20).reduce((sum, x) => sum + x) / 5 * 100) / 100
+
+      difficulties = [avg_easy, avg_medium, avg_hard, avg_hardest]
     }
+
+
 
     const options = {
       tooltips: {
@@ -83,7 +94,8 @@ export const RunGraph = (props) => {
       labels: labels,
       datasets: [
         {
-          label: "Highest Score",
+          type: 'bar',
+          label: "High Score",
           fill: true,
           backgroundColor: highs,
           borderColor: 'rgba(100,100,100,.5)',
@@ -93,7 +105,8 @@ export const RunGraph = (props) => {
           data: highest_jump
         },
         {
-          label: "Average Points",
+          type: 'bar',
+          label: "Avg Points",
           fill: true,
           backgroundColor: averages,
           borderColor: 'rgba(100,100,100,.5)',
@@ -102,15 +115,17 @@ export const RunGraph = (props) => {
           hoverBorderColor: 'rgba(100,100,100,.5)',
           data: filtered_jumps
         },
+        // will add once variable stepping is a chartjs option
         // {
-        //   label: "Difficulties",
+        //   type: 'line',
+        //   label: "Points per jump/",
         //   fill: false,
         //   backgroundColor: averages,
         //   borderColor: 'rgba(100,100,100,.5)',
         //   borderWidth: 2,
         //   hoverBackgroundColor: averages,
         //   hoverBorderColor: 'rgba(100,100,100,.5)',
-        //   data: filtered_jumps
+        //   data: difficulties
         // }
       ]
     }
