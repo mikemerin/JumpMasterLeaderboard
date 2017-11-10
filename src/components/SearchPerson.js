@@ -3,8 +3,6 @@ import { Dropdown, Statistic } from 'semantic-ui-react'
 
 export const SearchPerson = (props) => {
 
-  // possible bug: name is 'all', or resetting to basics, may not matter
-
   // get unique usernames and sort them
   var person_hash = {}
   var person_list = props.all_data.map(x => x.username)
@@ -27,7 +25,7 @@ export const SearchPerson = (props) => {
 
                   placeholder="All Users"
                   selected="custom"
-                  defaultValue={ props.username }
+                  value={ props.username }
                   scrolling={true}
                   compact={true}
                   noResultsMessage="No Users Found"

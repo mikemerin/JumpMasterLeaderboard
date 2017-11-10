@@ -9,7 +9,6 @@ import RunGraph from '../components/RunGraph'
 
 import SearchPerson from '../components/SearchPerson'
 
-
 export default class DataContainer extends Component {
 
   render() {
