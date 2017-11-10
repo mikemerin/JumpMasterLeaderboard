@@ -1,5 +1,5 @@
-// const score_URL = 'http://45.55.244.51:3000/api/v1/scores'
-const score_URL = 'http://localhost:3000/api/v1/scores'
+const score_URL = 'http://45.55.244.51:3000/api/v1/scores'
+// const score_URL = 'http://localhost:3000/api/v1/scores'
 
 export class ScoreAdapter {
 

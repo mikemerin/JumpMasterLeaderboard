@@ -3,12 +3,10 @@ import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { Grid, Divider } from 'semantic-ui-react'
 
-import Data from './components/Data'
-import DifficultyGraph from './components/DifficultyGraph'
-import Navbar from './components/Navbar'
-import RunGraph from './components/RunGraph'
 import Leaderboards from './components/Leaderboards'
-import SearchPerson from './components/SearchPerson'
+
+import NavbarContainer from './containers/NavbarContainer'
+import DataContainer from './containers/DataContainer'
 
 import { ScoreAdapter } from './adapters'
 
@@ -92,7 +90,7 @@ export default class App extends Component {
 
   handleHome = (event) => {
     event.preventDefault()
-    this.context.router.history.push('/')
+    this.setState({ username: "All Users" })
   }
 
   handleNameChange = (event, result) => {
@@ -125,22 +123,9 @@ export default class App extends Component {
 
     return (
       <div>
-        <Navbar handleHome={ this.handleHome } />
-        <Grid columns='equal' relaxed padded textAlign="center" verticalAlign="middle" >
-          <Grid.Row stretched>
-            <Grid.Column>
-              <DifficultyGraph filtered_jumps={ filtered_jumps } />
-            </Grid.Column>
-            <Grid.Column>
-              <SearchPerson all_data={ this.state.all_data } handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } />
-              <Divider />
-              <Data filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } />
-            </Grid.Column>
-            <Grid.Column>
-              <RunGraph filtered_data={ filtered_data } />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <NavbarContainer handleHome={ this.handleHome } username={ this.state.username } />
+        <DataContainer all_data={ this.state.all_data } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
+          handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } />
         <Switch>
           <Route exact path="/" render={routerProps => {
             return <Leaderboards filtered_data={ filtered_data } />
