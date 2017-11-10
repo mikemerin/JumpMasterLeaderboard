@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
-import PropTypes from 'prop-types';
 import { Grid, Divider } from 'semantic-ui-react'
 
 import Data from '../components/Data'
@@ -13,7 +11,7 @@ export default class DataContainer extends Component {
 
   render() {
 
-    const { all_data, filtered_data, filtered_jumps, handleNameChange, handleHome, username } = this.props
+    const { all_data, user_list, filtered_data, filtered_jumps, handleNameChange, handleHome, username } = this.props
 
     return(
       <Grid columns='equal' relaxed padded textAlign="center" verticalAlign="middle" >
@@ -24,7 +22,7 @@ export default class DataContainer extends Component {
           <Grid.Column>
             <SearchPerson all_data={ all_data } handleNameChange={ handleNameChange } handleHome={ handleHome } username={ username } />
             <Divider />
-            <Data filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } />
+            <Data user_list={ user_list } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } />
           </Grid.Column>
           <Grid.Column>
             <RunGraph filtered_data={ filtered_data } />

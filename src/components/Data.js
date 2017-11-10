@@ -1,15 +1,15 @@
 import React from 'react';
-import { Statistic, Divider } from 'semantic-ui-react'
+import { Statistic, Divider, Popup } from 'semantic-ui-react'
 
 export default function Data(props) {
 
-  // debugger
+  const { filtered_data, user_list } = props
 
-  // const { filtered_data } = props
+  var scores = [], easy = [], medium = [], hard = [], hardest = []
 
-  var scores = [], easy = [], medium = [], hard = [], hardest = [], total_jumps = 0, total_deaths = 0, sum_of_best = 0
+  var runs = filtered_data.length, total_jumps = 0, total_deaths = 0
 
-  props.filtered_data.forEach(x => {
+  filtered_data.forEach(x => {
     scores.push(x.total)
     easy.push(x.easy)
     medium.push(x.medium)
@@ -19,14 +19,18 @@ export default function Data(props) {
     total_deaths += x.deaths
   })
 
-  if ( props.filtered_data.length > 0 ) {
+  if ( runs > 0 ) {
 
     function total(type) { return type.reduce((sum, x) => sum+x ) }
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
-    var runs = props.filtered_data.length
 
-    var total_score = hundredths(total(scores))
-        sum_of_best = hundredths(total(props.filtered_jumps.map(x => Math.max(...x))))
+    var total_points = hundredths(total(scores))
+
+    var avg_points = hundredths(total_points / runs )
+    var avg_jumps = hundredths(total_jumps / runs )
+    var avg_deaths = hundredths(total_deaths / runs )
+
+    var sum_of_best = hundredths(total(props.filtered_jumps.map(x => Math.max(...x))))
 
     var total_easy = hundredths(total(easy))
     var avg_easy = hundredths(total_easy / runs )
@@ -42,32 +46,54 @@ export default function Data(props) {
 
   }
 
-
   return (
     <div>
-      <Statistic.Group widths={3}>
+      <Statistic.Group widths={5}>
+
         <Statistic size='mini'>
-          <Statistic.Label>Total Points</Statistic.Label>
-          { total_score }
-        </Statistic>
-        <Statistic size='mini'>
-          <Statistic.Label>Total Jumps</Statistic.Label>
           { total_jumps }
+          <Statistic.Label>Jumps</Statistic.Label>
+          { avg_jumps }
         </Statistic>
         <Statistic size='mini'>
-          <Statistic.Label>Total Deaths</Statistic.Label>
           { total_deaths }
+          <Statistic.Label>Deaths</Statistic.Label>
+          { avg_deaths }
         </Statistic>
+        <Statistic size='mini'>
+          Total
+          <Statistic.Label>   </Statistic.Label>
+          Average
+        </Statistic>
+        <Statistic size='mini'>
+          { total_points }
+          <Statistic.Label>Points</Statistic.Label>
+          { avg_points }
+        </Statistic>
+        <Statistic size='mini'>
+          { runs }
+          <Statistic.Label>Runs</Statistic.Label>
+          <Popup position='bottom center' trigger={
+              <div>{ runs / user_list.length }</div>
+          } content='average runs per user' />
+        </Statistic>
+
       </Statistic.Group>
+
       <Divider />
       <Statistic.Group widths={1}>
+
         <Statistic size='mini'>
           <Statistic.Label>Sum of Bests</Statistic.Label>
-          { sum_of_best }
+          <Popup position='bottom center' trigger={
+              <div>{ sum_of_best }</div>
+          } content='best jump from each run' />
         </Statistic>
+
       </Statistic.Group>
       <Divider />
       <Statistic.Group widths={5}>
+
         <Statistic size='mini'>
           { total_easy }
           <Statistic.Label>Easy</Statistic.Label>
@@ -93,6 +119,7 @@ export default function Data(props) {
           <Statistic.Label>Hardest</Statistic.Label>
           { avg_hardest }
         </Statistic>
+
       </Statistic.Group>
     </div>
   )

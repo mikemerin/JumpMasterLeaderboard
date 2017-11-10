@@ -44,11 +44,7 @@ export const RunGraph = (props) => {
                  "Cascade": "Cascade", "T-Bone" : "t-bone", "M-Jump 2" : "M-2", "Shuriken" : "Shuriken", "Half Diamond" : "H. Dmnd",
                  "M-Jump1" : "M-1", "Diamond" : "Diamond", "Bubble" : "Bubble", "Vortex" : "Vortex", "Hourglass" : "Hour",
                  "Plane" : "Plane", "Corner" : "Corner", "Valve" : "Valve", "9-Jump" : "9-Jump", "Double Diamond" : "D. Dmnd"}
-              // var image = "n/a"
-              // var image_src = label_hash[context.dataset._meta[0].data[context.dataIndex]._model.label]
-              // image = require(`../images/${image_src}.png`)
-              // console.log(<img src={image} />)
-              // return <img src={image} />
+
               return label_hash[context.dataset._meta[0].data[context.dataIndex]._model.label]
             }
          }
@@ -105,7 +101,17 @@ export const RunGraph = (props) => {
           hoverBackgroundColor: averages,
           hoverBorderColor: 'rgba(100,100,100,.5)',
           data: filtered_jumps
-        }
+        },
+        // {
+        //   label: "Difficulties",
+        //   fill: false,
+        //   backgroundColor: averages,
+        //   borderColor: 'rgba(100,100,100,.5)',
+        //   borderWidth: 2,
+        //   hoverBackgroundColor: averages,
+        //   hoverBorderColor: 'rgba(100,100,100,.5)',
+        //   data: filtered_jumps
+        // }
       ]
     }
 

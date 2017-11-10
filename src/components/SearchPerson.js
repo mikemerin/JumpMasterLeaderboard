@@ -4,14 +4,14 @@ import { Dropdown, Statistic } from 'semantic-ui-react'
 export const SearchPerson = (props) => {
 
   // get unique usernames and sort them
-  var person_hash = {}
-  var person_list = props.all_data.map(x => x.username)
-  person_list.forEach(x => { if (person_hash[x] === undefined) { person_hash[x] = 1 } } )
-  person_list = Object.keys(person_hash).sort().map((x, i) => ({key: i+1, value: x, text: x }) )
-  person_list.unshift({key: 0, value: "All Users", text: "All Users" })
+  var user_hash = {}
+  var user_list = props.all_data.map(x => x.username)
+  user_list.forEach(x => { if (user_hash[x] === undefined) { user_hash[x] = 1 } } )
+  user_list = Object.keys(user_hash).sort().map((x, i) => ({key: i+1, value: x, text: x }) )
+  user_list.unshift({key: 0, value: "All Users", text: "All Users" })
 
   if (props.all_data.length > 0) {
-    if ( !person_list.map(x => x.text.toLowerCase()).includes(props.username.toLowerCase()) ) {
+    if ( !user_list.map(x => x.text.toLowerCase()).includes(props.username.toLowerCase()) ) {
       alert(`Sorry, no runs for '${props.username}' were found.`)
     }
   }
@@ -30,7 +30,7 @@ export const SearchPerson = (props) => {
                   compact={true}
                   noResultsMessage="No Users Found"
 
-                  options={ person_list }
+                  options={ user_list }
                   onChange={ props.handleNameChange }
         />
       </Statistic>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types';
-import { Grid, Divider } from 'semantic-ui-react'
 
 import Leaderboards from './components/Leaderboards'
 
@@ -108,6 +107,12 @@ export default class App extends Component {
     const filtered_data = this.filterData()
     const filtered_jumps = this.filterJumps(filtered_data)
 
+    // unique users, sorted alphabetically
+    var user_hash = {}
+    var user_list = this.state.all_data.map(x => x.username)
+    user_list.forEach(x => { if (user_hash[x] === undefined) { user_hash[x] = 1 } } )
+    user_list = Object.keys(user_hash).sort()
+
     // <Route path="/station/:callsign/:date" render={routerProps => {
     //               const { date, callsign } = routerProps.match.params
     //               const station = this.state.stations.find(x => x.callsign === callsign)
@@ -124,7 +129,7 @@ export default class App extends Component {
     return (
       <div>
         <NavbarContainer handleHome={ this.handleHome } username={ this.state.username } />
-        <DataContainer all_data={ this.state.all_data } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
+        <DataContainer all_data={ this.state.all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
           handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } />
         <Switch>
           <Route exact path="/" render={routerProps => {

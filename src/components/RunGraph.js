@@ -4,6 +4,7 @@ import { Line } from 'react-chartjs-2'
 export const RunGraph = (props) => {
 
     var labels = [], totals = []
+    var trend = [], slope = 0
 
     if (props.filtered_data.length > 0) {
       props.filtered_data.forEach((x, i) => {
@@ -11,6 +12,46 @@ export const RunGraph = (props) => {
         totals.push(x.total)
       })
     }
+
+//     // trend line
+//
+//
+//     if (avg_temps.filter(x=>x).length !== 0) {
+//       // numbers to work off of
+//       let sum_temps = 0
+//       let sum_x_axis = 0
+//       let linear = 0
+//       let x_squared = 0
+//
+//       let avg = avg_temps.filter(x => x)
+//       let length = avg_temps.length
+//       let x_axis = avg_temps.map((x,i) => {
+//           sum_temps = Math.round(avg.reduce((sum, x) => sum + x) * 10) / 10
+//           return i+1
+//       })
+//
+//       sum_x_axis = x_axis.reduce((sum, x) => sum + x)
+//
+//       // work off those prior numbers to set up the trend equation
+//       avg_temps.forEach((t, i) => {
+//           // x_squared += i**2
+//           if (!isNaN(t)) {
+//             linear += t * i
+//           }
+//       })
+//
+//   // round linear
+//     linear = Math.round(linear * 10) / 10
+//
+//     // get slope and intercept for line start point and angle, then create the trend line
+//     slope = 1.0 * ((length * linear) - (sum_x_axis * sum_temps)) / ((length * x_squared) - (sum_x_axis ** 2))
+//     let intercept = 1.0 * (sum_temps - (slope * sum_x_axis)) / length
+//     trend = x_axis.map(x => (slope * x) + intercept )
+//
+// }
+//
+// let trend_year = Math.round(slope*12 * 1000) / 1000
+// let trend_total = Math.round((trend[trend.length-1]-trend[0]) * 1000) / 1000
 
     const options = {
       tooltips: {
@@ -34,7 +75,7 @@ export const RunGraph = (props) => {
       labels: labels,
       datasets: [
         {
-          label: `Total Runs (${props.filtered_data.length})`,
+          label: 'Points',
           type: 'line',
           fill: true,
           lineTension: 0,
