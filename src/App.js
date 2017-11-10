@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
-// import PropTypes from 'prop-types';
-import { Grid, Divider, Statistic } from 'semantic-ui-react'
+import { Route, Switch } from 'react-router-dom'
+import PropTypes from 'prop-types';
+import { Grid, Divider } from 'semantic-ui-react'
 
 import Data from './components/Data'
 import DifficultyGraph from './components/DifficultyGraph'
@@ -9,8 +9,6 @@ import Navbar from './components/Navbar'
 import RunGraph from './components/RunGraph'
 import Leaderboards from './components/Leaderboards'
 import SearchPerson from './components/SearchPerson'
-
-import PropTypes from 'prop-types';
 
 import { ScoreAdapter } from './adapters'
 
@@ -35,6 +33,10 @@ export default class App extends Component {
     ScoreAdapter.all().then(data => {
       this.setState({ all_data: data })
     })
+    var path = this.context.router.route.location.pathname
+    if (!!path.match(/\username\/(\w+)/)) {
+      this.setState({ username: path.match(/\username\/(\w+)/)[1] })
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -52,40 +54,40 @@ export default class App extends Component {
   }
 
   filterJumps(filtered_data) {
-    var each_jump = [ [], [], [], [], [],
+    var jumps = [ [], [], [], [], [],
                   [], [], [], [], [],
                   [], [], [], [], [],
                   [], [], [], [], [] ]
 
     filtered_data.forEach(x => {
 
-      each_jump[0].push(x.gate_points)
-      each_jump[1].push(x.diagonal_points)
-      each_jump[2].push(x.fjump_points)
-      each_jump[3].push(x.sgate_points)
-      each_jump[4].push(x.platform_points)
+      jumps[0].push(x.gate_points);
+      jumps[1].push(x.diagonal_points)
+      jumps[2].push(x.fjump_points)
+      jumps[3].push(x.sgate_points)
+      jumps[4].push(x.platform_points)
 
-      each_jump[5].push(x.cascade_points)
-      each_jump[6].push(x.tbone_points)
-      each_jump[7].push(x.mjump2_points)
-      each_jump[8].push(x.shuriken_points)
-      each_jump[9].push(x.hdiamond_points)
+      jumps[5].push(x.cascade_points)
+      jumps[6].push(x.tbone_points)
+      jumps[7].push(x.mjump2_points)
+      jumps[8].push(x.shuriken_points)
+      jumps[9].push(x.hdiamond_points)
 
-      each_jump[10].push(x.mjump1_points)
-      each_jump[11].push(x.diamond_points)
-      each_jump[12].push(x.bubble_points)
-      each_jump[13].push(x.vortex_points)
-      each_jump[14].push(x.hourglass_points)
+      jumps[10].push(x.mjump1_points)
+      jumps[11].push(x.diamond_points)
+      jumps[12].push(x.bubble_points)
+      jumps[13].push(x.vortex_points)
+      jumps[14].push(x.hourglass_points)
 
-      each_jump[15].push(x.plane_points)
-      each_jump[16].push(x.corner_points)
-      each_jump[17].push(x.valve_points)
-      each_jump[18].push(x.ninejump_points)
-      each_jump[19].push(x.ddiamond_points)
+      jumps[15].push(x.plane_points)
+      jumps[16].push(x.corner_points)
+      jumps[17].push(x.valve_points)
+      jumps[18].push(x.ninejump_points)
+      jumps[19].push(x.ddiamond_points)
 
     })
 
-    return each_jump
+    return jumps
   }
 
   handleHome = (event) => {
@@ -108,6 +110,19 @@ export default class App extends Component {
     const filtered_data = this.filterData()
     const filtered_jumps = this.filterJumps(filtered_data)
 
+    // <Route path="/station/:callsign/:date" render={routerProps => {
+    //               const { date, callsign } = routerProps.match.params
+    //               const station = this.state.stations.find(x => x.callsign === callsign)
+    //
+    //               return (
+    //                 <div>
+    //                   <Grid.Row>
+    //                     <DataContainer date={ date } station={ station }/>
+    //                   </Grid.Row>
+    //                 </div>
+    //               )
+    //             }} />.
+
     return (
       <div>
         <Navbar handleHome={ this.handleHome } />
@@ -117,15 +132,7 @@ export default class App extends Component {
               <DifficultyGraph filtered_jumps={ filtered_jumps } />
             </Grid.Column>
             <Grid.Column>
-              <Statistic.Group widths={3}>
-                <Statistic size='mini'>
-                </Statistic>
-                <Statistic size='mini'>
-                  <SearchPerson all_data={ this.state.all_data } handleNameChange={ this.handleNameChange } />
-                </Statistic>
-                <Statistic size='mini'>
-                </Statistic>
-              </Statistic.Group>
+              <SearchPerson all_data={ this.state.all_data } handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } />
               <Divider />
               <Data filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } />
             </Grid.Column>
@@ -134,7 +141,15 @@ export default class App extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <Leaderboards filtered_data={ filtered_data } />
+        <Switch>
+          <Route exact path="/" render={routerProps => {
+            return <Leaderboards filtered_data={ filtered_data } />
+          }} />
+          <Route exact path="/username/:username" render={routerProps => {
+            const username = routerProps.match.params.username
+            return <Leaderboards filtered_data={ filtered_data } username={ username } />
+          }} />
+        </Switch>
       </div>
     );
   }
