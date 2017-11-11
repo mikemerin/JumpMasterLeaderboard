@@ -46,7 +46,7 @@ export const RunGraph = (props) => {
             anchor: 'start',
             align: 'right',
             font: {
-              size: 8
+              size: 9
             },
             offset: 0,
             formatter: function(value, context) {
