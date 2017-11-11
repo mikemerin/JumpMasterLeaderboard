@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types';
+import { Dimmer, Loader } from 'semantic-ui-react'
 
 import Leaderboards from './components/Leaderboards'
-
 import NavbarContainer from './containers/NavbarContainer'
 import DataContainer from './containers/DataContainer'
 
@@ -102,6 +102,17 @@ export default class App extends Component {
     this.setState({ type: result.value })
   }
 
+  loading_screen = () => {
+
+    if (this.state.all_data.length === 0) {
+      return (
+        <Dimmer active>
+          <Loader size='large'>Loading All Runs</Loader>
+        </Dimmer>
+      )
+    }
+  }
+
   render() {
 
     const filtered_data = this.filterData()
@@ -113,22 +124,11 @@ export default class App extends Component {
     user_list.forEach(x => { if (user_hash[x] === undefined) { user_hash[x] = 1 } } )
     user_list = Object.keys(user_hash).sort()
 
-    // <Route path="/station/:callsign/:date" render={routerProps => {
-    //               const { date, callsign } = routerProps.match.params
-    //               const station = this.state.stations.find(x => x.callsign === callsign)
-    //
-    //               return (
-    //                 <div>
-    //                   <Grid.Row>
-    //                     <DataContainer date={ date } station={ station }/>
-    //                   </Grid.Row>
-    //                 </div>
-    //               )
-    //             }} />.
-
     return (
       <div>
-        <NavbarContainer handleHome={ this.handleHome } username={ this.state.username } />
+
+          <NavbarContainer handleHome={ this.handleHome } username={ this.state.username } />
+        { this.loading_screen() }
         <DataContainer all_data={ this.state.all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
           handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } />
         <Switch>
