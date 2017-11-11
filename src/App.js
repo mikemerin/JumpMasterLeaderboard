@@ -139,6 +139,10 @@ export default class App extends Component {
             const username = routerProps.match.params.username
             return <LeaderboardContainer filtered_data={ filtered_data } username={ username } />
           }} />
+          <Route exact path="/run/:id" render={routerProps => {
+            const username = routerProps.match.params.username
+            return <LeaderboardContainer filtered_data={ filtered_data } username={ username } />
+          }} />
           <Route path="/" render={routerProps => {
             return <LeaderboardContainer filtered_data={ filtered_data } />
           }} />

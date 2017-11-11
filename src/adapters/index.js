@@ -26,7 +26,7 @@ export class ScoreAdapter {
         body: JSON.stringify({
           username: "tehjman1993",
 
-            total: 1496.35,
+            total: 13.35,
             jumps: 409,
             deaths: 221,
             longest_streak: 42,

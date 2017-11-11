@@ -28,6 +28,7 @@ export default class Leaderboards extends Component {
   handleSort = clickedColumn => () => {
 
     const { column, data, direction } = this.state
+    console.log(this.state)
 
     if (column !== clickedColumn) {
       if (clickedColumn === "place" || clickedColumn === "username" ) {

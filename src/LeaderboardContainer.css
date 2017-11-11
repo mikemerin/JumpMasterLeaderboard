@@ -1,7 +1,7 @@
 .Leaderboards-scroll {
   position: relative;
   top: 30px;
-  z-index: -5;
+  z-index: 2;
 }
 
 /*semantic ui conflict for fixed header, will add later once the ui is updated*/
