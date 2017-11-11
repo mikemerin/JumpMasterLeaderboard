@@ -21,7 +21,7 @@ export default class Leaderboards extends Component {
        x['created_at'] = `${x.created_at.slice(0,10)} - ${x.created_at.slice(11,19)} UTC`
        return x
       })
-    this.setState({ data: sorted_data })
+    this.setState({ column: null, data: sorted_data, direction: null })
     console.log('cwrp')
   }
 
