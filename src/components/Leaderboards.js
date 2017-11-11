@@ -15,8 +15,8 @@ export default class Leaderboards extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // sort data and add a place
-    var sorted_data = nextProps.filtered_data.sort((a, b) => a.total < b.total).map((x, i) => {
+    // sort data by high score followed by lowest deaths, and add a place / custom created_at
+    var sorted_data = nextProps.filtered_data.sort((a, b) => b.total - a.total || a.deaths - b.deaths ).map((x, i) => {
 	     x['place'] = i+1
        x['created_at_formatted'] = `${x.created_at.slice(0,10)} - ${x.created_at.slice(11,19)} UTC`
        return x

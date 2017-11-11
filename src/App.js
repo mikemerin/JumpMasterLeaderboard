@@ -126,9 +126,8 @@ export default class App extends Component {
 
     return (
       <div>
-
-          <NavbarContainer handleHome={ this.handleHome } username={ this.state.username } />
         { this.loading_screen() }
+        <NavbarContainer handleHome={ this.handleHome } username={ this.state.username } />
         <DataContainer all_data={ this.state.all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
           handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } />
         <Switch>

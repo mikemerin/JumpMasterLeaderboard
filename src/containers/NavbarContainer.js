@@ -11,7 +11,7 @@ export default class NavbarContainer extends Component {
     const title = username === "All Users" ? "Main Leaderboards" : `All runs for ${username}`
 
     return (
-      <Menu color='blue' inverted  fluid widths={3} size='huge' icon>
+      <Menu color='blue' inverted  fluid widths={3} size='huge' icon fixed='top'>
 
         <Menu.Item name='I Wanna Be the Jump Master' fitted='vertically' >
           <Link to="/" onClick={ handleHome } >I Wanna Be the Jump Master</Link>
