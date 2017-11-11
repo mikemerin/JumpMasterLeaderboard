@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { Dimmer, Loader } from 'semantic-ui-react'
-
-import Leaderboards from './components/Leaderboards'
+import './App.css'
 import NavbarContainer from './containers/NavbarContainer'
 import DataContainer from './containers/DataContainer'
+import LeaderboardContainer from './containers/LeaderboardContainer'
 
 import { ScoreAdapter } from './adapters'
 
@@ -128,17 +128,22 @@ export default class App extends Component {
       <div>
         { this.loading_screen() }
         <NavbarContainer handleHome={ this.handleHome } username={ this.state.username } />
-        <DataContainer all_data={ this.state.all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
-          handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } />
+
+        <div className="Data-fixed">
+          <DataContainer all_data={ this.state.all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
+            handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } />
+        </div>
+
         <Switch>
           <Route exact path="/username/:username" render={routerProps => {
             const username = routerProps.match.params.username
-            return <Leaderboards filtered_data={ filtered_data } username={ username } />
+            return <LeaderboardContainer filtered_data={ filtered_data } username={ username } />
           }} />
           <Route path="/" render={routerProps => {
-            return <Leaderboards filtered_data={ filtered_data } />
+            return <LeaderboardContainer filtered_data={ filtered_data } />
           }} />
         </Switch>
+
       </div>
     );
   }

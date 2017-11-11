@@ -21,3 +21,11 @@
 .App-intro {
   font-size: large;
 }
+
+
+.Data-fixed {
+  position: sticky;
+  top: 30px;
+  z-index: 4;
+  background-color: #ffffff;
+}

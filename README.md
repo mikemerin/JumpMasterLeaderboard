@@ -4,11 +4,13 @@ This is an API for the fangame I Wanna Be the Jump Master, storing user informat
 
 # To be added:
 
-* Top: stack if window width < 1200
-
 * * Leaderboards
-* Sort by all / daily / weekly / monthly
 * click on an individual run
 
 * * Routes
-* Set up routes for each score, each user
+* Set up routes for each score
+
+# Small bugs to fix
+
+* Top: stack if window width < 1200
+* * popup scrolls on fixed datacontainer, may need to use hideOnScroll
