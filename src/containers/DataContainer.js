@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Divider } from 'semantic-ui-react'
+import { Grid, Divider, Transition } from 'semantic-ui-react'
 
 import Data from '../components/Data'
 import DifficultyGraph from '../components/DifficultyGraph'

@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import React, { Component } from 'react';
 import { Table } from 'semantic-ui-react'
-import './LeaderboardContainer.css'
+import '../LeaderboardContainer.css'
 
 export default class Leaderboards extends Component {
 
@@ -22,6 +22,7 @@ export default class Leaderboards extends Component {
        return x
       })
     this.setState({ column: null, data: sorted_data, direction: null })
+    window.scrollTo(0, 0)
   }
 
   handleSort = clickedColumn => () => {
