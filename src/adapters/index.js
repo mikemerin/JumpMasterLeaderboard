@@ -8,15 +8,14 @@ export class ScoreAdapter {
 
   static all() {
     return fetch(score_URL).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        throw new Error('Something went wrong');
-      }
-        }).catch((error) => {
-      alert("Sorry something went wrong and no run data was found.\n\nPlease try again shortly.\n\nIf this problem persists please contact ShadowsDieAway on discord.")
-      return [fail_data]
-    })
+      if (res.ok)
+        { return res.json() }
+      else
+        { throw new Error('Something went wrong') }
+      }).catch((error) => {
+        alert("Sorry something went wrong and no run data was found.\n\nPlease try again shortly.\n\nIf this problem persists please contact ShadowsDieAway on discord.")
+        return [fail_data]
+      })
 
   }
 
