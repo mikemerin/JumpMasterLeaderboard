@@ -18,11 +18,10 @@ export default class Leaderboards extends Component {
     // sort data and add a place
     var sorted_data = nextProps.filtered_data.sort((a, b) => a.total < b.total).map((x, i) => {
 	     x['place'] = i+1
-       x['created_at'] = `${x.created_at.slice(0,10)} - ${x.created_at.slice(11,19)} UTC`
+       x['created_at_formatted'] = `${x.created_at.slice(0,10)} - ${x.created_at.slice(11,19)} UTC`
        return x
       })
     this.setState({ column: null, data: sorted_data, direction: null })
-    console.log('cwrp')
   }
 
   handleSort = clickedColumn => () => {
@@ -67,19 +66,19 @@ export default class Leaderboards extends Component {
             <Table.HeaderCell sorted={column === 'total' ? direction : null} onClick={this.handleSort('total')}>Score</Table.HeaderCell>
             <Table.HeaderCell sorted={column === 'jumps' ? direction : null} onClick={this.handleSort('jumps')}>Jumps</Table.HeaderCell>
             <Table.HeaderCell sorted={column === 'deaths' ? direction : null} onClick={this.handleSort('deaths')}>Deaths</Table.HeaderCell>
-            <Table.HeaderCell sorted={column === 'created_at' ? direction : null} onClick={this.handleSort('created_at')}>Run Time</Table.HeaderCell>
+            <Table.HeaderCell sorted={column === 'created_at_formatted' ? direction : null} onClick={this.handleSort('created_at_formatted')}>Run Time</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
-          {_.map(data, ({ place, username, total, jumps, deaths, created_at }) => (
+          {_.map(data, ({ place, username, total, jumps, deaths, created_at_formatted }) => (
             <Table.Row key={place}>
               <Table.Cell>{place}</Table.Cell>
               <Table.Cell>{username}</Table.Cell>
               <Table.Cell>{total}</Table.Cell>
               <Table.Cell>{jumps}</Table.Cell>
               <Table.Cell>{deaths}</Table.Cell>
-              <Table.Cell>{created_at}</Table.Cell>
+              <Table.Cell>{created_at_formatted}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
