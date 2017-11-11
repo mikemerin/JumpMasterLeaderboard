@@ -11,7 +11,7 @@ export const SearchPerson = (props) => {
 
   if (all_data.length > 0) {
     if ( !user_list.map(x => x.text.toLowerCase()).includes(username.toLowerCase()) ) {
-      alert(`Sorry, no runs for '${username}' were found.`)
+      alert(`Sorry, no runs for '${username}' were found.\n\nPlease choose another name from the dropdown menu.`)
     }
   }
 

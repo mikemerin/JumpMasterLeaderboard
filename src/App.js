@@ -132,12 +132,12 @@ export default class App extends Component {
         <DataContainer all_data={ this.state.all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
           handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } />
         <Switch>
-          <Route exact path="/" render={routerProps => {
-            return <Leaderboards filtered_data={ filtered_data } />
-          }} />
           <Route exact path="/username/:username" render={routerProps => {
             const username = routerProps.match.params.username
             return <Leaderboards filtered_data={ filtered_data } username={ username } />
+          }} />
+          <Route path="/" render={routerProps => {
+            return <Leaderboards filtered_data={ filtered_data } />
           }} />
         </Switch>
       </div>

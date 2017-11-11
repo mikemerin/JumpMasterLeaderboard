@@ -3,7 +3,7 @@ import { Statistic, Divider, Popup } from 'semantic-ui-react'
 
 export default function Data(props) {
 
-  const { filtered_data, user_list } = props
+  const { filtered_data, user_list, username } = props
 
   var scores = [], easy = [], medium = [], hard = [], hardest = []
 
@@ -25,7 +25,11 @@ export default function Data(props) {
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
 
     var total_points = hundredths(total(scores))
-    avg_runs = runs / user_list.length
+    if (username === "All Users") {
+      avg_runs = Math.round(runs / user_list.length * 100 ) / 100
+    } else {
+      avg_runs = "N/A"
+    }
 
     var avg_points = hundredths(total_points / runs )
     var avg_jumps = hundredths(total_jumps / runs )
