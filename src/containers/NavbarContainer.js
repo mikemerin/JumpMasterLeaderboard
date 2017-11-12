@@ -8,7 +8,7 @@ export default class NavbarContainer extends Component {
 
     const { handleHome, username } = this.props
 
-    const title = username === "All Users" ? "Main Leaderboards" : `All runs for ${username}`
+    const title = username === "All Users" ? "Main Leaderboards" : <Link to={`/username/${username}`} >All runs for { username }</Link>
 
     return (
       <Menu color='blue' inverted  fluid widths={3} size='huge' icon fixed='top' >

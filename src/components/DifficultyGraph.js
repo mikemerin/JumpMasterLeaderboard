@@ -54,7 +54,6 @@ export const RunGraph = (props) => {
                  "Cascade": "Cascade", "T-Bone" : "T-bone", "M-Jump 2" : "M-Jump 2", "Shuriken" : "Shuriken", "Half Diamond" : "H. Dmnd",
                  "M-Jump1" : "M-Jump 1", "Diamond" : "Diamond", "Bubble" : "Bubble", "Vortex" : "Vortex", "Hourglass" : "Hour",
                  "Plane" : "Plane", "Corner" : "Corner", "Valve" : "Valve", "9-Jump" : "9-Jump", "Double Diamond" : "D. Dmnd"}
-
               return label_hash[context.dataset._meta[0].data[context.dataIndex]._model.label]
             }
          }

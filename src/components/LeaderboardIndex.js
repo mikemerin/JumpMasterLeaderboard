@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import { Table } from 'semantic-ui-react'
 import '../Leaderboard.css'
 
@@ -63,9 +64,9 @@ export default class LeaderboardIndex extends Component {
     }
   }
 
-  localCell(local_place) {
+  localCell(local_place, id) {
     if (this.props.username !== "All Users" ) {
-      return <Table.Cell>{local_place}</Table.Cell>
+      return <Table.Cell selectable><Link to={`/run/${id}`} > {local_place} </Link></Table.Cell>
     }
   }
 
@@ -89,12 +90,13 @@ export default class LeaderboardIndex extends Component {
             </Table.Row>
           </Table.Header>
 
+
           <Table.Body>
-            {_.map(data, ({ global_place, local_place, username, total, jumps, deaths, created_at_formatted }) => (
+            {_.map(data, ({ id, global_place, local_place, username, total, jumps, deaths, created_at_formatted }) => (
               <Table.Row key={global_place}>
-                <Table.Cell>{global_place}</Table.Cell>
-                { this.localCell(local_place) }
-                <Table.Cell>{username}</Table.Cell>
+                <Table.Cell selectable><Link to={`/run/${id}`}> {global_place} </Link></Table.Cell>
+                { this.localCell(local_place, id) }
+                <Table.Cell selectable><Link to={`/username/${username}`} onClick={ this.props.handleNameClick }> {username} </Link></Table.Cell>
                 <Table.Cell>{total}</Table.Cell>
                 <Table.Cell>{jumps}</Table.Cell>
                 <Table.Cell>{deaths}</Table.Cell>

@@ -24,6 +24,7 @@ export default class App extends Component {
     super(props)
     this.state = {
       all_data: [],
+      run: false,
       username: "All Users"
     }
   }
@@ -34,8 +35,11 @@ export default class App extends Component {
       this.setState({ all_data: data })
     })
     var path = this.context.router.route.location.pathname
-    if (!!path.match(/\username\/(\w+)/)) {
-      this.setState({ username: path.match(/\username\/(\w+)/)[1] })
+    if (!!path.match(/^\/username\/(\w+)/)) {
+      this.setState({ username: path.match(/^\/username\/(\w+)/)[1] })
+    }
+    if (!!path.match(/^\/run\/(\d+)/)) {
+      this.setState({ run: true })
     }
   }
 
@@ -46,6 +50,7 @@ export default class App extends Component {
       else
         { this.context.router.history.push(`/username/${this.state.username}`) }
       }
+
   }
 
   addPlacesAndFormatCA(data) {
@@ -121,6 +126,11 @@ export default class App extends Component {
     this.setState({ username: result.value })
   }
 
+  handleNameClick = (event) => {
+    event.preventDefault()
+    this.setState({ username: event.target.innerText })
+  }
+
   loading_screen = () => {
     if (this.state.all_data.length === 0) {
       return (
@@ -149,6 +159,7 @@ export default class App extends Component {
         <div className="App-header">
           <NavbarContainer handleHome={ this.handleHome } username={ this.state.username } />
         </div>
+
         <div className="Data-fixed">
           <DataContainer all_data={ this.state.all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
             handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } />
@@ -165,7 +176,7 @@ export default class App extends Component {
             return <LeaderboardRun filtered_data={ filtered_data } filtered_jumps={ filtered_jumps} run={ run } />
           }} />
           <Route path="/" render={routerProps => {
-            return <LeaderboardIndex filtered_data={ filtered_data } username={ "All Users" }/>
+            return <LeaderboardIndex filtered_data={ filtered_data } username={ "All Users" } handleNameClick={ this.handleNameClick }/>
           }} />
         </Switch>
 
