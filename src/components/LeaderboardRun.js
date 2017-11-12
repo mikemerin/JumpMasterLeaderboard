@@ -1,32 +1,50 @@
-import _ from 'lodash'
 import React, { Component } from 'react';
-import { Table } from 'semantic-ui-react'
+import { Popup, Table } from 'semantic-ui-react'
 import '../Leaderboard.css'
 
 export default class LeaderboardRun extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      filtered_data: [],
+      run: {}
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     // sort data by high score followed by lowest deaths, and add a place / custom created_at
     var { filtered_data, filtered_jumps, run } = nextProps
-
-    // debugger
-    // var sorted_data = nextProps.filtered_data.sort((a, b) => b.total - a.total || a.deaths - b.deaths ).map((x, i) => {
-	  //    x['place'] = i+1
-    //    x['created_at_formatted'] = `${x.created_at.slice(0,10)} - ${x.created_at.slice(11,19)} UTC`
-    //    return x
-    //   })
-    // this.setState({ column: null, data: sorted_data, direction: null })
-    // window.scrollTo(0, 0)
+    this.setState({ filtered_data: filtered_data, run: run })
   }
 
   render() {
 
-    const jumps = ["gate", "diagonal", "fjump", "sgate", "platform",
-                   "cascade", "tbone", "mjump2", "shuriken", "hdiamond",
-                   "mjump1", "diamond", "bubble", "vortex", "hourglass",
-                   "plane", "corner", "valve", "ninejump", "ddiamond"]
+    const jump_names = ["gate", "diagonal", "fjump", "sgate", "platform",
+                        "cascade", "tbone", "mjump2", "shuriken", "hdiamond",
+                        "mjump1", "diamond", "bubble", "vortex", "hourglass",
+                        "plane", "corner", "valve", "ninejump", "ddiamond"]
 
-    function headers(jumps) { return jumps.map(jump => <Table.HeaderCell><img src={ require(`../images/${jump}.png`) } width={45} /></Table.HeaderCell> ) }
+    const labels = ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump",
+                    "Cascade", "T-Bone", "M-Jump 2", "Shuriken", "Half Diamond",
+                    "M-Jump1", "Diamond", "Bubble", "Vortex", "Hourglass",
+                    "Plane", "Corner", "Valve", "9-Jump", "Double Diamond"]
+
+
+    function headers() {
+      return jump_names.map((jump, i) => (
+        <Table.HeaderCell key={jump}>
+          <Popup position='top center' trigger={
+              <img src={ require(`../images/${jump}.png`) } alt={jump} width={40} />
+          } content={labels[i]} />
+        </Table.HeaderCell>
+      ))
+    }
+
+    function jumps() {
+      debugger
+      return <Table.HeaderCell>{this}</Table.HeaderCell>
+    }
 
     // definition
 
@@ -36,12 +54,20 @@ export default class LeaderboardRun extends Component {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Data</Table.HeaderCell>
-              { headers(jumps) }
+              { headers() }
             </Table.Row>
           </Table.Header>
 
           <Table.Body>
-
+            <Table.Row>
+              <Table.HeaderCell>Jumps</Table.HeaderCell>
+            </Table.Row>
+            <Table.Row>
+              <Table.HeaderCell>Streak</Table.HeaderCell>
+            </Table.Row>
+            <Table.Row>
+              <Table.HeaderCell>Points</Table.HeaderCell>
+            </Table.Row>
           </Table.Body>
 
         </Table>

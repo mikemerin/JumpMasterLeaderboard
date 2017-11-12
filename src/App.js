@@ -24,7 +24,7 @@ export default class App extends Component {
     super(props)
     this.state = {
       all_data: [],
-      type: "users",
+      run: false,
       username: "All Users"
     }
   }
@@ -41,11 +41,12 @@ export default class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if ( prevState.username !== this.state.username )
+    if ( prevState.username !== this.state.username && this.state.run === false) {
       if ( this.state.username === "All Users" )
         { this.context.router.history.push('/') }
       else
         { this.context.router.history.push(`/username/${this.state.username}`) }
+      }
   }
 
   addPlacesAndFormatCA(data) {
@@ -119,11 +120,6 @@ export default class App extends Component {
   handleNameChange = (event, result) => {
     event.preventDefault()
     this.setState({ username: result.value })
-  }
-
-  typeHandler = (event, result) => {
-    event.preventDefault()
-    this.setState({ type: result.value })
   }
 
   loading_screen = () => {
