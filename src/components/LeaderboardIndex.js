@@ -1,9 +1,9 @@
 import _ from 'lodash'
 import React, { Component } from 'react';
 import { Table } from 'semantic-ui-react'
-import '../LeaderboardContainer.css'
+import '../Leaderboard.css'
 
-export default class Leaderboards extends Component {
+export default class LeaderboardIndex extends Component {
 
   constructor(props) {
     super(props)
@@ -15,12 +15,9 @@ export default class Leaderboards extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // sort data by high score followed by lowest deaths, and add a place / custom created_at
-    var sorted_data = nextProps.filtered_data.sort((a, b) => b.total - a.total || a.deaths - b.deaths ).map((x, i) => {
-	     x['place'] = i+1
-       x['created_at_formatted'] = `${x.created_at.slice(0,10)} - ${x.created_at.slice(11,19)} UTC`
-       return x
-      })
+
+    // sort data by high score (tiebreaker lowest deaths)
+    var sorted_data = nextProps.filtered_data.sort((a, b) => b.total - a.total || a.deaths - b.deaths )
     this.setState({ column: null, data: sorted_data, direction: null })
     window.scrollTo(0, 0)
   }
@@ -28,10 +25,9 @@ export default class Leaderboards extends Component {
   handleSort = clickedColumn => () => {
 
     const { column, data, direction } = this.state
-    console.log(this.state)
 
     if (column !== clickedColumn) {
-      if (clickedColumn === "place" || clickedColumn === "username" ) {
+      if (clickedColumn === "local_place" || clickedColumn === "username" ) {
         this.setState({
           column: clickedColumn,
           data: _.sortBy(data, [clickedColumn]),
@@ -55,6 +51,25 @@ export default class Leaderboards extends Component {
 
   }
 
+  // toggle table for all runs vs. one user's
+
+  globalHeader() {
+    return (this.props.username === "All Users" ? "" : "Global " ) + "Place"
+  }
+
+  localHeader(column, direction) {
+    if (this.props.username !== "All Users") {
+      return <Table.HeaderCell sorted={column === 'local_place' ? direction : null} onClick={this.handleSort('local_place')}>Local Place</Table.HeaderCell>
+    }
+  }
+
+  localCell(local_place) {
+    if (this.props.username !== "All Users" ) {
+      return <Table.Cell>{local_place}</Table.Cell>
+    }
+  }
+
+
   render() {
 
     const { column, data, direction } = this.state
@@ -64,7 +79,8 @@ export default class Leaderboards extends Component {
         <Table celled color="blue" inverted sortable striped fixed compact="very" size="small" textAlign="center" >
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell sorted={column === 'place' ? direction : null} onClick={this.handleSort('place')}>Place</Table.HeaderCell>
+              <Table.HeaderCell sorted={column === 'global_place' ? direction : null} onClick={this.handleSort('global_place')}>{ this.globalHeader() }</Table.HeaderCell>
+              { this.localHeader(column, direction) }
               <Table.HeaderCell sorted={column === 'username' ? direction : null} onClick={this.handleSort('username')}>Username</Table.HeaderCell>
               <Table.HeaderCell sorted={column === 'total' ? direction : null} onClick={this.handleSort('total')}>Score</Table.HeaderCell>
               <Table.HeaderCell sorted={column === 'jumps' ? direction : null} onClick={this.handleSort('jumps')}>Jumps</Table.HeaderCell>
@@ -74,9 +90,10 @@ export default class Leaderboards extends Component {
           </Table.Header>
 
           <Table.Body>
-            {_.map(data, ({ place, username, total, jumps, deaths, created_at_formatted }) => (
-              <Table.Row key={place}>
-                <Table.Cell>{place}</Table.Cell>
+            {_.map(data, ({ global_place, local_place, username, total, jumps, deaths, created_at_formatted }) => (
+              <Table.Row key={global_place}>
+                <Table.Cell>{global_place}</Table.Cell>
+                { this.localCell(local_place) }
                 <Table.Cell>{username}</Table.Cell>
                 <Table.Cell>{total}</Table.Cell>
                 <Table.Cell>{jumps}</Table.Cell>

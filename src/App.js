@@ -3,11 +3,15 @@ import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { Dimmer, Loader } from 'semantic-ui-react'
 import './App.css'
-import NavbarContainer from './containers/NavbarContainer'
-import DataContainer from './containers/DataContainer'
-import LeaderboardContainer from './containers/LeaderboardContainer'
 
 import { ScoreAdapter } from './adapters'
+
+import LeaderboardIndex from './components/LeaderboardIndex'
+import LeaderboardRun from './components/LeaderboardRun'
+
+import NavbarContainer from './containers/NavbarContainer'
+import DataContainer from './containers/DataContainer'
+
 
 
 export default class App extends Component {
@@ -20,7 +24,7 @@ export default class App extends Component {
     super(props)
     this.state = {
       all_data: [],
-      type: "all",
+      type: "users",
       username: "All Users"
     }
   }
@@ -44,10 +48,30 @@ export default class App extends Component {
         { this.context.router.history.push(`/username/${this.state.username}`) }
   }
 
+  addPlacesAndFormatCA(data) {
+    var data_dup = data.slice(0,data.length)
+
+    // sort by high score (low death tiebreker), add place and format, then resort by id
+    return data_dup.sort((a, b) => b.total - a.total || a.deaths - b.deaths ).map((x, i) => {
+       x['global_place'] = i+1
+       x['created_at_formatted'] = `${x.created_at.slice(0,10)} - ${x.created_at.slice(11,19)} UTC`
+       return x
+    }).sort((a, b) => a.id - b.id )
+  }
+
   filterData() {
+
+    // first filter by name (or all name),
+
+    // then sort by high score (low death tiebreker), add local_place, then resort by id
+
     return this.state.all_data.filter(x => (
+      // if all, filter everything, else filter by the username picked
       this.state.username === "All Users" ? x : x.username === this.state.username
-    ))
+    )).sort((a, b) => b.total - a.total || a.deaths - b.deaths ).map((x,i) => {
+       x['local_place'] = i+1
+       return x
+    }).sort((a, b) => a.id - b.id )
   }
 
   filterJumps(filtered_data) {
@@ -103,7 +127,6 @@ export default class App extends Component {
   }
 
   loading_screen = () => {
-
     if (this.state.all_data.length === 0) {
       return (
         <Dimmer active>
@@ -115,6 +138,7 @@ export default class App extends Component {
 
   render() {
 
+    this.addPlacesAndFormatCA(this.state.all_data)
     const filtered_data = this.filterData()
     const filtered_jumps = this.filterJumps(filtered_data)
 
@@ -127,8 +151,9 @@ export default class App extends Component {
     return (
       <div>
         { this.loading_screen() }
-        <NavbarContainer handleHome={ this.handleHome } username={ this.state.username } />
-
+        <div className="App-header">
+          <NavbarContainer handleHome={ this.handleHome } username={ this.state.username } />
+        </div>
         <div className="Data-fixed">
           <DataContainer all_data={ this.state.all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
             handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } />
@@ -137,14 +162,15 @@ export default class App extends Component {
         <Switch>
           <Route exact path="/username/:username" render={routerProps => {
             const username = routerProps.match.params.username
-            return <LeaderboardContainer filtered_data={ filtered_data } username={ username } />
+            return <LeaderboardIndex filtered_data={ filtered_data } username={ username } />
           }} />
           <Route exact path="/run/:id" render={routerProps => {
-            const username = routerProps.match.params.username
-            return <LeaderboardContainer filtered_data={ filtered_data } username={ username } />
+            const id = routerProps.match.params.id
+            const run = this.state.all_data.find(x => x.id === parseInt(id, 10))
+            return <LeaderboardRun filtered_data={ filtered_data } filtered_jumps={ filtered_jumps} run={ run } />
           }} />
           <Route path="/" render={routerProps => {
-            return <LeaderboardContainer filtered_data={ filtered_data } />
+            return <LeaderboardIndex filtered_data={ filtered_data } username={ "All Users" }/>
           }} />
         </Switch>
 
