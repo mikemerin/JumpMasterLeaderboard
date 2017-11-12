@@ -24,7 +24,6 @@ export default class App extends Component {
     super(props)
     this.state = {
       all_data: [],
-      run: false,
       username: "All Users"
     }
   }
@@ -41,7 +40,7 @@ export default class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if ( prevState.username !== this.state.username && this.state.run === false) {
+    if ( prevState.username !== this.state.username ) {
       if ( this.state.username === "All Users" )
         { this.context.router.history.push('/') }
       else

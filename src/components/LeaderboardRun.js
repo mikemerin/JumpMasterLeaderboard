@@ -2,49 +2,67 @@ import React, { Component } from 'react';
 import { Popup, Table } from 'semantic-ui-react'
 import '../Leaderboard.css'
 
-export default class LeaderboardRun extends Component {
+const jump_names = ["gate", "diagonal", "fjump", "sgate", "platform",
+                    "cascade", "tbone", "mjump2", "shuriken", "hdiamond",
+                    "mjump1", "diamond", "bubble", "vortex", "hourglass",
+                    "plane", "corner", "valve", "ninejump", "ddiamond"]
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      filtered_data: [],
-      run: {}
-    }
-  }
+const labels = ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump",
+                "Cascade", "T-Bone", "M-Jump 2", "Shuriken", "Half Diamond",
+                "M-Jump1", "Diamond", "Bubble", "Vortex", "Hourglass",
+                "Plane", "Corner", "Valve", "9-Jump", "Double Diamond"]
+
+export default class LeaderboardRun extends Component {
 
   componentWillReceiveProps(nextProps) {
     // sort data by high score followed by lowest deaths, and add a place / custom created_at
-    var { filtered_data, filtered_jumps, run } = nextProps
-    this.setState({ filtered_data: filtered_data, run: run })
+    // var { filtered_data, filtered_jumps, run } = nextProps
+    // this.setState({ filtered_data: filtered_data, run: run })
   }
 
+  headers = () => {
+    return jump_names.map((jump, i) => (
+      <Table.HeaderCell key={jump}>
+        <Popup position='top center' trigger={
+            <img src={ require(`../images/${jump}.png`) } alt={jump} width={40} />
+        } content={labels[i]} />
+      </Table.HeaderCell>
+    ))
+  }
+
+  body = () => {
+    var all_jumps = [], all_streaks = [], all_points = []
+    jump_names.forEach(jump => {
+      // console.log(eval(`this.props.run.${jump}_jumps`))
+      // eval(`this.props.run.${jump}_jumps`)
+      if (this.props.run !== undefined) {
+        all_jumps.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_jumps`] }</Table.Cell>)
+        all_streaks.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_streak`] }</Table.Cell>)
+        all_points.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_points`] }</Table.Cell>)
+      }
+    })
+
+    return (
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>Jumps</Table.Cell>
+          { all_jumps }
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>Streak</Table.Cell>
+          { all_streaks }
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>Points</Table.Cell>
+          { all_points }
+        </Table.Row>
+      </Table.Body>
+    )
+
+  }
+
+
   render() {
-
-    const jump_names = ["gate", "diagonal", "fjump", "sgate", "platform",
-                        "cascade", "tbone", "mjump2", "shuriken", "hdiamond",
-                        "mjump1", "diamond", "bubble", "vortex", "hourglass",
-                        "plane", "corner", "valve", "ninejump", "ddiamond"]
-
-    const labels = ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump",
-                    "Cascade", "T-Bone", "M-Jump 2", "Shuriken", "Half Diamond",
-                    "M-Jump1", "Diamond", "Bubble", "Vortex", "Hourglass",
-                    "Plane", "Corner", "Valve", "9-Jump", "Double Diamond"]
-
-
-    function headers() {
-      return jump_names.map((jump, i) => (
-        <Table.HeaderCell key={jump}>
-          <Popup position='top center' trigger={
-              <img src={ require(`../images/${jump}.png`) } alt={jump} width={40} />
-          } content={labels[i]} />
-        </Table.HeaderCell>
-      ))
-    }
-
-    function jumps() {
-      debugger
-      return <Table.HeaderCell>{this}</Table.HeaderCell>
-    }
 
     // definition
 
@@ -54,21 +72,11 @@ export default class LeaderboardRun extends Component {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Data</Table.HeaderCell>
-              { headers() }
+              { this.headers() }
             </Table.Row>
           </Table.Header>
 
-          <Table.Body>
-            <Table.Row>
-              <Table.HeaderCell>Jumps</Table.HeaderCell>
-            </Table.Row>
-            <Table.Row>
-              <Table.HeaderCell>Streak</Table.HeaderCell>
-            </Table.Row>
-            <Table.Row>
-              <Table.HeaderCell>Points</Table.HeaderCell>
-            </Table.Row>
-          </Table.Body>
+          { this.body() }
 
         </Table>
       </div>
