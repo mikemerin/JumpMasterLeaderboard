@@ -6,11 +6,9 @@ import './App.css'
 
 import { ScoreAdapter } from './adapters'
 
-import LeaderboardIndex from './components/LeaderboardIndex'
-import LeaderboardRun from './components/LeaderboardRun'
-
 import NavbarContainer from './containers/NavbarContainer'
 import DataContainer from './containers/DataContainer'
+import LeaderboardContainer from './containers/LeaderboardContainer'
 
 
 
@@ -25,6 +23,7 @@ export default class App extends Component {
     this.state = {
       all_data: [],
       run: false,
+      visible: false,
       username: "All Users"
     }
   }
@@ -44,6 +43,11 @@ export default class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if ( prevState.all_data !== this.state.all_data ) {
+      this.setState({ visible: true })
+    }
+
+
     if ( prevState.username !== this.state.username ) {
       if ( this.state.username === "All Users" )
         { this.context.router.history.push('/') }
@@ -134,8 +138,8 @@ export default class App extends Component {
   loading_screen = () => {
     if (this.state.all_data.length === 0) {
       return (
-        <Dimmer active>
-          <Loader size='large'>Loading All Runs</Loader>
+        <Dimmer active page>
+          <Loader size='large'>Fetching All Run Data</Loader>
         </Dimmer>
       )
     }
@@ -162,23 +166,11 @@ export default class App extends Component {
 
         <div className="Data-fixed">
           <DataContainer all_data={ this.state.all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
-            handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } />
+            handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } visible={ this.state.visible } />
         </div>
 
-        <Switch>
-          <Route exact path="/username/:username" render={routerProps => {
-            const username = routerProps.match.params.username
-            return <LeaderboardIndex filtered_data={ filtered_data } username={ username } />
-          }} />
-          <Route exact path="/run/:id" render={routerProps => {
-            const id = routerProps.match.params.id
-            const run = this.state.all_data.find(x => x.id === parseInt(id, 10))
-            return <LeaderboardRun filtered_data={ filtered_data } filtered_jumps={ filtered_jumps} run={ run } />
-          }} />
-          <Route path="/" render={routerProps => {
-            return <LeaderboardIndex filtered_data={ filtered_data } username={ "All Users" } handleNameClick={ this.handleNameClick }/>
-          }} />
-        </Switch>
+        <LeaderboardContainer all_data={ this.state.all_data } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps }
+            username={ this.state.username } visible={ this.state.visible } handleNameClick={ this.handleNameClick } />
 
       </div>
     );

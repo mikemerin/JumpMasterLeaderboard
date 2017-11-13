@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Popup, Table } from 'semantic-ui-react'
+import { Popup, Table, Transition } from 'semantic-ui-react'
 import '../Leaderboard.css'
 
 const jump_names = ["gate", "diagonal", "fjump", "sgate", "platform",
@@ -67,19 +67,21 @@ export default class LeaderboardRun extends Component {
     // definition
 
     return (
-      <div className="Leaderboards-scroll">
-        <Table celled color="blue" inverted striped fixed compact="very" size="small" textAlign="center" >
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Data</Table.HeaderCell>
-              { this.headers() }
-            </Table.Row>
-          </Table.Header>
+      <Transition visible={ this.props.visible } animation='slide down' duration={1500}>
+        <div className="Leaderboards-scroll">
+          <Table celled color="blue" inverted striped fixed compact="very" size="small" textAlign="center" >
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Data</Table.HeaderCell>
+                { this.headers() }
+              </Table.Row>
+            </Table.Header>
 
-          { this.body() }
+            { this.body() }
 
-        </Table>
-      </div>
+          </Table>
+        </div>
+      </Transition>
 
     )
 
