@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Menu, Icon, Popup } from 'semantic-ui-react'
+import { Menu, Icon, Popup, Modal, Image } from 'semantic-ui-react'
 
 export default class NavbarContainer extends Component {
 
@@ -26,6 +26,20 @@ export default class NavbarContainer extends Component {
                 <Icon name='download' />
               </a>
           } content='download the game' />
+
+          <Modal size='tiny' trigger={<a><Popup position='bottom center' trigger={
+              <Icon name='info' />
+          } content='Info' /></a>}>
+            <Modal.Header><center>I Wanna Be the Jump Master Leaderboards </center></Modal.Header>
+            <Modal.Content image>
+              <Image size='large' src={ require('../images/logo.png') } />
+              <Modal.Description>
+                <center><p>This website (and game) was created by ShadowsDieAway.</p></center>
+                <br />
+                <center><p>Please use the icons on the header for game and profile links.</p></center>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
 
           <Popup position='bottom center' trigger={
             <a href="http://twitch.tv/shadowsdieaway" target="_blank" rel="noopener noreferrer">

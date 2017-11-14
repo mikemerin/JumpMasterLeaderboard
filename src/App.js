@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { Dimmer, Loader } from 'semantic-ui-react'
 import './App.css'
@@ -43,6 +42,7 @@ export default class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // fade in once data is fetched
     if ( prevState.all_data !== this.state.all_data ) {
       this.setState({ visible: true })
     }

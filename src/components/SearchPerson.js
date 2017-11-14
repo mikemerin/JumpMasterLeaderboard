@@ -9,13 +9,13 @@ export const SearchPerson = (props) => {
   user_list = user_list.map((x, i) => ({key: i+1, value: x, text: x }) )
   user_list.unshift({key: 0, value: "All Users", text: "All Users" })
 
-  if (all_data.length > 0) {
-    if ( !user_list.map(x => x.text.toLowerCase()).includes(username.toLowerCase()) ) {
-      alert(`Sorry, no runs for '${username}' were found.\n\nPlease choose another name from the dropdown menu.`)
-    }
-  }
+  if (all_data.length > 0 && !user_list.map(x => x.text.toLowerCase()).includes(username.toLowerCase()) )
+      { alert(`Sorry, no runs for '${username}' were found.\n\nPlease choose another name from the dropdown menu.`) }
 
-  return (
+  if (all_data.length > 0 && all_data[0].username === "Sorry, no data was found")
+    { return ( <div /> ) }
+  else
+    { return (
     <Statistic.Group widths={3}>
       <Statistic size='mini'>
       </Statistic>
@@ -36,8 +36,8 @@ export const SearchPerson = (props) => {
       <Statistic size='mini'>
       </Statistic>
     </Statistic.Group>
-
   )
+}
 
 }
 

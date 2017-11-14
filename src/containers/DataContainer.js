@@ -25,7 +25,7 @@ export default class DataContainer extends Component {
             <Grid.Column>
               <SearchPerson all_data={ all_data } user_list={ user_list } handleNameChange={ handleNameChange } handleHome={ handleHome } username={ username } />
               <Divider />
-              <Data user_list={ user_list } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } username={ username } />
+              <Data all_data={ all_data } user_list={ user_list } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } username={ username } />
             </Grid.Column>
           </Transition>
           <Transition visible={ visible } animation='scale' duration={500}>

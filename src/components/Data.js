@@ -1,60 +1,65 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Statistic, Divider, Popup } from 'semantic-ui-react'
 
-export default function Data(props) {
+export default class Data extends Component {
 
-  const { filtered_data, user_list, username } = props
+  render() {
 
-  var scores = [], easy = [], medium = [], hard = [], hardest = []
+    const { all_data, filtered_data, filtered_jumps, user_list, username } = this.props
 
-  var runs = filtered_data.length, total_jumps = 0, total_deaths = 0, avg_runs = 0
+    var scores = [], easy = [], medium = [], hard = [], hardest = []
 
-  filtered_data.forEach(x => {
-    scores.push(x.total)
-    easy.push(x.easy)
-    medium.push(x.medium)
-    hard.push(x.hard)
-    hardest.push(x.hardest)
-    total_jumps += x.jumps
-    total_deaths += x.deaths
-  })
+    var runs = filtered_data.length, total_jumps = null, total_deaths = null, avg_runs = null
 
-  if ( runs > 0 ) {
+    filtered_data.forEach(x => {
+      scores.push(x.total)
+      easy.push(x.easy)
+      medium.push(x.medium)
+      hard.push(x.hard)
+      hardest.push(x.hardest)
+      total_jumps += x.jumps
+      total_deaths += x.deaths
+    })
 
-    function total(type) { return type.reduce((sum, x) => sum+x ) }
-    function hundredths(type) { return Math.round(type * 100 ) / 100 }
+    if ( runs > 0 ) {
 
-    var total_points = hundredths(total(scores))
-    if (username === "All Users") {
-      avg_runs = Math.round(runs / user_list.length * 100 ) / 100
-    } else {
-      avg_runs = "N/A"
+      function total(type) { return type.reduce((sum, x) => sum+x ) }
+      function hundredths(type) { return Math.round(type * 100 ) / 100 }
+
+      var total_points = hundredths(total(scores))
+      if (username === "All Users") {
+        avg_runs = Math.round(runs / user_list.length * 100 ) / 100
+      } else {
+        avg_runs = "N/A"
+      }
+
+      var avg_points = hundredths(total_points / runs )
+      var avg_jumps = hundredths(total_jumps / runs )
+      var avg_deaths = hundredths(total_deaths / runs )
+
+      var sum_of_best = hundredths(total(this.props.filtered_jumps.map(x => Math.max(...x))))
+
+      var total_easy = hundredths(total(easy))
+      var avg_easy = hundredths(total_easy / runs )
+
+      var total_medium = hundredths(total(medium))
+      var avg_medium = hundredths(total_medium / runs )
+
+      var total_hard = hundredths(total(hard))
+      var avg_hard = hundredths(total_hard / runs )
+
+      var total_hardest = hundredths(total(hardest))
+      var avg_hardest = hundredths(total_hardest / runs )
+
     }
 
-    var avg_points = hundredths(total_points / runs )
-    var avg_jumps = hundredths(total_jumps / runs )
-    var avg_deaths = hundredths(total_deaths / runs )
-
-    var sum_of_best = hundredths(total(props.filtered_jumps.map(x => Math.max(...x))))
-
-    var total_easy = hundredths(total(easy))
-    var avg_easy = hundredths(total_easy / runs )
-
-    var total_medium = hundredths(total(medium))
-    var avg_medium = hundredths(total_medium / runs )
-
-    var total_hard = hundredths(total(hard))
-    var avg_hard = hundredths(total_hard / runs )
-
-    var total_hardest = hundredths(total(hardest))
-    var avg_hardest = hundredths(total_hardest / runs )
-
-  }
+    // if (all_data.length > 0 && all_data[0].username === "Sorry, no data was found")
+    //   { runs = 0, avg_runs = 0 }
 
   return (
+
     <div>
       <Statistic.Group widths={5}>
-
         <Statistic size='mini'>
           { total_jumps }
           <Statistic.Label>Jumps</Statistic.Label>
@@ -126,7 +131,8 @@ export default function Data(props) {
         </Statistic>
 
       </Statistic.Group>
-    </div>
-  )
+      </div>
 
+    )
+  }
 }

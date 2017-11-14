@@ -96,7 +96,7 @@ export default class LeaderboardIndex extends Component {
             <Table.Body>
               {_.map(data, ({ id, global_place, local_place, username, total, jumps, deaths, created_at_formatted }) => (
                 <Table.Row key={global_place}>
-                  <Table.Cell selectable><Link to={`/run/${id}`}> {global_place} </Link></Table.Cell>
+                  <Table.Cell selectable><Link to={`/username/${username}/run/${id}`}> {global_place} </Link></Table.Cell>
                   { this.localCell(local_place, id) }
                   <Table.Cell selectable><Link to={`/username/${username}`} onClick={ handleNameClick }> {username} </Link></Table.Cell>
                   <Table.Cell>{total}</Table.Cell>

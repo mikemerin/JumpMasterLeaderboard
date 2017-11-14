@@ -4,6 +4,9 @@ This is an API for the fangame I Wanna Be the Jump Master, storing user informat
 
 # To be added:
 
+* larger icon for modal
+* Stack if window width < 1200
+*
 * About page (as modal)
 * X need to route from runs to users and vice versa X (now /u/:u/i/:i)
 * * use state, add back "type"
@@ -18,6 +21,9 @@ This is an API for the fangame I Wanna Be the Jump Master, storing user informat
 
 # Small bugs to fix
 
-* Top: stack if window width < 1200
-* * popup scrolls on fixed datacontainer, may need to use hideOnScroll
-* Leaderboard not as compact, may have to do with links
+* Run to Score routes don't update state
+
+# Unfixable for now
+
+* Leaderboard not as compact, semantic-ui-react selectable bug on their end
+* popup scrolls on fixed datacontainer, may need to use hideOnScroll
