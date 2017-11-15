@@ -11,7 +11,7 @@ export default class DataContainer extends Component {
 
   render() {
 
-    const { all_data, user_list, filtered_data, filtered_jumps, handleNameChange, handleHome, username, visible } = this.props
+    const { all_data, user_list, filtered_data, filtered_jumps, handleNameChange, username, visible } = this.props
 
     return(
       <Grid columns='equal' relaxed textAlign="center" verticalAlign="middle" padded >
@@ -21,9 +21,9 @@ export default class DataContainer extends Component {
               <DifficultyGraph filtered_jumps={ filtered_jumps } />
             </Grid.Column>
           </Transition>
-          <Transition visible={ visible } animation='horizontal flip' duration={2000}>
+          <Transition visible={ visible } animation='horizontal flip' duration={1500}>
             <Grid.Column>
-              <SearchPerson all_data={ all_data } user_list={ user_list } handleNameChange={ handleNameChange } handleHome={ handleHome } username={ username } />
+              <SearchPerson all_data={ all_data } user_list={ user_list } handleNameChange={ handleNameChange } username={ username } />
               <Divider />
               <Data all_data={ all_data } user_list={ user_list } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } username={ username } />
             </Grid.Column>

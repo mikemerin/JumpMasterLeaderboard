@@ -31,14 +31,25 @@ export default class App extends Component {
     console.log("mounting");
     ScoreAdapter.all().then(data => {
       this.setState({ all_data: data })
+
+
+      var path = this.context.router.route.location.pathname
+
+      if (!!path.match(/^\/username\/(\w+)/)) {
+        this.setState({ username: path.match(/^\/username\/(\w+)/)[1] })
+      }
+
+      if (!!path.match(/^\/run\/(\d+)/)) {
+        // if (this.state.all_data.length > 0) {
+          var id = parseInt(path.match(/^\/run\/(\d+)/)[1], 10)
+          var run = this.state.all_data.find(x => x.id === id)
+          this.setState({ run: true })
+
+      }
+
     })
-    var path = this.context.router.route.location.pathname
-    if (!!path.match(/^\/username\/(\w+)/)) {
-      this.setState({ username: path.match(/^\/username\/(\w+)/)[1] })
-    }
-    if (!!path.match(/^\/run\/(\d+)/)) {
-      this.setState({ run: true })
-    }
+
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -47,14 +58,14 @@ export default class App extends Component {
       this.setState({ visible: true })
     }
 
-
-    if ( prevState.username !== this.state.username ) {
+    if ( prevState.username !== this.state.username) {
       if ( this.state.username === "All Users" )
         { this.context.router.history.push('/') }
       else
         { this.context.router.history.push(`/username/${this.state.username}`) }
       }
 
+      console.log("run", this.state.run, "visible", this.state.visible, this.state.username)
   }
 
   addPlacesAndFormatCA(data) {
@@ -91,7 +102,7 @@ export default class App extends Component {
 
     filtered_data.forEach(x => {
 
-      jumps[0].push(x.gate_points);
+      jumps[0].push(x.gate_points)
       jumps[1].push(x.diagonal_points)
       jumps[2].push(x.fjump_points)
       jumps[3].push(x.sgate_points)
@@ -122,17 +133,24 @@ export default class App extends Component {
 
   handleHome = (event) => {
     event.preventDefault()
-    this.setState({ username: "All Users" })
+    this.setState({ username: "All Users", run: false })
   }
 
   handleNameChange = (event, result) => {
     event.preventDefault()
-    this.setState({ username: result.value })
+    this.setState({ username: result.value, run: false })
   }
 
   handleNameClick = (event) => {
+    // event.preventDefault()
+    const username = event.target.href.match(/username\/(\w+)/)[1]
+    this.setState({ username: username, run: false })
+  }
+
+  handleRunClick = (event) => {
     event.preventDefault()
-    this.setState({ username: event.target.innerText })
+    // const username = event.target.href.match(/username\/(\w+)/)[1]
+    // this.setState({ username: username, run: true })
   }
 
   loading_screen = () => {
@@ -147,13 +165,15 @@ export default class App extends Component {
 
   render() {
 
-    this.addPlacesAndFormatCA(this.state.all_data)
+    const { all_data, username, run, visible } = this.state
+
+    this.addPlacesAndFormatCA(all_data)
     const filtered_data = this.filterData()
     const filtered_jumps = this.filterJumps(filtered_data)
 
     // unique users, sorted alphabetically
     var user_hash = {}
-    var user_list = this.state.all_data.map(x => x.username)
+    var user_list = all_data.map(x => x.username)
     user_list.forEach(x => { if (user_hash[x] === undefined) { user_hash[x] = 1 } } )
     user_list = Object.keys(user_hash).sort()
 
@@ -161,16 +181,16 @@ export default class App extends Component {
       <div>
         { this.loading_screen() }
         <div className="App-header">
-          <NavbarContainer handleHome={ this.handleHome } username={ this.state.username } />
+          <NavbarContainer handleHome={ this.handleHome } username={ username } run={ run } />
         </div>
 
         <div className="Data-fixed">
-          <DataContainer all_data={ this.state.all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
-            handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ this.state.username } visible={ this.state.visible } />
+          <DataContainer all_data={ all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
+            handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ username } visible={ visible } run={ run }/>
         </div>
 
-        <LeaderboardContainer all_data={ this.state.all_data } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps }
-            username={ this.state.username } visible={ this.state.visible } handleNameClick={ this.handleNameClick } />
+        <LeaderboardContainer all_data={ all_data } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps }
+            username={ username } visible={ visible } handleNameClick={ this.handleNameClick } handleNameRunClick={ this.handleNameRunClick }/>
 
       </div>
     );

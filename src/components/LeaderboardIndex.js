@@ -64,9 +64,9 @@ export default class LeaderboardIndex extends Component {
     }
   }
 
-  localCell(local_place, id) {
+  localCell(local_place, id, username) {
     if (this.props.username !== "All Users" ) {
-      return <Table.Cell selectable><Link to={`/run/${id}`} > {local_place} </Link></Table.Cell>
+      return <Table.Cell> {local_place} </Table.Cell>
     }
   }
 
@@ -74,14 +74,15 @@ export default class LeaderboardIndex extends Component {
   render() {
 
     const { column, data, direction } = this.state
-    const { visible, handleNameClick } = this.props
+    const { visible, handleNameClick, handleRunClick } = this.props
 
     return (
-      <Transition visible={ visible } animation='slide down' duration={1500}>
+      <Transition visible={ visible } animation='slide down' duration={1000}>
         <div className="Leaderboards-scroll">
           <Table celled color="blue" inverted sortable striped fixed compact="very" size="small" textAlign="center" >
             <Table.Header>
               <Table.Row>
+                <Table.HeaderCell> Run Info </Table.HeaderCell>
                 <Table.HeaderCell sorted={column === 'global_place' ? direction : null} onClick={this.handleSort('global_place')}>{ this.globalHeader() }</Table.HeaderCell>
                 { this.localHeader(column, direction) }
                 <Table.HeaderCell sorted={column === 'username' ? direction : null} onClick={this.handleSort('username')}>Username</Table.HeaderCell>
@@ -96,8 +97,9 @@ export default class LeaderboardIndex extends Component {
             <Table.Body>
               {_.map(data, ({ id, global_place, local_place, username, total, jumps, deaths, created_at_formatted }) => (
                 <Table.Row key={global_place}>
-                  <Table.Cell selectable><Link to={`/username/${username}/run/${id}`}> {global_place} </Link></Table.Cell>
-                  { this.localCell(local_place, id) }
+                  <Table.Cell selectable><Link to={`/run/${id}`} onClick={ handleRunClick } > Link </Link></Table.Cell>
+                  <Table.Cell> {global_place} </Table.Cell>
+                  { this.localCell(local_place, id, username) }
                   <Table.Cell selectable><Link to={`/username/${username}`} onClick={ handleNameClick }> {username} </Link></Table.Cell>
                   <Table.Cell>{total}</Table.Cell>
                   <Table.Cell>{jumps}</Table.Cell>
