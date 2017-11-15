@@ -12,12 +12,12 @@ This is an API for the fangame I Wanna Be the Jump Master, storing user informat
 * * use state, add back "type"
 
 * * Run Leaderboards
+* use routerProps and: if (!!id) use other data
 
 * Add comparing data, dataContainer needs to update for it (will happen through new routes)
 * Search turns into “back” as context.router.history.push.last?
 *  * OR button switches to “back to user” and “back to all runs”
-* Change run route to /username/:username/id/:id
-* ? If id add to routerprops ?
+
 
 # Small bugs to fix
 
