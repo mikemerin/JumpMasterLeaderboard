@@ -2,8 +2,9 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2'
 import 'chartjs-plugin-datalabels'
 
-export const RunGraph = (props) => {
+export const DifficultyGraphRun = (props) => {
 
+    function total(type) { return type.reduce((sum, x) => sum+x ) }
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
 
     const labels = ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump",
@@ -16,7 +17,7 @@ export const RunGraph = (props) => {
            "M-Jump 1", "Diamond", "Bubble", "Vortex", "Hour",
            "Plane", "Corner", "Valve", "9-Jump", "D. Dmnd"]
 
-    var filtered_jumps = [], highest_jump = []
+    var all_jump_avgs = [], filtered_jumps = [], highest_jump = []
     // var difficulties = []
 
     if (props.filtered_jumps[0].length > 0) {
@@ -27,6 +28,7 @@ export const RunGraph = (props) => {
       })
 
       highest_jump = props.filtered_jumps.map(x => hundredths(Math.max(...x) ))
+      all_jump_avgs = props.all_jumps.map(x => hundredths(total(x)/props.all_jumps[0].length))
 
       // will add once variable stepping is a chartjs option
 
@@ -42,21 +44,6 @@ export const RunGraph = (props) => {
       tooltips: {
         mode: 'x-axis',
         position: 'nearest'
-      },
-      plugins: {
-         datalabels: {
-            display: true,
-            rotation: -90,
-            anchor: 'start',
-            align: 'right',
-            font: {
-              size: 9
-            },
-            offset: 0,
-            formatter: function(value, context) {
-              return labels_formatter[context.dataIndex]
-            }
-         }
       },
       scales: {
         xAxes: [{
@@ -92,30 +79,62 @@ export const RunGraph = (props) => {
       labels: labels,
       datasets: [
         {
+          type: 'line',
+          label: "Global Avg",
+          fill: false,
+          pointRadius: 2,
+          backgroundColor: 'rgba(128,128,128,.2)',
+          borderColor: 'rgba(128,128,128,.5)',
+          showLine: false,
+          hoverBackgroundColor: 'rgba(128,128,128,.2)',
+          hoverBorderColor: 'rgba(128,128,128,.5)',
+          data: all_jump_avgs,
+          datalabels: {
+             display: false,
+          }
+        },
+        {
           type: 'bar',
-          label: "Local High Score",
+          label: "Local High",
           fill: true,
           backgroundColor: highs,
           borderColor: 'rgba(100,100,100,.5)',
           borderWidth: 2,
           hoverBackgroundColor: highs,
           hoverBorderColor: 'rgba(100,100,100,.5)',
-          data: highest_jump
+          data: highest_jump,
+          datalabels: {
+             display: true,
+             rotation: -90,
+             anchor: 'start',
+             align: 'right',
+             font: {
+               size: 9
+             },
+             offset: -3,
+             formatter: function(value, context) {
+               return labels_formatter[context.dataIndex]
+             }
+          }
         },
         {
           type: 'bar',
-          label: "Local Avg Points",
+          label: "Local Avg",
           fill: true,
           backgroundColor: averages,
           borderColor: 'rgba(100,100,100,.5)',
           borderWidth: 2,
           hoverBackgroundColor: averages,
           hoverBorderColor: 'rgba(100,100,100,.5)',
-          data: filtered_jumps
+          data: filtered_jumps,
+          datalabels: {
+             display: false,
+          }
         },
+        // will add once variable stepping is a chartjs option
         // {
         //   type: 'line',
-        //   label: "Run",
+        //   label: "Points per jump/",
         //   fill: false,
         //   backgroundColor: averages,
         //   borderColor: 'rgba(100,100,100,.5)',
@@ -133,4 +152,4 @@ export const RunGraph = (props) => {
 
 }
 
-export default RunGraph
+export default DifficultyGraphRun

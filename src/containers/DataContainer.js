@@ -13,7 +13,7 @@ export default class DataContainer extends Component {
 
   render() {
 
-    const { all_data, user_list, filtered_data, filtered_jumps, handleNameChange, handleNameClick, handleHome, username, visible, run } = this.props
+    const { all_data, all_jumps, user_list, filtered_data, filtered_jumps, handleNameChange, handleNameClick, handleHome, username, visible, run } = this.props
 
     return(
       <Switch>
@@ -23,7 +23,7 @@ export default class DataContainer extends Component {
               <Grid.Row stretched>
                 <Transition visible={ visible } animation='scale' duration={500}>
                   <Grid.Column>
-                    <DifficultyGraphRun filtered_jumps={ filtered_jumps } run={ run } />
+                    <DifficultyGraphRun all_jumps={ all_jumps } filtered_jumps={ filtered_jumps } run={ run } />
                   </Grid.Column>
                 </Transition>
                 <Transition visible={ visible } animation='horizontal flip' duration={1500}>
@@ -52,7 +52,7 @@ export default class DataContainer extends Component {
               <Grid.Row stretched>
                 <Transition visible={ visible } animation='scale' duration={500}>
                   <Grid.Column>
-                    <DifficultyGraph filtered_jumps={ filtered_jumps } />
+                    <DifficultyGraph all_jumps={ all_jumps } filtered_jumps={ filtered_jumps } username={ username } />
                   </Grid.Column>
                 </Transition>
                 <Transition visible={ visible } animation='horizontal flip' duration={1500}>

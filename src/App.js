@@ -91,13 +91,13 @@ export default class App extends Component {
     }).sort((a, b) => a.id - b.id )
   }
 
-  filterJumps(filtered_data) {
+  justJumps(data) {
     var jumps = [ [], [], [], [], [],
                   [], [], [], [], [],
                   [], [], [], [], [],
                   [], [], [], [], [] ]
 
-    filtered_data.forEach(x => {
+    data.forEach(x => {
 
       jumps[0].push(x.gate_points)
       jumps[1].push(x.diagonal_points)
@@ -163,7 +163,8 @@ export default class App extends Component {
 
     this.addPlacesAndFormatCA(all_data)
     const filtered_data = this.filterData()
-    const filtered_jumps = this.filterJumps(filtered_data)
+    const all_jumps = this.justJumps(all_data)
+    const filtered_jumps = this.justJumps(filtered_data)
 
     // unique users, sorted alphabetically
     var user_hash = {}
@@ -179,9 +180,9 @@ export default class App extends Component {
         </div>
 
         <div className="Data-fixed">
-          <DataContainer all_data={ all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
+          <DataContainer all_data={ all_data } all_jumps={ all_jumps } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
             handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } handleNameClick={ this.handleNameClick }
-            username={ username } visible={ visible } run={ run } />
+            user_list={ user_list } username={ username } visible={ visible } run={ run } />
         </div>
 
         <LeaderboardContainer all_data={ all_data } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps }
