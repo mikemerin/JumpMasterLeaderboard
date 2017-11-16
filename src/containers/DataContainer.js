@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Grid, Divider, Transition } from 'semantic-ui-react'
+import { Grid, Divider, Transition, Button } from 'semantic-ui-react'
+import { Route, Switch, Link } from 'react-router-dom'
 
 import Data from '../components/Data'
 import DifficultyGraph from '../components/DifficultyGraph'
@@ -11,7 +12,7 @@ export default class DataContainer extends Component {
 
   render() {
 
-    const { all_data, user_list, filtered_data, filtered_jumps, handleNameChange, username, visible } = this.props
+    const { all_data, user_list, filtered_data, filtered_jumps, handleNameChange, handleNameClick, handleHome, username, visible } = this.props
 
     return(
       <Grid columns='equal' relaxed textAlign="center" verticalAlign="middle" padded >
@@ -23,7 +24,21 @@ export default class DataContainer extends Component {
           </Transition>
           <Transition visible={ visible } animation='horizontal flip' duration={1500}>
             <Grid.Column>
-              <SearchPerson all_data={ all_data } user_list={ user_list } handleNameChange={ handleNameChange } username={ username } />
+              <Switch>
+
+                <Route exact path="/run/:id" render={routerProps => {
+                  return (
+                      <div>
+                        <Button basic><Link to="/" onClick={ handleHome } >All Runs</Link></Button>
+                        <Button basic><Link to={`/username/${username}`} onClick={ handleNameClick }> {username} </Link></Button>
+                      </div>
+                  )
+                }} />
+
+                <Route path="/" render={routerProps => {
+                  return <SearchPerson all_data={ all_data } user_list={ user_list } handleNameChange={ handleNameChange } username={ username } />
+                }} />
+              </Switch>
               <Divider />
               <Data all_data={ all_data } user_list={ user_list } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } username={ username } />
             </Grid.Column>
@@ -40,3 +55,21 @@ export default class DataContainer extends Component {
 
 
 }
+
+// for if I switch data during runs
+
+// <Switch>
+//
+//   <Route exact path="/run/:id" render={routerProps => {
+//     return (
+//         <div>
+//           <Button basic><Link to="/" onClick={ handleHome } >All Runs</Link></Button>
+//           <Button basic><Link to={`/username/${username}`} onClick={ handleNameChange } >Runs by {username}</Link></Button>
+//         </div>
+//     )
+//   }} />
+//
+//   <Route path="/" render={routerProps => {
+//     return <SearchPerson all_data={ all_data } user_list={ user_list } handleNameChange={ handleNameChange } username={ username } />
+//   }} />
+// </Switch>

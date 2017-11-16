@@ -60,9 +60,8 @@ export default class App extends Component {
         { this.context.router.history.push(`/username/${this.state.username}`) }
     }
 
-    // console.log("run", this.state.run )
-    // console.log("username", this.state.username )
-    // console.log("pS", prevState )
+    if ( this.state.username !== "All Users" && prevState.run.id !== undefined && this.state.run.id === undefined )
+      { this.context.router.history.push(`/username/${this.state.username}`) }
 
   }
 
@@ -139,7 +138,7 @@ export default class App extends Component {
 
   handleNameClick = (event) => {
     const username = event.target.href.match(/username\/(\w+)/)[1]
-    this.setState({ username: username })
+    this.setState({ username: username, run: {} })
   }
 
   handleRunClick = (event) => {
@@ -181,11 +180,12 @@ export default class App extends Component {
 
         <div className="Data-fixed">
           <DataContainer all_data={ all_data } user_list={ user_list } filtered_jumps={ filtered_jumps } filtered_data={ filtered_data }
-            handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } username={ username } visible={ visible } run={ run }/>
+            handleNameChange={ this.handleNameChange } handleHome={ this.handleHome } handleNameClick={ this.handleNameClick }
+            username={ username } visible={ visible } run={ run } />
         </div>
 
         <LeaderboardContainer all_data={ all_data } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps }
-            username={ username } visible={ visible } handleNameClick={ this.handleNameClick } handleRunClick={ this.handleRunClick }/>
+            username={ username } visible={ visible } handleNameClick={ this.handleNameClick } handleRunClick={ this.handleRunClick } />
 
       </div>
     );

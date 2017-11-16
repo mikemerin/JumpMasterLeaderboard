@@ -14,12 +14,6 @@ const labels = ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump",
 
 export default class LeaderboardRun extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    // sort data by high score followed by lowest deaths, and add a place / custom created_at
-    // var { filtered_data, filtered_jumps, run } = nextProps
-    // this.setState({ filtered_data: filtered_data, run: run })
-  }
-
   headers = () => {
     return jump_names.map((jump, i) => (
       <Table.HeaderCell key={jump}>
@@ -63,7 +57,6 @@ export default class LeaderboardRun extends Component {
     )
 
   }
-
 
   render() {
 
