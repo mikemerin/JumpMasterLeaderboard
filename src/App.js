@@ -32,7 +32,6 @@ export default class App extends Component {
     ScoreAdapter.all().then(data => {
       this.setState({ all_data: data })
 
-
       var path = this.context.router.route.location.pathname
 
       if (!!path.match(/^\/username\/(\w+)/)) {
@@ -43,29 +42,24 @@ export default class App extends Component {
         // if (this.state.all_data.length > 0) {
           var id = parseInt(path.match(/^\/run\/(\d+)/)[1], 10)
           var run = this.state.all_data.find(x => x.id === id)
-          debugger
-          this.setState({ username: "One Run", run: run })
-
+          this.setState({ username: run.username, run: run })
       }
 
     })
-
-
   }
 
   componentDidUpdate(prevProps, prevState) {
     // fade in once data is fetched
-    if ( prevState.all_data !== this.state.all_data ) {
-      this.setState({ visible: true })
-    }
+    if ( prevState.all_data !== this.state.all_data )
+      { this.setState({ visible: true }) }
 
-    if ( prevState.username !== this.state.username) {
+    if ( prevState.username !== this.state.username ) {
       if ( this.state.username === "All Users" )
         { this.context.router.history.push('/') }
-      else
+      else if ( this.state.run.id === undefined ) {
         { this.context.router.history.push(`/username/${this.state.username}`) }
       }
-
+    }
       console.log("run", this.state.run, "visible", this.state.visible, this.state.username)
   }
 
@@ -134,22 +128,23 @@ export default class App extends Component {
 
   handleHome = (event) => {
     event.preventDefault()
-    this.setState({ username: "All Users", run: false })
+    this.setState({ username: "All Users" })
   }
 
   handleNameChange = (event, result) => {
     event.preventDefault()
-    this.setState({ username: result.value, run: false })
+    this.setState({ username: result.value })
   }
 
   handleNameClick = (event) => {
-    // event.preventDefault()
+    event.preventDefault()
     const username = event.target.href.match(/username\/(\w+)/)[1]
-    this.setState({ username: username, run: false })
+    this.setState({ username: username })
   }
 
   handleRunClick = (event) => {
     event.preventDefault()
+
     // const username = event.target.href.match(/username\/(\w+)/)[1]
     // this.setState({ username: username, run: true })
   }

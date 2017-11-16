@@ -64,7 +64,7 @@ export const RunGraph = (props) => {
           }],
           yAxes: [{
             ticks: {
-              min: 0,
+              beginAtZero: 0,
             }
           }]
 
