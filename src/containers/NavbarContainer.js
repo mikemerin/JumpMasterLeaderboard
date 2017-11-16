@@ -15,9 +15,9 @@ export default class NavbarContainer extends Component {
 
         <Modal.Header><center>I Wanna Be the Jump Master Leaderboards </center></Modal.Header>
           <Modal.Content image>
-            <Image size='large' src={ require('../images/logo.png') } />
+            <Image src={ require('../images/logo.png') } width={200} height={152} />
             <Modal.Description>
-              <center><p>This website (and game) was created by ShadowsDieAway.</p></center>
+              <center><p>This website, along with the game I Wanna Be the Jump Master, was created by ShadowsDieAway.</p></center>
               <br />
               <center><p>Please use the icons on the header for game and profile links.</p></center>
             </Modal.Description>
@@ -62,8 +62,6 @@ export default class NavbarContainer extends Component {
             </a>
           } content='download the game' />
 
-          { modal }
-
           <Popup position='bottom center' trigger={
             <a href="http://twitch.tv/shadowsdieaway" target="_blank" rel="noopener noreferrer">
               <Icon name='twitch' />
@@ -87,6 +85,8 @@ export default class NavbarContainer extends Component {
               <Icon name='graduation' />
             </a>
           } content='Blog' />
+
+          { modal }
 
         </Menu.Item>
 

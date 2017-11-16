@@ -93,7 +93,7 @@ export const RunGraph = (props) => {
       datasets: [
         {
           type: 'bar',
-          label: "High Score",
+          label: "Local High Score",
           fill: true,
           backgroundColor: highs,
           borderColor: 'rgba(100,100,100,.5)',
@@ -104,7 +104,7 @@ export const RunGraph = (props) => {
         },
         {
           type: 'bar',
-          label: "Avg Points",
+          label: "Local Avg Points",
           fill: true,
           backgroundColor: averages,
           borderColor: 'rgba(100,100,100,.5)',
@@ -113,10 +113,9 @@ export const RunGraph = (props) => {
           hoverBorderColor: 'rgba(100,100,100,.5)',
           data: filtered_jumps
         },
-        // will add once variable stepping is a chartjs option
         // {
         //   type: 'line',
-        //   label: "Points per jump/",
+        //   label: "Run",
         //   fill: false,
         //   backgroundColor: averages,
         //   borderColor: 'rgba(100,100,100,.5)',
