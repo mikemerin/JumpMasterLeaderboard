@@ -27,3 +27,16 @@ This is an API for the fangame I Wanna Be the Jump Master, storing user informat
 
 * Leaderboard not as compact, semantic-ui-react selectable bug on their end
 * popup scrolls on fixed datacontainer, may need to use hideOnScroll
+
+
+
+
+important:
+
+
+CWRP handles the re-rendering so:
+
+
+for runs: this.setState({ username: "N/A" })
+
+this triggers CWRP and allows the re-rendering of the component in and out, including in App.js

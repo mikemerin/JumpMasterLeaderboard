@@ -3,6 +3,8 @@ import { Line } from 'react-chartjs-2'
 
 export const RunGraph = (props) => {
 
+    function hundredths(type) { return Math.round(type * 100 ) / 100 }
+
     var labels = [], totals = []
     var trend = [], avg = []
 
@@ -42,7 +44,7 @@ export const RunGraph = (props) => {
       // get slope and intercept for line start point and angle, then create the trend line
       slope = 1.0 * ((length * linear) - (sum_x_axis * sum_totals)) / ((length * x_squared) - (sum_x_axis ** 2))
       let intercept = 1.0 * (sum_totals - (slope * sum_x_axis)) / length
-      trend = x_axis.map(x => (slope * x) + intercept )
+      trend = x_axis.map(x => hundredths((slope * x) + intercept ))
 
     }
 
@@ -56,10 +58,14 @@ export const RunGraph = (props) => {
           display: false
         }
       },
-
         scales: {
           xAxes: [{
             display: false
+          }],
+          yAxes: [{
+            ticks: {
+              min: 0,
+            }
           }]
 
       },

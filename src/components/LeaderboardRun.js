@@ -31,6 +31,9 @@ export default class LeaderboardRun extends Component {
   }
 
   body = () => {
+
+    function hundredths(type) { return Math.round(type * 100 ) / 100 }
+
     var all_jumps = [], all_streaks = [], all_points = []
     jump_names.forEach(jump => {
       // console.log(eval(`this.props.run.${jump}_jumps`))
@@ -38,7 +41,7 @@ export default class LeaderboardRun extends Component {
       if (this.props.run !== undefined) {
         all_jumps.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_jumps`] }</Table.Cell>)
         all_streaks.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_streak`] }</Table.Cell>)
-        all_points.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_points`] }</Table.Cell>)
+        all_points.push(<Table.Cell key={jump} >{ hundredths(this.props.run[`${jump}_points`]) }</Table.Cell>)
       }
     })
 

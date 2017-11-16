@@ -21,9 +21,9 @@ export default class App extends Component {
     super(props)
     this.state = {
       all_data: [],
-      run: false,
       visible: false,
-      username: "All Users"
+      username: "All Users",
+      run: {}
     }
   }
 
@@ -43,7 +43,8 @@ export default class App extends Component {
         // if (this.state.all_data.length > 0) {
           var id = parseInt(path.match(/^\/run\/(\d+)/)[1], 10)
           var run = this.state.all_data.find(x => x.id === id)
-          this.setState({ run: true })
+          debugger
+          this.setState({ username: "One Run", run: run })
 
       }
 

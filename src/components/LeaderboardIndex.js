@@ -75,6 +75,7 @@ export default class LeaderboardIndex extends Component {
 
     const { column, data, direction } = this.state
     const { visible, handleNameClick, handleRunClick } = this.props
+    function hundredths(type) { return Math.round(type * 100 ) / 100 }
 
     return (
       <Transition visible={ visible } animation='slide down' duration={1000}>
@@ -101,7 +102,7 @@ export default class LeaderboardIndex extends Component {
                   <Table.Cell> {global_place} </Table.Cell>
                   { this.localCell(local_place, id, username) }
                   <Table.Cell selectable><Link to={`/username/${username}`} onClick={ handleNameClick }> {username} </Link></Table.Cell>
-                  <Table.Cell>{total}</Table.Cell>
+                  <Table.Cell>{hundredths(total)}</Table.Cell>
                   <Table.Cell>{jumps}</Table.Cell>
                   <Table.Cell>{deaths}</Table.Cell>
                   <Table.Cell>{created_at_formatted}</Table.Cell>

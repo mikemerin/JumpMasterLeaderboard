@@ -4,6 +4,8 @@ import 'chartjs-plugin-datalabels'
 
 export const RunGraph = (props) => {
 
+    function hundredths(type) { return Math.round(type * 100 ) / 100 }
+
     var labels = ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump",
         "Cascade", "T-Bone", "M-Jump 2", "Shuriken", "Half Diamond",
         "M-Jump1", "Diamond", "Bubble", "Vortex", "Hourglass",
@@ -16,10 +18,10 @@ export const RunGraph = (props) => {
 
       filtered_jumps = props.filtered_jumps.map(x => {
       	var runs = x.length
-      	return Math.round(x.reduce((sum, x) => sum + x) * 100 / runs) / 100
+      	return hundredths(x.reduce((sum, x) => sum + x) / runs)
       })
 
-      highest_jump = props.filtered_jumps.map(x => Math.max(...x) )
+      highest_jump = props.filtered_jumps.map(x => hundredths(Math.max(...x) ))
 
       // will add once variable stepping is a chartjs option
 
