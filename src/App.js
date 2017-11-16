@@ -56,11 +56,14 @@ export default class App extends Component {
     if ( prevState.username !== this.state.username ) {
       if ( this.state.username === "All Users" )
         { this.context.router.history.push('/') }
-      else if ( this.state.run.id === undefined ) {
+      else if ( this.state.run.id === undefined )
         { this.context.router.history.push(`/username/${this.state.username}`) }
-      }
     }
-      console.log("run", this.state.run, "visible", this.state.visible, this.state.username)
+
+    // console.log("run", this.state.run )
+    // console.log("username", this.state.username )
+    // console.log("pS", prevState )
+
   }
 
   addPlacesAndFormatCA(data) {
@@ -127,26 +130,22 @@ export default class App extends Component {
   }
 
   handleHome = (event) => {
-    event.preventDefault()
-    this.setState({ username: "All Users" })
+    this.setState({ username: "All Users", run: {} })
   }
 
   handleNameChange = (event, result) => {
-    event.preventDefault()
     this.setState({ username: result.value })
   }
 
   handleNameClick = (event) => {
-    event.preventDefault()
     const username = event.target.href.match(/username\/(\w+)/)[1]
     this.setState({ username: username })
   }
 
   handleRunClick = (event) => {
-    event.preventDefault()
-
-    // const username = event.target.href.match(/username\/(\w+)/)[1]
-    // this.setState({ username: username, run: true })
+    var id = parseInt(event.target.href.match(/run\/(\d+)/)[1], 10)
+    var run = this.state.all_data.find(x => x.id === id)
+    this.setState({ username: run.username, run: run })
   }
 
   loading_screen = () => {
@@ -186,7 +185,7 @@ export default class App extends Component {
         </div>
 
         <LeaderboardContainer all_data={ all_data } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps }
-            username={ username } visible={ visible } handleNameClick={ this.handleNameClick } handleNameRunClick={ this.handleNameRunClick }/>
+            username={ username } visible={ visible } handleNameClick={ this.handleNameClick } handleRunClick={ this.handleRunClick }/>
 
       </div>
     );
