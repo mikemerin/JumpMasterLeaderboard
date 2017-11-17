@@ -25,7 +25,9 @@ export default class DataContainer extends Component {
               <Grid.Row stretched>
                 <Transition visible={ visible } animation='scale' duration={1500}>
                   <Grid.Column>
+
                     <DifficultyGraphRun all_jumps={ all_jumps } filtered_jumps={ filtered_jumps } run={ run } />
+
                   </Grid.Column>
                 </Transition>
                 <Transition visible={ visible } animation='horizontal flip' duration={2000}>
@@ -35,12 +37,16 @@ export default class DataContainer extends Component {
                       <Button basic><Link to={`/username/${username}`} onClick={ handleNameClick }> All Runs by {username} </Link></Button>
                     </div>
                     <Divider />
+
                     <Data all_data={ all_data } user_list={ user_list } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } username={ username } />
+
                   </Grid.Column>
                 </Transition>
                 <Transition visible={ visible } animation='scale' duration={1500}>
                   <Grid.Column>
+
                     <RunGraph filtered_data={ filtered_data } />
+
                   </Grid.Column>
                 </Transition>
               </Grid.Row>

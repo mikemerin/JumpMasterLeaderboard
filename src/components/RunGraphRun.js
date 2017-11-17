@@ -1,7 +1,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2'
 
-export const RunGraph = (props) => {
+export const RunGraphRun = (props) => {
 
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
 
@@ -154,4 +154,4 @@ export const RunGraph = (props) => {
 
 }
 
-export default RunGraph
+export default RunGraphRun
