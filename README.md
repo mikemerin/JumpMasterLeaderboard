@@ -6,8 +6,8 @@ This site was built with React.js, React Chart.js 2, and Semantic-UI-React.
 
 # To be added:
 
-* larger icon for modal
 * Stack if window width < 1200
+* Leaderboard Run info will highlight current PBs or WRs in the run
 
 # Unfixable for now
 
