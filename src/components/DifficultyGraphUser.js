@@ -95,7 +95,7 @@ export const DifficultyGraph = (props) => {
       {
         order: 2,
         type: 'bar',
-        label: "Local High",
+        label: "User PB",
         fill: true,
         backgroundColor: highs,
         borderColor: 'rgba(100,100,100,.5)',
@@ -120,7 +120,7 @@ export const DifficultyGraph = (props) => {
       {
         order: 3,
         type: 'bar',
-        label: "Local Avg",
+        label: "User Avg",
         fill: true,
         backgroundColor: averages,
         borderColor: 'rgba(100,100,100,.5)',

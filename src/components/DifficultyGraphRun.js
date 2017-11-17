@@ -17,27 +17,25 @@ export const DifficultyGraphRun = (props) => {
            "M-Jump 1", "Diamond", "Bubble", "Vortex", "Hour",
            "Plane", "Corner", "Valve", "9-Jump", "D. Dmnd"]
 
-    var all_jump_avgs = [], filtered_jumps = [], highest_jump = []
-    // var difficulties = []
+    const jump_names = ["gate", "diagonal", "fjump", "sgate", "platform",
+                        "cascade", "tbone", "mjump2", "shuriken", "hdiamond",
+                        "mjump1", "diamond", "bubble", "vortex", "hourglass",
+                        "plane", "corner", "valve", "ninejump", "ddiamond"]
+
+
+    var run_points = [], user_pbs = [], wrs = []
 
     if (props.filtered_jumps[0].length > 0) {
 
-      filtered_jumps = props.filtered_jumps.map(x => {
-      	var runs = x.length
-      	return hundredths(x.reduce((sum, x) => sum + x) / runs)
+      jump_names.forEach(jump => {
+        if (props.run !== undefined) {
+          run_points.push(props.run[`${jump}_points`])
+        }
       })
 
-      highest_jump = props.filtered_jumps.map(x => hundredths(Math.max(...x) ))
-      all_jump_avgs = props.all_jumps.map(x => hundredths(total(x)/props.all_jumps[0].length))
-
-      // will add once variable stepping is a chartjs option
-
-      // var avg_easy = Math.round(filtered_jumps.slice(0,5).reduce((sum, x) => sum + x) / 5 * 100) / 100
-      // var avg_medium = Math.round(filtered_jumps.slice(5,10).reduce((sum, x) => sum + x) / 5 * 100) / 100
-      // var avg_hard = Math.round(filtered_jumps.slice(10,15).reduce((sum, x) => sum + x) / 5 * 100) / 100
-      // var avg_hardest = Math.round(filtered_jumps.slice(15,20).reduce((sum, x) => sum + x) / 5 * 100) / 100
-
-      // difficulties = [avg_easy, avg_medium, avg_hard, avg_hardest]
+      user_pbs = props.filtered_jumps.map(x => hundredths(Math.max(...x) ))
+      wrs = props.all_jumps.map(x => hundredths(Math.max(...x) ))
+      
     }
 
     const options = {
@@ -80,7 +78,7 @@ export const DifficultyGraphRun = (props) => {
       datasets: [
         {
           type: 'line',
-          label: "Global Avg",
+          label: "This Run",
           fill: false,
           pointRadius: 2,
           backgroundColor: 'rgba(128,128,128,.2)',
@@ -88,21 +86,21 @@ export const DifficultyGraphRun = (props) => {
           showLine: false,
           hoverBackgroundColor: 'rgba(128,128,128,.2)',
           hoverBorderColor: 'rgba(128,128,128,.5)',
-          data: all_jump_avgs,
+          data: run_points,
           datalabels: {
              display: false,
           }
         },
         {
           type: 'bar',
-          label: "Local High",
+          label: "WR",
           fill: true,
           backgroundColor: highs,
           borderColor: 'rgba(100,100,100,.5)',
           borderWidth: 2,
           hoverBackgroundColor: highs,
           hoverBorderColor: 'rgba(100,100,100,.5)',
-          data: highest_jump,
+          data: wrs,
           datalabels: {
              display: true,
              rotation: -90,
@@ -119,14 +117,14 @@ export const DifficultyGraphRun = (props) => {
         },
         {
           type: 'bar',
-          label: "Local Avg",
+          label: "User PB",
           fill: true,
           backgroundColor: averages,
           borderColor: 'rgba(100,100,100,.5)',
           borderWidth: 2,
           hoverBackgroundColor: averages,
           hoverBorderColor: 'rgba(100,100,100,.5)',
-          data: filtered_jumps,
+          data: user_pbs,
           datalabels: {
              display: false,
           }

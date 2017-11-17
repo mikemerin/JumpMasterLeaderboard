@@ -30,8 +30,6 @@ export default class LeaderboardRun extends Component {
 
     var all_jumps = [], all_streaks = [], all_points = []
     jump_names.forEach(jump => {
-      // console.log(eval(`this.props.run.${jump}_jumps`))
-      // eval(`this.props.run.${jump}_jumps`)
       if (this.props.run !== undefined) {
         all_jumps.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_jumps`] }</Table.Cell>)
         all_streaks.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_streak`] }</Table.Cell>)
