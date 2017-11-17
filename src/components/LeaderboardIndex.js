@@ -78,7 +78,7 @@ export default class LeaderboardIndex extends Component {
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
 
     return (
-      <Transition visible={ visible } animation='slide down' duration={1000}>
+      <Transition visible={ visible } animation='slide down' duration={1200}>
         <div className="Leaderboards-scroll">
           <Table celled color="blue" inverted sortable striped fixed compact="very" size="small" textAlign="center" >
             <Table.Header>

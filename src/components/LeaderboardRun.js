@@ -61,7 +61,7 @@ export default class LeaderboardRun extends Component {
     // definition
 
     return (
-      <Transition visible={ this.props.visible } animation='slide down' duration={1500}>
+      <Transition visible={ this.props.visible } animation='slide down' duration={1200}>
         <div className="Leaderboards-scroll">
           <Table celled color="blue" inverted striped fixed compact="very" size="small" textAlign="center" >
             <Table.Header>

@@ -23,12 +23,12 @@ export default class DataContainer extends Component {
           return (
             <Grid columns='equal' relaxed textAlign="center" verticalAlign="middle" padded >
               <Grid.Row stretched>
-                <Transition visible={ visible } animation='scale' duration={500}>
+                <Transition visible={ visible } animation='scale' duration={1500}>
                   <Grid.Column>
                     <DifficultyGraphRun all_jumps={ all_jumps } filtered_jumps={ filtered_jumps } run={ run } />
                   </Grid.Column>
                 </Transition>
-                <Transition visible={ visible } animation='horizontal flip' duration={1500}>
+                <Transition visible={ visible } animation='horizontal flip' duration={2000}>
                   <Grid.Column>
                     <div>
                       <Button basic><Link to="/" onClick={ handleHome } >All Runs</Link></Button>
@@ -38,7 +38,7 @@ export default class DataContainer extends Component {
                     <Data all_data={ all_data } user_list={ user_list } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } username={ username } />
                   </Grid.Column>
                 </Transition>
-                <Transition visible={ visible } animation='scale' duration={500}>
+                <Transition visible={ visible } animation='scale' duration={1500}>
                   <Grid.Column>
                     <RunGraph filtered_data={ filtered_data } />
                   </Grid.Column>
@@ -52,7 +52,7 @@ export default class DataContainer extends Component {
           return (
             <Grid columns='equal' relaxed textAlign="center" verticalAlign="middle" padded >
               <Grid.Row stretched>
-                <Transition visible={ visible } animation='scale' duration={500}>
+                <Transition visible={ visible } animation='scale' duration={1500}>
                   <Grid.Column>
                     <Switch>
                       <Route exact path="/username/:username" render={routerProps => {
@@ -69,14 +69,14 @@ export default class DataContainer extends Component {
                     </Switch>
                   </Grid.Column>
                 </Transition>
-                <Transition visible={ visible } animation='horizontal flip' duration={1500}>
+                <Transition visible={ visible } animation='horizontal flip' duration={2000}>
                   <Grid.Column>
                     <SearchPerson all_data={ all_data } user_list={ user_list } handleNameChange={ handleNameChange } username={ username } />
                     <Divider />
                     <Data all_data={ all_data } user_list={ user_list } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } username={ username } />
                   </Grid.Column>
                 </Transition>
-                <Transition visible={ visible } animation='scale' duration={500}>
+                <Transition visible={ visible } animation='scale' duration={1500}>
                   <Grid.Column>
                     <RunGraph filtered_data={ filtered_data } />
                   </Grid.Column>

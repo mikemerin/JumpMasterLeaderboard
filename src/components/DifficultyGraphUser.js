@@ -60,6 +60,10 @@ export const DifficultyGraph = (props) => {
             fontSize: 10
           }
         }]
+      },
+      animation: {
+        easing: "easeOutElastic",
+        duration: 1500
       }
     }
 
