@@ -12,11 +12,12 @@ const labels = ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump",
                 "M-Jump1", "Diamond", "Bubble", "Vortex", "Hourglass",
                 "Plane", "Corner", "Valve", "9-Jump", "Double Diamond"]
 
-const online_labels = [
-  "https://imgur.com/PWgoigU.png", "https://imgur.com/cI8bck7.png", "https://imgur.com/jdBjRVm.png", "https://imgur.com/IyN1nEZ.png", "https://imgur.com/Qu7I2X6.png",
-  "https://imgur.com/51WM0mT.png", "https://imgur.com/PdoNmxJ.png", "https://imgur.com/SJifuQU.png", "https://imgur.com/zH6UlC0.png", "https://imgur.com/mCgztWU.png",
-  "https://imgur.com/HIbB6MA.png", "https://imgur.com/1zLdLEA.png", "https://imgur.com/LJpDc26.png", "https://imgur.com/DgVFwwv.png", "https://imgur.com/TnfQaZn.png",
-  "https://imgur.com/HYlYcJn.png", "https://imgur.com/PJE22bY.png", "https://imgur.com/OKrUoTh.png", "https://imgur.com/kyKnOBb.png", "https://imgur.com/uLBMke7.png"]
+// reserved for if there are any issues that pop up with dev builds
+// const online_labels = [
+//   "https://imgur.com/PWgoigU.png", "https://imgur.com/cI8bck7.png", "https://imgur.com/jdBjRVm.png", "https://imgur.com/IyN1nEZ.png", "https://imgur.com/Qu7I2X6.png",
+//   "https://imgur.com/51WM0mT.png", "https://imgur.com/PdoNmxJ.png", "https://imgur.com/SJifuQU.png", "https://imgur.com/zH6UlC0.png", "https://imgur.com/mCgztWU.png",
+//   "https://imgur.com/HIbB6MA.png", "https://imgur.com/1zLdLEA.png", "https://imgur.com/LJpDc26.png", "https://imgur.com/DgVFwwv.png", "https://imgur.com/TnfQaZn.png",
+//   "https://imgur.com/HYlYcJn.png", "https://imgur.com/PJE22bY.png", "https://imgur.com/OKrUoTh.png", "https://imgur.com/kyKnOBb.png", "https://imgur.com/uLBMke7.png"]
 
 
 export default class LeaderboardRun extends Component {
@@ -29,14 +30,6 @@ export default class LeaderboardRun extends Component {
             <img src={require(`../images/${jump}.png`)} alt={jump_names[i]} width={40} />
         } content={labels[i]} />
       </Table.HeaderCell>
-
-    // note: doesn't work in production, only development, hence why the ugly thing below is needed for now
-    // return jump_names.map((jump, i) => (
-    //   <Table.HeaderCell key={jump}>
-    //     <Popup position='top center' trigger={
-    //         <img src={ require(`../images/${jump}.png`) } alt={jump} width={40} />
-    //     } content={labels[i]} />
-    //   </Table.HeaderCell>
     ))
   }
 
@@ -98,38 +91,3 @@ export default class LeaderboardRun extends Component {
   }
 
 }
-
-// <Table.Header>
-//   <Table.Row>
-//     <Table.HeaderCell>Data</Table.HeaderCell>
-//     <Table.HeaderCell>Gate</Table.HeaderCell>
-//     <Table.HeaderCell>Diagonal</Table.HeaderCell>
-//     <Table.HeaderCell>F-Jump</Table.HeaderCell>
-//     <Table.HeaderCell>S. Gate</Table.HeaderCell>
-//     <Table.HeaderCell>Platform</Table.HeaderCell>
-//     <Table.HeaderCell>Cascade</Table.HeaderCell>
-//     <Table.HeaderCell>T-Bone</Table.HeaderCell>
-//     <Table.HeaderCell>M-Jump 2</Table.HeaderCell>
-//     <Table.HeaderCell>Shuriken</Table.HeaderCell>
-//     <Table.HeaderCell>H. Diamond</Table.HeaderCell>
-//     <Table.HeaderCell>M-Jump 1</Table.HeaderCell>
-//     <Table.HeaderCell>Diamond</Table.HeaderCell>
-//     <Table.HeaderCell>Bubble</Table.HeaderCell>
-//     <Table.HeaderCell>Vortex</Table.HeaderCell>
-//     <Table.HeaderCell>Hourglass</Table.HeaderCell>
-//     <Table.HeaderCell>Plane</Table.HeaderCell>
-//     <Table.HeaderCell>Corner</Table.HeaderCell>
-//     <Table.HeaderCell>Valve</Table.HeaderCell>
-//     <Table.HeaderCell>9-Jump</Table.HeaderCell>
-//     <Table.HeaderCell>D. Diamond</Table.HeaderCell>
-//   </Table.Row>
-// </Table.Header>
-
-// <Table.Row key={place}>
-//   <Table.Cell>{place}</Table.Cell>
-//   <Table.Cell>{username}</Table.Cell>
-//   <Table.Cell>{total}</Table.Cell>
-//   <Table.Cell>{jumps}</Table.Cell>
-//   <Table.Cell>{deaths}</Table.Cell>
-//   <Table.Cell>{created_at_formatted}</Table.Cell>
-// </Table.Row>
