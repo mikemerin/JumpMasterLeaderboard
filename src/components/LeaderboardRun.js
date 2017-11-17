@@ -12,15 +12,31 @@ const labels = ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump",
                 "M-Jump1", "Diamond", "Bubble", "Vortex", "Hourglass",
                 "Plane", "Corner", "Valve", "9-Jump", "Double Diamond"]
 
+const online_labels = [
+  "https://imgur.com/PWgoigU.png", "https://imgur.com/cI8bck7.png", "https://imgur.com/jdBjRVm.png", "https://imgur.com/IyN1nEZ.png", "https://imgur.com/Qu7I2X6.png",
+  "https://imgur.com/51WM0mT.png", "https://imgur.com/PdoNmxJ.png", "https://imgur.com/SJifuQU.png", "https://imgur.com/zH6UlC0.png", "https://imgur.com/mCgztWU.png",
+  "https://imgur.com/HIbB6MA.png", "https://imgur.com/1zLdLEA.png", "https://imgur.com/LJpDc26.png", "https://imgur.com/DgVFwwv.png", "https://imgur.com/TnfQaZn.png",
+  "https://imgur.com/HYlYcJn.png", "https://imgur.com/PJE22bY.png", "https://imgur.com/OKrUoTh.png", "https://imgur.com/kyKnOBb.png", "https://imgur.com/uLBMke7.png"]
+
+
 export default class LeaderboardRun extends Component {
 
   headers = () => {
-    return jump_names.map((jump, i) => (
-      <Table.HeaderCell key={jump}>
+
+    return online_labels.map((jump, i) => (
+      <Table.HeaderCell key={jump_names[i]}>
         <Popup position='top center' trigger={
-            <img src={ require(`../images/${jump}.png`) } alt={jump} width={40} />
+            <img src={jump} alt={jump_names[i]} width={40} />
         } content={labels[i]} />
       </Table.HeaderCell>
+
+    // note: doesn't work in production, only development, hence why the ugly thing below is needed for now
+    // return jump_names.map((jump, i) => (
+    //   <Table.HeaderCell key={jump}>
+    //     <Popup position='top center' trigger={
+    //         <img src={ require(`../images/${jump}.png`) } alt={jump} width={40} />
+    //     } content={labels[i]} />
+    //   </Table.HeaderCell>
     ))
   }
 
