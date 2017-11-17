@@ -5,6 +5,7 @@ import { Route, Switch, Link } from 'react-router-dom'
 import Data from '../components/Data'
 import DifficultyGraph from '../components/DifficultyGraph'
 import DifficultyGraphRun from '../components/DifficultyGraphRun'
+import DifficultyGraphUser from '../components/DifficultyGraphUser'
 import RunGraph from '../components/RunGraph'
 
 import SearchPerson from '../components/SearchPerson'
@@ -52,7 +53,19 @@ export default class DataContainer extends Component {
               <Grid.Row stretched>
                 <Transition visible={ visible } animation='scale' duration={500}>
                   <Grid.Column>
-                    <DifficultyGraph all_jumps={ all_jumps } filtered_jumps={ filtered_jumps } username={ username } />
+                    <Switch>
+                      <Route exact path="/username/:username" render={routerProps => {
+                        return (
+                          <DifficultyGraphUser all_jumps={ all_jumps } filtered_jumps={ filtered_jumps } username={ username } />
+                        )
+                      }} />
+
+                      <Route path="/" render={routerProps => {
+                        return (
+                          <DifficultyGraph all_jumps={ all_jumps } filtered_jumps={ filtered_jumps } username={ username } />
+                        )
+                      }} />
+                    </Switch>
                   </Grid.Column>
                 </Transition>
                 <Transition visible={ visible } animation='horizontal flip' duration={1500}>

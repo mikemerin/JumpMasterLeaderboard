@@ -77,6 +77,22 @@ export const DifficultyGraph = (props) => {
 
     var data = [
       {
+          order: 1,
+          type: 'line',
+          label: "Global Avg",
+          fill: false,
+          pointRadius: 2,
+          backgroundColor: 'rgba(128,128,128,.2)',
+          borderColor: 'rgba(128,128,128,.5)',
+          showLine: false,
+          hoverBackgroundColor: 'rgba(128,128,128,.2)',
+          hoverBorderColor: 'rgba(128,128,128,.5)',
+          data: all_jump_avgs,
+          datalabels: {
+             display: false,
+          }
+        },
+      {
         order: 2,
         type: 'bar',
         label: "Local High",
