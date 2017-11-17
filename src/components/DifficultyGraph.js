@@ -63,13 +63,13 @@ export const DifficultyGraph = (props) => {
       }
     }
 
-    const easy = 'rgba(80,180,250,0.6)'
+    const easy = 'rgba(80,180,250,0.2)'
     const easya = 'rgba(110,225,255,0.6)'
-    const medium = 'rgba(63,147,212,0.6)'
+    const medium = 'rgba(63,147,212,0.2)'
     const mediuma = 'rgba(76,195,255,0.6)'
-    const hard = 'rgba(248,139,139,0.6)'
+    const hard = 'rgba(248,139,139,0.2)'
     const harda = 'rgba(255,190,190,0.6)'
-    const hardest = 'rgba(226,83,83,0.6)'
+    const hardest = 'rgba(226,83,83,0.2)'
     const hardesta = 'rgba(244,136,136,0.6)'
 
     const highs = [easy, easy, easy, easy, easy, medium, medium, medium, medium, medium, hard, hard, hard, hard, hard, hardest, hardest, hardest, hardest, hardest]
@@ -79,7 +79,7 @@ export const DifficultyGraph = (props) => {
       {
         order: 2,
         type: 'bar',
-        label: "Local High",
+        label: "WR",
         fill: true,
         backgroundColor: highs,
         borderColor: 'rgba(100,100,100,.5)',
@@ -104,7 +104,7 @@ export const DifficultyGraph = (props) => {
       {
         order: 3,
         type: 'bar',
-        label: "Local Avg",
+        label: "Average Points",
         fill: true,
         backgroundColor: averages,
         borderColor: 'rgba(100,100,100,.5)',

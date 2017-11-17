@@ -35,7 +35,7 @@ export const DifficultyGraphRun = (props) => {
 
       user_pbs = props.filtered_jumps.map(x => hundredths(Math.max(...x) ))
       wrs = props.all_jumps.map(x => hundredths(Math.max(...x) ))
-      
+
     }
 
     const options = {
@@ -61,13 +61,13 @@ export const DifficultyGraphRun = (props) => {
       }
     }
 
-    const easy = 'rgba(80,180,250,0.6)'
+    const easy = 'rgba(80,180,250,0.2)'
     const easya = 'rgba(110,225,255,0.6)'
-    const medium = 'rgba(63,147,212,0.6)'
+    const medium = 'rgba(63,147,212,0.2)'
     const mediuma = 'rgba(76,195,255,0.6)'
-    const hard = 'rgba(248,139,139,0.6)'
+    const hard = 'rgba(248,139,139,0.2)'
     const harda = 'rgba(255,190,190,0.6)'
-    const hardest = 'rgba(226,83,83,0.6)'
+    const hardest = 'rgba(226,83,83,0.2)'
     const hardesta = 'rgba(244,136,136,0.6)'
 
     const highs = [easy, easy, easy, easy, easy, medium, medium, medium, medium, medium, hard, hard, hard, hard, hard, hardest, hardest, hardest, hardest, hardest]
@@ -80,7 +80,8 @@ export const DifficultyGraphRun = (props) => {
           type: 'line',
           label: "This Run",
           fill: false,
-          pointRadius: 2,
+          pointStyle: "rectRot",
+          pointRadius: 4,
           backgroundColor: 'rgba(128,128,128,.2)',
           borderColor: 'rgba(128,128,128,.5)',
           showLine: false,
