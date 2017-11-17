@@ -6,6 +6,7 @@ import Data from '../components/Data'
 import DifficultyGraph from '../components/DifficultyGraph'
 import DifficultyGraphRun from '../components/DifficultyGraphRun'
 import DifficultyGraphUser from '../components/DifficultyGraphUser'
+
 import RunGraph from '../components/RunGraph'
 
 import SearchPerson from '../components/SearchPerson'

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, Link } from 'react-router-dom'
-import { Menu, Icon, Popup, Modal, Image } from 'semantic-ui-react'
+import { Menu, Icon, Popup, Modal, Image, Button } from 'semantic-ui-react'
 
 export default class NavbarContainer extends Component {
 
@@ -9,17 +9,19 @@ export default class NavbarContainer extends Component {
     const { handleHome, username } = this.props
 
     const modal = (
-      <Modal size='tiny' trigger={<a><Popup position='bottom center' trigger={
+      <Modal size='small' dimmer='blurring' closeIcon trigger={<a><Popup position='bottom center' trigger={
           <Icon name='info' />
       } content='Info' /></a>}>
 
         <Modal.Header><center>I Wanna Be the Jump Master Leaderboards </center></Modal.Header>
           <Modal.Content image>
-            <Image src={ require('../images/logo.png') } width={200} height={152} />
+            <Image src={ require('../images/logo.png') } width={250} height={190} />
             <Modal.Description>
-              <center><p>This website, along with the game I Wanna Be the Jump Master, was created by ShadowsDieAway.</p></center>
+              <center><p><font size={4}>This website, along with the game I Wanna Be the Jump Master, was created by ShadowsDieAway.</font></p></center>
               <br />
-              <center><p>Please use the icons on the header for game and profile links.</p></center>
+              <center><p><font size={4}>This site was built with React.js, React Chart.js 2, and Semantic-UI-React.</font></p></center>
+              <br />
+              <center><p><font size={4}>Please use the icons on the header for game and profile links.</font></p></center>
             </Modal.Description>
           </Modal.Content>
         </Modal>
