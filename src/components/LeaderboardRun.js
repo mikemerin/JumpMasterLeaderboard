@@ -18,7 +18,7 @@ export default class LeaderboardRun extends Component {
     return jump_names.map((jump, i) => (
       <Table.HeaderCell key={jump}>
         <Popup position='top center' trigger={
-            <img src={ require(`../images/${jump}.png`) } alt={jump} width={40} />
+            <img src={ require(`./images/${jump}.png`) } alt={jump} width={40} />
         } content={labels[i]} />
       </Table.HeaderCell>
     ))

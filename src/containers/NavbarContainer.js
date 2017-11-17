@@ -15,7 +15,7 @@ export default class NavbarContainer extends Component {
 
         <Modal.Header><center>I Wanna Be the Jump Master Leaderboards </center></Modal.Header>
           <Modal.Content image>
-            <Image src={ require('../images/logo.png') } width={250} height={190} />
+            <Image src={ require('./logo.png') } width={250} height={190} />
             <Modal.Description>
               <center><p><font size={4}>This website, along with the game I Wanna Be the Jump Master, was created by ShadowsDieAway.</font></p></center>
               <br />
