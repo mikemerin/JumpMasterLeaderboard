@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Popup, Table, Transition } from 'semantic-ui-react'
 import '../Leaderboard.css'
+import '../index.css'
 
 const jump_names = [ ["gate", "diagonal", "fjump", "sgate", "platform" ],
                      ["cascade", "tbone", "mjump2", "shuriken", "hdiamond"],

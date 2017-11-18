@@ -1,5 +1,6 @@
 import React from 'react';
 import { Statistic, Divider, Popup } from 'semantic-ui-react'
+import '../index.css'
 
 export const DataRun = (props) => {
 
@@ -36,8 +37,8 @@ export const DataRun = (props) => {
   //   alert("Sorry, no data was found on this run.")
   // }
 
-  // if (all_data.length > 0 && all_data[0].username === "Sorry, no data was found")
-  //   { runs = 0, avg_runs = 0 }
+  if ( all_data.length > 0 && all_data[0].username === "Sorry, no data was found")
+    { runs = 0, avg_runs = 0 }
 
 return (
 
@@ -45,7 +46,7 @@ return (
     <Statistic.Group widths={4}>
       <Statistic size='mini'>
         <Statistic.Label>PBs</Statistic.Label>
-        { pbs }
+        <div className='outlinePB'>{ pbs }</div>
       </Statistic>
       <Statistic size='mini'>
         <Statistic.Label>User Rank</Statistic.Label>
@@ -57,7 +58,7 @@ return (
       </Statistic>
       <Statistic size='mini'>
         <Statistic.Label>WRs</Statistic.Label>
-        { wrs }
+        <div className='outlineWR'>{ wrs }</div>
       </Statistic>
     </Statistic.Group>
 
