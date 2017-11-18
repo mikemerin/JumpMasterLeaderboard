@@ -14,6 +14,7 @@ export const DataRun = (props) => {
 
   var difficulty_jumps = [ null, null, null, null ], pbs = 0, wrs = 0
 
+  function hundredths(type) { return type === undefined ? type : Math.round(type * 100 ) / 100 }
   function total(type) { return type.reduce((sum, x) => sum+x ) }
   function maximum(type) { return Math.max(...type) }
 
@@ -80,7 +81,7 @@ return (
       <Statistic size='mini'>
         <font size='4.5'><strong>
           <Statistic.Label>TOTAL POINTS</Statistic.Label>
-          <div className={ high('total') }>{ run.total }</div>
+          <div className={ high('total') }>{ hundredths(run.total) }</div>
         </strong></font>
       </Statistic>
       <Statistic size='mini'>
@@ -93,12 +94,12 @@ return (
     <Statistic.Group widths={5}>
 
       <Statistic size='mini'>
-        <div className={ high('easy') }>{ run.easy }</div>
+        <div className={ high('easy') }>{ hundredths(run.easy) }</div>
         <Statistic.Label>Easy</Statistic.Label>
         { difficulty_jumps[0] }
       </Statistic>
       <Statistic size='mini'>
-        <div className={ high('medium') }>{ run.medium }</div>
+        <div className={ high('medium') }>{ hundredths(run.medium) }</div>
         <Statistic.Label>Medium</Statistic.Label>
         { difficulty_jumps[1] }
       </Statistic>
@@ -108,12 +109,12 @@ return (
         Jumps
       </Statistic>
       <Statistic size='mini'>
-        <div className={ high('hard') }>{ run.hard }</div>
+        <div className={ high('hard') }>{ hundredths(run.hard) }</div>
         <Statistic.Label>Hard</Statistic.Label>
         { difficulty_jumps[2] }
       </Statistic>
       <Statistic size='mini'>
-        <div className={ high('hardest') }>{ run.hardest }</div>
+        <div className={ high('hardest') }>{ hundredths(run.hardest) }</div>
         <Statistic.Label>Hardest</Statistic.Label>
         { difficulty_jumps[3] }
       </Statistic>

@@ -8,7 +8,7 @@ body {
 
 .outlinePB
 {
-    color: #EAEAEA;
+    color: #C4C4C4;
     font-weight: bold;
     text-shadow:
     1px 0 #111111,
@@ -31,24 +31,24 @@ body {
 
 .outlineWR
 {
-    color: #FFD700;
+    color: #FFE944;
     font-weight: bold;
     text-shadow:
-    1px 0 #111111,
-    1px 1px #111111,
-    0 1px #111111,
-    -1px 0 #111111,
-    -1px -1px #111111,
-    0 -1px #111111,
-    1px -1px #111111,
-    -1px 1px #111111,
-    2px 0 #666666,
-    2px 2px #666666,
-    0 2px #666666,
-    -2px 0 #666666,
-    -2px -2px #666666,
-    0 -2px #666666,
-    2px -2px #666666,
-    -2px 2px #666666;
+    1px 0 #222211,
+    1px 1px #222211,
+    0 1px #222211,
+    -1px 0 #222211,
+    -1px -1px #222211,
+    0 -1px #222211,
+    1px -1px #222211,
+    -1px 1px #222211,
+    2px 0 #888866,
+    2px 2px #888866,
+    0 2px #888866,
+    -2px 0 #888866,
+    -2px -2px #888866,
+    0 -2px #888866,
+    2px -2px #888866,
+    -2px 2px #888866;
 
 }

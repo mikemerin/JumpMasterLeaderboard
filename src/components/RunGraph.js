@@ -8,14 +8,11 @@ export const RunGraph = (props) => {
     var labels = [], totals = []
     var trend = [], avg = []
 
-    // function total(type) { return type.reduce((sum, x) => sum+x ) }
-    // function hundredths(type) { return Math.round(type * 100 ) / 100 }
-
     if (props.filtered_data.length > 0) {
 
       props.filtered_data.forEach((x, i) => {
         labels.push(i+1)
-        totals.push(x.total)
+        totals.push(hundredths(x.total))
       })
 
       // trend line
@@ -45,6 +42,12 @@ export const RunGraph = (props) => {
       slope = 1.0 * ((length * linear) - (sum_x_axis * sum_totals)) / ((length * x_squared) - (sum_x_axis ** 2))
       let intercept = 1.0 * (sum_totals - (slope * sum_x_axis)) / length
       trend = x_axis.map(x => hundredths((slope * x) + intercept ))
+
+      if (totals.length === 1) {
+        totals.push(totals[0])
+        trend.push(trend[0])
+        avg.push(avg[0])
+      }
 
     }
 

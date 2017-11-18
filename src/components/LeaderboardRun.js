@@ -10,7 +10,7 @@ const jump_names = [ ["gate", "diagonal", "fjump", "sgate", "platform" ],
 
 const labels = [ ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump"],
                  ["Cascade", "T-Bone", "M-Jump 2", "Shuriken", "Half Diamond"],
-                 ["M-Jump1", "Diamond", "Bubble", "Vortex", "Hourglass"],
+                 ["M-Jump 1", "Diamond", "Bubble", "Vortex", "Hourglass"],
                  ["Plane", "Corner", "Valve", "9-Jump", "Double Diamond"] ]
 
 // reserved for if there are any issues that pop up with dev builds
@@ -52,8 +52,7 @@ export default class LeaderboardRun extends Component {
 
     const type = n === 0 ? [0,1] : [2,3]
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
-    function maximum(type) { return Math.max(...type) }
-
+    
     var all_points_0 = [], all_jumps_0 = [], all_streaks_0 = []
 
     jump_names[type[0]].forEach(jump => {

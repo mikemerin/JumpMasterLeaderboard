@@ -49,7 +49,7 @@ export default class DataContainer extends Component {
                 <Transition visible={ visible } animation='scale' duration={1500}>
                   <Grid.Column>
 
-                    <RunGraphRun filtered_data={ filtered_data } />
+                    <RunGraphRun all_data={ all_data } all_jumps={ all_jumps } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } run={ run }/>
 
                   </Grid.Column>
                 </Transition>

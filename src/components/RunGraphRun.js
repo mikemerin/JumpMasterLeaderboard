@@ -4,49 +4,50 @@ import { Line } from 'react-chartjs-2'
 export const RunGraphRun = (props) => {
 
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
+    function total(type) { return type.reduce((sum, x) => sum+x ) }
+    function maximum(type) { return Math.max(...type) }
 
-    var labels = [], totals = []
-    var trend = [], avg = []
+    const labels = [ "Average", "Record", "Sum of Best" ]
 
-    // function total(type) { return type.reduce((sum, x) => sum+x ) }
-    // function hundredths(type) { return Math.round(type * 100 ) / 100 }
+    // This RunGraphRun
+    // world avg
+    // WR
+    // world SoB
 
-    if (props.filtered_data.length > 0) {
+    const this_run = [null, props.run.total, null]
+    var user_info = [], world_info = []
 
-      props.filtered_data.forEach((x, i) => {
-        labels.push(i+1)
-        totals.push(x.total)
-      })
+    if ( props.run.id !== undefined ) {
 
-      // trend line
-      let sum_totals = 0
-      let x_squared = 0
-      let slope = 0
+      const user_totals = props.filtered_data.map(x => x.total)
+      const world_totals = props.all_data.map(x => x.total)
 
-      let length = totals.length
+      user_info.push(hundredths(total(user_totals) / props.filtered_data.length))
+      user_info.push(maximum(user_totals))
+      user_info.push(hundredths(total(props.filtered_jumps.map(x => maximum(x)))))
 
-      let x_axis = totals.map((x,i) => {
-          sum_totals = Math.round(totals.reduce((sum, x) => sum + x) * 100) / 100
-          return i+1
-      })
-
-      let sum_x_axis = x_axis.reduce((sum, x) => sum + x)
-
-      // work off those prior numbers to set up the trend equation
-      let linear = totals.map((x, i) => {
-        x_squared += (i+1)**2
-        return x * (i+1)
-      }).reduce((sum, x) => sum + x)
-
-      linear = Math.round(linear * 100) / 100
-      avg = new Array(length).fill(Math.round(sum_totals / length * 100) / 100)
-
-      // get slope and intercept for line start point and angle, then create the trend line
-      slope = 1.0 * ((length * linear) - (sum_x_axis * sum_totals)) / ((length * x_squared) - (sum_x_axis ** 2))
-      let intercept = 1.0 * (sum_totals - (slope * sum_x_axis)) / length
-      trend = x_axis.map(x => hundredths((slope * x) + intercept ))
+      world_info.push(hundredths(total(world_totals) / props.all_data.length))
+      world_info.push(maximum(world_totals))
+      world_info.push(hundredths(total(props.all_jumps.map(x => maximum(x)))))
 
     }
+
+    // if (props.filtered_data.length > 0) {
+
+
+
+      // props.filtered_data.forEach((x, i) => {
+      //   labels.push(i+1)
+      //   totals.push(hundredths(x.total))
+      // })
+
+      // if (totals.length === 1) {
+      //   totals.push(totals[0])
+      //   trend.push(trend[0])
+      //   avg.push(avg[0])
+      // }
+
+    // }
 
 
     const options = {
@@ -78,9 +79,33 @@ export const RunGraphRun = (props) => {
       labels: labels,
       datasets: [
         {
-          label: 'Points',
+          label: 'This Run',
           type: 'line',
-          fill: true,
+          fill: false,
+          lineTension: 0,
+          showLine: false,
+          backgroundColor: 'rgba(0,0,0,.5)',
+          borderColor: 'rgba(20,20,20,1)',
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: 'rgba(20,20,20,1)',
+          pointBackgroundColor: '#aaa',
+          pointBorderWidth: 2,
+          pointHoverRadius: 10,
+          pointHoverBackgroundColor: 'rgba(0,0,0,.5)',
+          pointHoverBorderColor: 'rgba(20,20,20,1)',
+          pointHoverBorderWidth: 2,
+          pointStyle: "rectRounded",
+          pointRadius: 15,
+          pointHitRadius: 10,
+          data: this_run
+        },
+        {
+          label: 'User Info',
+          type: 'line',
+          fill: '+1',
           lineTension: 0,
           backgroundColor: 'rgba(14,110,184,0.4)',
           borderColor: 'rgba(14,110,184,1)',
@@ -97,51 +122,29 @@ export const RunGraphRun = (props) => {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: totals
+          data: user_info
         },
         {
-          label: 'Trends',
-          type: 'line',
-          fill: '+1',
-          lineTension: 0,
-          backgroundColor: 'rgba(0,0,0,.1)',
-          borderColor: 'rgba(0,0,0,.3)',
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(180,180,180,.3)',
-          pointBackgroundColor: '#aaa',
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(0,0,0,.3)',
-          pointHoverBorderColor: 'rgba(0,0,0,.3)',
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: trend
-        },
-        {
-          label: 'Avg Score',
+          label: 'World Info',
           type: 'line',
           fill: false,
           lineTension: 0,
-          backgroundColor: 'rgba(180,180,180,.1)',
-          borderColor: 'rgba(180,180,180,.3)',
+          backgroundColor: 'rgba(14,55,92,0.4)',
+          borderColor: 'rgba(14,55,92,1)',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(200,200,200,.3)',
-          pointBackgroundColor: '#aaa',
+          pointBorderColor: 'rgba(14,55,92,1)',
+          pointBackgroundColor: '#fff',
           pointBorderWidth: 1,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(180,180,180,.3)',
-          pointHoverBorderColor: 'rgba(180,180,180,.3)',
+          pointHoverBackgroundColor: 'rgba(14,55,92,1)',
+          pointHoverBorderColor: 'rgba(14,55,92,1)',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: avg
+          data: world_info
         }
       ]
     };
