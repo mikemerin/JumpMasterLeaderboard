@@ -7,12 +7,7 @@ export const RunGraphRun = (props) => {
     function total(type) { return type.reduce((sum, x) => sum+x ) }
     function maximum(type) { return Math.max(...type) }
 
-    const labels = [ "Average", "Record", "Sum of Best" ]
-
-    // This RunGraphRun
-    // world avg
-    // WR
-    // world SoB
+    const labels = [ "Average Points", "PB/WR", "Sum of Best" ]
 
     const this_run = [null, props.run.total, null]
     var user_info = [], world_info = []
@@ -31,24 +26,6 @@ export const RunGraphRun = (props) => {
       world_info.push(hundredths(total(props.all_jumps.map(x => maximum(x)))))
 
     }
-
-    // if (props.filtered_data.length > 0) {
-
-
-
-      // props.filtered_data.forEach((x, i) => {
-      //   labels.push(i+1)
-      //   totals.push(hundredths(x.total))
-      // })
-
-      // if (totals.length === 1) {
-      //   totals.push(totals[0])
-      //   trend.push(trend[0])
-      //   avg.push(avg[0])
-      // }
-
-    // }
-
 
     const options = {
       tooltips: {
