@@ -49,7 +49,7 @@ export const Data = (props) => {
     var total_hardest = hundredths(total(hardest))
     var avg_hardest = hundredths(total_hardest / runs )
 
-  }
+  } else { runs = null }
 
 return (
 

@@ -19,29 +19,7 @@ export const DataRun = (props) => {
   function total(type) { return type.reduce((sum, x) => sum+x ) }
   function hundredths(type) { return Math.round(type * 100 ) / 100 }
 
-  // filtered_data.forEach(x => {
-  //   scores.push(x.total)
-  //   easy.push(x.easy)
-  //   medium.push(x.medium)
-  //   hard.push(x.hard)
-  //   hardest.push(x.hardest)
-  //   total_jumps += x.jumps
-  //   total_deaths += x.deaths
-  // })
-
   if ( run.id !== undefined ) {
-
-    // var total_easy = hundredths(total(easy))
-    // var avg_easy = hundredths(total_easy / runs )
-    //
-    // var total_medium = hundredths(total(medium))
-    // var avg_medium = hundredths(total_medium / runs )
-    //
-    // var total_hard = hundredths(total(hard))
-    // var avg_hard = hundredths(total_hard / runs )
-    //
-    // var total_hardest = hundredths(total(hardest))
-    // var avg_hardest = hundredths(total_hardest / runs )
 
     for (let i = 0; i < 4; i++ )
     { difficulty_jumps[i] = total(jump_names[i].map(jump => run[`${jump}_jumps`])) }

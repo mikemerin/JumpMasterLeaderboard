@@ -42,7 +42,13 @@ export default class App extends Component {
         // if (this.state.all_data.length > 0) {
           var id = parseInt(path.match(/^\/run\/(\d+)/)[1], 10)
           var run = this.state.all_data.find(x => x.id === id)
-          this.setState({ username: run.username, run: run })
+          if ( run !== undefined )
+            { this.setState({ username: run.username, run: run }) }
+          else {
+              alert(`Sorry, this run was not found.\n\nReturning you to the main screen.`)
+              this.context.router.history.push("/")
+              this.context.router.history.push("/")
+            }
       }
 
     })
