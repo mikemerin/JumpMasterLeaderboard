@@ -102,13 +102,19 @@ return (
     </Statistic.Group>
 
     <Divider />
-    <Statistic.Group widths={1}>
+    <Statistic.Group widths={3}>
 
       <Statistic size='mini'>
-        <Statistic.Label>Sum of Bests</Statistic.Label>
-        <Popup position='bottom center' trigger={
-            <div>{ sum_of_best }</div>
-        } content='best jump from each run' />
+        <Statistic.Label>Total Jumps</Statistic.Label>
+        { run.jumps }
+      </Statistic>
+      <Statistic size='mini'>
+        <Statistic.Label>Total Points</Statistic.Label>
+        { run.total }
+      </Statistic>
+      <Statistic size='mini'>
+        <Statistic.Label>Total Deaths</Statistic.Label>
+        { run.deaths }
       </Statistic>
 
     </Statistic.Group>
@@ -126,9 +132,9 @@ return (
         { difficulty_jumps[1] }
       </Statistic>
       <Statistic size='mini'>
-        Total Points
+        Points
         <Statistic.Label>   </Statistic.Label>
-        Total Jumps
+        Jumps
       </Statistic>
       <Statistic size='mini'>
         { run.hard }
