@@ -1,5 +1,5 @@
 import React from 'react';
-import { Statistic, Divider, Popup } from 'semantic-ui-react'
+import { Statistic, Divider } from 'semantic-ui-react'
 import '../index.css'
 
 export const DataRun = (props) => {
@@ -10,43 +10,51 @@ export const DataRun = (props) => {
                        ["plane", "corner", "valve", "ninejump", "ddiamond"] ]
 
 
-  const { all_data, filtered_data, all_jumps, filtered_jumps, user_list, username, run } = props
+  const { all_data, filtered_data, all_jumps, filtered_jumps, run } = props
 
-  var scores = [], easy = [], medium = [], hard = [], hardest = []
-
-  var runs = filtered_data.length, total_jumps = null, total_deaths = null, avg_runs = null
-  var difficulty_jumps = [ null, null, null, null ], pbs = null, wrs = null
+  var difficulty_jumps = [ null, null, null, null ], pbs = 0, wrs = 0
 
   function total(type) { return type.reduce((sum, x) => sum+x ) }
-  function hundredths(type) { return Math.round(type * 100 ) / 100 }
+  function maximum(type) { return Math.max(...type) }
 
   if ( run.id !== undefined ) {
 
+    // add up jumps for each difficulty
     for (let i = 0; i < 4; i++ )
     { difficulty_jumps[i] = total(jump_names[i].map(jump => run[`${jump}_jumps`])) }
 
+    // count the total PBs/WRs for all jumps
     jump_names.reduce((a,b) => a.concat(b)).forEach((jump, i) => {
-      if ( run[`${jump}_points`] >= Math.max(...filtered_jumps[i]) )
+      if ( run[`${jump}_points`] >= maximum( filtered_jumps[i]) )
         { pbs++ }
-      if ( run[`${jump}_points`] >= Math.max(...all_jumps[i]) )
+      if ( run[`${jump}_points`] >= maximum( all_jumps[i]) )
         { wrs++ }
     })
 
-  }
-  // else {
-  //   alert("Sorry, no data was found on this run.")
-  // }
+    // debugger
+    // [ props.local_place, props.global_place, props.jumps, props.total, props.deaths, props.easy, props.medium, props.hard, props.hardest ].forEach(x => {
+    //
+    // })
 
-  if ( all_data.length > 0 && all_data[0].username === "Sorry, no data was found")
-    { runs = 0, avg_runs = 0 }
+  }
+
+  function high(type) {
+
+    if ( run[type]  === maximum( filtered_data.map(x => x[type] )) ) {
+      return run[type]  === maximum( all_data.map(x => x[type] )) ? 'outlineWR' : 'outlinePB'
+    } else {
+      return ''
+    }
+
+  }
 
 return (
 
   <div>
     <Statistic.Group widths={4}>
       <Statistic size='mini'>
-        <Statistic.Label>PBs</Statistic.Label>
-        <div className='outlinePB'>{ pbs }</div>
+        <div className='outlinePB'>JUMP PBs</div>
+        { pbs }
       </Statistic>
       <Statistic size='mini'>
         <Statistic.Label>User Rank</Statistic.Label>
@@ -57,8 +65,8 @@ return (
         { run.global_place }
       </Statistic>
       <Statistic size='mini'>
-        <Statistic.Label>WRs</Statistic.Label>
-        <div className='outlineWR'>{ wrs }</div>
+        <div className='outlineWR'>JUMP WRs</div>
+        { wrs }
       </Statistic>
     </Statistic.Group>
 
@@ -66,18 +74,18 @@ return (
     <Statistic.Group widths={3}>
 
       <Statistic size='mini'>
-        <Statistic.Label>Total Jumps</Statistic.Label>
-        { run.jumps }
+        <Statistic.Label>Jumps</Statistic.Label>
+        <div className={ high('jumps') }>{ run.jumps }</div>
       </Statistic>
       <Statistic size='mini'>
         <font size='4.5'><strong>
           <Statistic.Label>TOTAL POINTS</Statistic.Label>
-          { run.total }
+          <div className={ high('total') }>{ run.total }</div>
         </strong></font>
       </Statistic>
       <Statistic size='mini'>
-        <Statistic.Label>Total Deaths</Statistic.Label>
-        { run.deaths }
+        <Statistic.Label>Deaths</Statistic.Label>
+        <div className={ high('deaths') }>{ run.deaths }</div>
       </Statistic>
 
     </Statistic.Group>
@@ -85,12 +93,12 @@ return (
     <Statistic.Group widths={5}>
 
       <Statistic size='mini'>
-        { run.easy }
+        <div className={ high('easy') }>{ run.easy }</div>
         <Statistic.Label>Easy</Statistic.Label>
         { difficulty_jumps[0] }
       </Statistic>
       <Statistic size='mini'>
-        { run.medium }
+        <div className={ high('medium') }>{ run.medium }</div>
         <Statistic.Label>Medium</Statistic.Label>
         { difficulty_jumps[1] }
       </Statistic>
@@ -100,12 +108,12 @@ return (
         Jumps
       </Statistic>
       <Statistic size='mini'>
-        { run.hard }
+        <div className={ high('hard') }>{ run.hard }</div>
         <Statistic.Label>Hard</Statistic.Label>
         { difficulty_jumps[2] }
       </Statistic>
       <Statistic size='mini'>
-        { run.hardest }
+        <div className={ high('hardest') }>{ run.hardest }</div>
         <Statistic.Label>Hardest</Statistic.Label>
         { difficulty_jumps[3] }
       </Statistic>
