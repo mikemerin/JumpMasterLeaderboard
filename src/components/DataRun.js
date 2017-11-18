@@ -1,13 +1,23 @@
 import React from 'react';
 import { Statistic, Divider, Popup } from 'semantic-ui-react'
 
-export const Data = (props) => {
+export const DataRun = (props) => {
 
-  const { filtered_data, filtered_jumps, user_list, username } = props
+  const jump_names = [ ["gate", "diagonal", "fjump", "sgate", "platform" ],
+                       ["cascade", "tbone", "mjump2", "shuriken", "hdiamond"],
+                       ["mjump1", "diamond", "bubble", "vortex", "hourglass"],
+                       ["plane", "corner", "valve", "ninejump", "ddiamond"] ]
+
+
+  const { all_data, filtered_data, filtered_jumps, user_list, username, run } = props
 
   var scores = [], easy = [], medium = [], hard = [], hardest = []
 
   var runs = filtered_data.length, total_jumps = null, total_deaths = null, avg_runs = null
+  var difficulty_jumps = [ null, null, null, null ]
+
+  function total(type) { return type.reduce((sum, x) => sum+x ) }
+  function hundredths(type) { return Math.round(type * 100 ) / 100 }
 
   filtered_data.forEach(x => {
     scores.push(x.total)
@@ -19,10 +29,7 @@ export const Data = (props) => {
     total_deaths += x.deaths
   })
 
-  if ( runs > 0 ) {
-
-    function total(type) { return type.reduce((sum, x) => sum+x ) }
-    function hundredths(type) { return Math.round(type * 100 ) / 100 }
+  if ( run.id !== undefined ) {
 
     var total_points = hundredths(total(scores))
     if (username === "All Users") {
@@ -49,7 +56,16 @@ export const Data = (props) => {
     var total_hardest = hundredths(total(hardest))
     var avg_hardest = hundredths(total_hardest / runs )
 
+    for (let i = 0; i < 4; i++ )
+    { difficulty_jumps[i] = total(jump_names[i].map(jump => run[`${jump}_jumps`])) }
+
   }
+  // else {
+  //   alert("Sorry, no data was found on this run.")
+  // }
+
+  // if (all_data.length > 0 && all_data[0].username === "Sorry, no data was found")
+  //   { runs = 0, avg_runs = 0 }
 
 return (
 
@@ -100,36 +116,36 @@ return (
     <Statistic.Group widths={5}>
 
       <Statistic size='mini'>
-        { total_easy }
+        { run.easy }
         <Statistic.Label>Easy</Statistic.Label>
-        { avg_easy }
+        { difficulty_jumps[0] }
       </Statistic>
       <Statistic size='mini'>
-        { total_medium }
+        { run.medium }
         <Statistic.Label>Medium</Statistic.Label>
-        { avg_medium }
+        { difficulty_jumps[1] }
       </Statistic>
       <Statistic size='mini'>
-        Total
+        Total Points
         <Statistic.Label>   </Statistic.Label>
-        Average
+        Total Jumps
       </Statistic>
       <Statistic size='mini'>
-        { total_hard }
+        { run.hard }
         <Statistic.Label>Hard</Statistic.Label>
-        { avg_hard }
+        { difficulty_jumps[2] }
       </Statistic>
       <Statistic size='mini'>
-        { total_hardest }
+        { run.hardest }
         <Statistic.Label>Hardest</Statistic.Label>
-        { avg_hardest }
+        { difficulty_jumps[3] }
       </Statistic>
 
     </Statistic.Group>
     </div>
 
   )
-
 }
 
-export default Data
+
+export default DataRun

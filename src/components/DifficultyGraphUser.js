@@ -134,7 +134,17 @@ export const DifficultyGraph = (props) => {
         hoverBorderColor: 'rgba(100,100,100,.5)',
         data: filtered_jumps,
         datalabels: {
-           display: false,
+           display: true,
+           rotation: -90,
+           anchor: 'start',
+           align: 'right',
+           font: {
+             size: 9
+           },
+           offset: -3,
+           formatter: function(value, context) {
+             return labels_formatter[context.dataIndex]
+           }
         }
       }]
 

@@ -17,7 +17,7 @@ export const DifficultyGraph = (props) => {
            "M-Jump 1", "Diamond", "Bubble", "Vortex", "Hour",
            "Plane", "Corner", "Valve", "9-Jump", "D. Dmnd"]
 
-    var all_jump_avgs = [], filtered_jumps = [], highest_jump = []
+    var filtered_jumps = [], highest_jump = []
     // var difficulties = []
 
     if (props.filtered_jumps[0].length > 0) {
@@ -28,7 +28,6 @@ export const DifficultyGraph = (props) => {
       })
 
       highest_jump = props.filtered_jumps.map(x => hundredths(Math.max(...x) ))
-      all_jump_avgs = props.all_jumps.map(x => hundredths(total(x)/props.all_jumps[0].length))
 
       // will add once variable stepping is a chartjs option
 
@@ -117,7 +116,17 @@ export const DifficultyGraph = (props) => {
         hoverBorderColor: 'rgba(100,100,100,.5)',
         data: filtered_jumps,
         datalabels: {
-           display: false,
+           display: true,
+           rotation: -90,
+           anchor: 'start',
+           align: 'right',
+           font: {
+             size: 9
+           },
+           offset: -3,
+           formatter: function(value, context) {
+             return labels_formatter[context.dataIndex]
+           }
         }
       }]
 

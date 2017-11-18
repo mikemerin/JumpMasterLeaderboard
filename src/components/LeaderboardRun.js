@@ -38,27 +38,33 @@ export default class LeaderboardRun extends Component {
     const type = n === 0 ? [0,1] : [2,3]
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
 
-    var all_jumps_0 = [], all_streaks_0 = [], all_points_0 = []
+    var all_points_0 = [], all_jumps_0 = [], all_streaks_0 = []
 
     jump_names[type[0]].forEach(jump => {
       if (this.props.run !== undefined) {
+        all_points_0.push(<Table.Cell key={jump} >{ hundredths(this.props.run[`${jump}_points`]) }</Table.Cell>)
         all_jumps_0.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_jumps`] }</Table.Cell>)
         all_streaks_0.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_streak`] }</Table.Cell>)
-        all_points_0.push(<Table.Cell key={jump} >{ hundredths(this.props.run[`${jump}_points`]) }</Table.Cell>)
       }
     })
 
     var all_jumps_1 = [], all_streaks_1 = [], all_points_1 = []
     jump_names[type[1]].forEach(jump => {
       if (this.props.run !== undefined) {
+        all_points_1.push(<Table.Cell key={jump} >{ hundredths(this.props.run[`${jump}_points`]) }</Table.Cell>)
         all_jumps_1.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_jumps`] }</Table.Cell>)
         all_streaks_1.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_streak`] }</Table.Cell>)
-        all_points_1.push(<Table.Cell key={jump} >{ hundredths(this.props.run[`${jump}_points`]) }</Table.Cell>)
       }
     })
 
     return (
       <Table.Body>
+        <Table.Row>
+          <Table.Cell><h4>Points</h4></Table.Cell>
+          { all_points_0 }
+          <Table.Cell><h4>Points</h4></Table.Cell>
+          { all_points_1 }
+        </Table.Row>
         <Table.Row>
           <Table.Cell><h4>Jumps</h4></Table.Cell>
           { all_jumps_0 }
@@ -70,12 +76,6 @@ export default class LeaderboardRun extends Component {
           { all_streaks_0 }
           <Table.Cell><h4>Streak</h4></Table.Cell>
           { all_streaks_1 }
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell><h4>Points</h4></Table.Cell>
-          { all_points_0 }
-          <Table.Cell><h4>Points</h4></Table.Cell>
-          { all_points_1 }
         </Table.Row>
       </Table.Body>
     )

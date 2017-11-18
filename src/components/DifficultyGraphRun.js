@@ -4,7 +4,6 @@ import 'chartjs-plugin-datalabels'
 
 export const DifficultyGraphRun = (props) => {
 
-    function total(type) { return type.reduce((sum, x) => sum+x ) }
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
 
     const labels = ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump",

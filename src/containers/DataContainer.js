@@ -3,11 +3,14 @@ import { Grid, Divider, Transition, Button } from 'semantic-ui-react'
 import { Route, Switch, Link } from 'react-router-dom'
 
 import Data from '../components/Data'
+import DataRun from '../components/DataRun'
+
 import DifficultyGraph from '../components/DifficultyGraph'
 import DifficultyGraphRun from '../components/DifficultyGraphRun'
 import DifficultyGraphUser from '../components/DifficultyGraphUser'
 
 import RunGraph from '../components/RunGraph'
+import RunGraphRun from '../components/RunGraphRun'
 
 import SearchPerson from '../components/SearchPerson'
 
@@ -38,14 +41,14 @@ export default class DataContainer extends Component {
                     </div>
                     <Divider />
 
-                    <Data all_data={ all_data } user_list={ user_list } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } username={ username } />
+                    <DataRun all_data={ all_data } user_list={ user_list } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } username={ username } run={ run }/>
 
                   </Grid.Column>
                 </Transition>
                 <Transition visible={ visible } animation='scale' duration={1500}>
                   <Grid.Column>
 
-                    <RunGraph filtered_data={ filtered_data } />
+                    <RunGraphRun filtered_data={ filtered_data } />
 
                   </Grid.Column>
                 </Transition>
