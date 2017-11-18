@@ -23,6 +23,20 @@ const labels = [ ["Gate", "Diagonal", "F-Jump", "Sideways Gate", "Platform Jump"
 
 export default class LeaderboardRun extends Component {
 
+  maximum = (type) => {
+    return Math.max(...type)
+  }
+
+  high = (type) => {
+
+    if ( this.props.run[type]  === this.maximum( this.props.filtered_data.map(x => x[type] )) ) {
+      return this.props.run[type]  === this.maximum( this.props.all_data.map(x => x[type] )) ? 'outlineWR' : 'outlinePB'
+    } else {
+      return ''
+    }
+
+  }
+
   headers = (n) => {
 
     return jump_names[n].map((jump, i) => (
@@ -38,23 +52,24 @@ export default class LeaderboardRun extends Component {
 
     const type = n === 0 ? [0,1] : [2,3]
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
+    function maximum(type) { return Math.max(...type) }
 
     var all_points_0 = [], all_jumps_0 = [], all_streaks_0 = []
 
     jump_names[type[0]].forEach(jump => {
       if (this.props.run !== undefined) {
-        all_points_0.push(<Table.Cell key={jump} >{ hundredths(this.props.run[`${jump}_points`]) }</Table.Cell>)
-        all_jumps_0.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_jumps`] }</Table.Cell>)
-        all_streaks_0.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_streak`] }</Table.Cell>)
+        all_points_0.push(<Table.Cell key={jump} className={ this.high(`${jump}_points`) }>{ hundredths(this.props.run[`${jump}_points`]) }</Table.Cell>)
+        all_jumps_0.push(<Table.Cell key={jump} className={ this.high(`${jump}_jumps`) }>{ hundredths(this.props.run[`${jump}_jumps`]) }</Table.Cell>)
+        all_streaks_0.push(<Table.Cell key={jump} className={ this.high(`${jump}_streak`) }>{ hundredths(this.props.run[`${jump}_streak`]) }</Table.Cell>)
       }
     })
 
     var all_jumps_1 = [], all_streaks_1 = [], all_points_1 = []
     jump_names[type[1]].forEach(jump => {
       if (this.props.run !== undefined) {
-        all_points_1.push(<Table.Cell key={jump} >{ hundredths(this.props.run[`${jump}_points`]) }</Table.Cell>)
-        all_jumps_1.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_jumps`] }</Table.Cell>)
-        all_streaks_1.push(<Table.Cell key={jump} >{ this.props.run[`${jump}_streak`] }</Table.Cell>)
+        all_points_1.push(<Table.Cell key={jump} className={ this.high(`${jump}_points`) }>{ hundredths(this.props.run[`${jump}_points`]) }</Table.Cell>)
+        all_jumps_1.push(<Table.Cell key={jump} className={ this.high(`${jump}_jumps`) }>{ hundredths(this.props.run[`${jump}_jumps`]) }</Table.Cell>)
+        all_streaks_1.push(<Table.Cell key={jump} className={ this.high(`${jump}_streak`) }>{ hundredths(this.props.run[`${jump}_streak`]) }</Table.Cell>)
       }
     })
 
