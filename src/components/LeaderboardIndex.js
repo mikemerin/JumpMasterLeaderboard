@@ -55,12 +55,12 @@ export default class LeaderboardIndex extends Component {
   // toggle table for all runs vs. one user's
 
   globalHeader() {
-    return (this.props.username === "All Users" ? "" : "Global " ) + "Place"
+    return (this.props.username === "All Users" ? "" : "Global " ) + "Rank"
   }
 
   localHeader(column, direction) {
     if (this.props.username !== "All Users") {
-      return <Table.HeaderCell sorted={column === 'local_place' ? direction : null} onClick={this.handleSort('local_place')}>Local Place</Table.HeaderCell>
+      return <Table.HeaderCell sorted={column === 'local_place' ? direction : null} onClick={this.handleSort('local_place')}>Local Rank</Table.HeaderCell>
     }
   }
 

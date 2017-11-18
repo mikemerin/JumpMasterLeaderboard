@@ -41,7 +41,8 @@ export default class DataContainer extends Component {
                     </div>
                     <Divider />
 
-                    <DataRun all_data={ all_data } user_list={ user_list } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } username={ username } run={ run }/>
+                    <DataRun all_data={ all_data } all_jumps={ all_jumps } user_list={ user_list }
+                        filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } username={ username } run={ run }/>
 
                   </Grid.Column>
                 </Transition>

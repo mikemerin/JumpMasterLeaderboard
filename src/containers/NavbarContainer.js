@@ -28,8 +28,15 @@ export const NavbarContainer = (props) => {
   return (
     <Menu color='blue' inverted  fluid widths={3} size='huge' icon fixed='top' >
 
+
+
       <Menu.Item name='I Wanna Be the Jump Master' fitted='vertically' >
-        <Link to="/" onClick={ handleHome } >I Wanna Be the Jump Master</Link>
+
+        <Popup position='right center' trigger={
+          <Link to="/" onClick={ handleHome } >I Wanna Be the Jump Master</Link>
+        } content='Return to Main Screen' />
+
+
       </Menu.Item>
 
       <Menu.Item name='title' fitted='vertically' >
