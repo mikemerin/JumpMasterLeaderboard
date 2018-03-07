@@ -29,6 +29,7 @@ export default class App extends Component {
 
   componentWillMount() {
     console.log("mounting");
+    window.onpopstate = e => window.history.go(1);
     ScoreAdapter.all().then(data => {
       this.setState({ all_data: data })
 

@@ -15,7 +15,7 @@ export const DataRun = (props) => {
   var pbs = 0, wrs = 0
 
   function hundredths(type) { return type === undefined ? type : Math.round(type * 100 ) / 100 }
-  function total(type) { return type.reduce((sum, x) => sum+x ) }
+  // function total(type) { return type.reduce((sum, x) => sum+x ) }
   function maximum(type) { return Math.max(...type) }
 
   if ( run.id !== undefined ) {
@@ -36,8 +36,6 @@ export const DataRun = (props) => {
   }
 
   function high(type) {
-    if (type == "easy_jumps") {debugger}
-
     if ( run[type]  === maximum( filtered_data.map(x => x[type] )) ) {
       return run[type]  === maximum( all_data.map(x => x[type] )) ? 'outlineWR' : 'outlinePB'
     } else {
