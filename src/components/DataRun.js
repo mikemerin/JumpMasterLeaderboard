@@ -12,17 +12,13 @@ export const DataRun = (props) => {
 
   const { all_data, filtered_data, all_jumps, filtered_jumps, run } = props
 
-  var difficulty_jumps = [ null, null, null, null ], pbs = 0, wrs = 0
+  var pbs = 0, wrs = 0
 
   function hundredths(type) { return type === undefined ? type : Math.round(type * 100 ) / 100 }
   function total(type) { return type.reduce((sum, x) => sum+x ) }
   function maximum(type) { return Math.max(...type) }
 
   if ( run.id !== undefined ) {
-
-    // add up jumps for each difficulty
-    for (let i = 0; i < 4; i++ )
-    { difficulty_jumps[i] = total(jump_names[i].map(jump => run[`${jump}_jumps`])) }
 
     // count the total PBs/WRs for all jumps
     jump_names.reduce((a,b) => a.concat(b)).forEach((jump, i) => {
@@ -40,6 +36,7 @@ export const DataRun = (props) => {
   }
 
   function high(type) {
+    if (type == "easy_jumps") {debugger}
 
     if ( run[type]  === maximum( filtered_data.map(x => x[type] )) ) {
       return run[type]  === maximum( all_data.map(x => x[type] )) ? 'outlineWR' : 'outlinePB'
