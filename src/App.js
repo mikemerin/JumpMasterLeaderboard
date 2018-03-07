@@ -31,6 +31,9 @@ export default class App extends Component {
     console.log("mounting");
     window.onpopstate = e => window.history.go(1);
     ScoreAdapter.all().then(data => {
+      data.forEach(x => {
+        x.username = encodeURIComponent(x.username === "" ? "Anonymous" : x.username)
+      })
       this.setState({ all_data: data })
 
       var path = this.context.router.route.location.pathname
