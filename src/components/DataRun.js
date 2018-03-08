@@ -89,12 +89,12 @@ return (
     <Statistic.Group widths={5}>
 
       <Statistic size='mini'>
-        <div className={ high('easy') }>{ hundredths(run.easy) }</div>
+        <div className={ high('easy_points') }>{ hundredths(run.easy_points) }</div>
         <Statistic.Label>Easy</Statistic.Label>
         <div className={ high('easy_jumps') }>{ hundredths(run.easy_jumps) }</div>
       </Statistic>
       <Statistic size='mini'>
-        <div className={ high('medium') }>{ hundredths(run.medium) }</div>
+        <div className={ high('medium_points') }>{ hundredths(run.medium_points) }</div>
         <Statistic.Label>Medium</Statistic.Label>
         <div className={ high('medium_jumps') }>{ hundredths(run.medium_jumps) }</div>
       </Statistic>
@@ -104,12 +104,12 @@ return (
         Jumps
       </Statistic>
       <Statistic size='mini'>
-        <div className={ high('hard') }>{ hundredths(run.hard) }</div>
+        <div className={ high('hard_points') }>{ hundredths(run.hard_points) }</div>
         <Statistic.Label>Hard</Statistic.Label>
         <div className={ high('hard_jumps') }>{ hundredths(run.hard_jumps) }</div>
       </Statistic>
       <Statistic size='mini'>
-        <div className={ high('hardest') }>{ hundredths(run.hardest) }</div>
+        <div className={ high('hardest_points') }>{ hundredths(run.hardest_points) }</div>
         <Statistic.Label>Hardest</Statistic.Label>
         <div className={ high('hardest_jumps') }>{ hundredths(run.hardest_jumps) }</div>
       </Statistic>

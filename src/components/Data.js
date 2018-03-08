@@ -5,16 +5,16 @@ export const Data = (props) => {
 
   const { filtered_data, filtered_jumps, user_list, username } = props
 
-  var scores = [], easy = [], medium = [], hard = [], hardest = []
+  var scores = [], easy_points = [], medium_points = [], hard_points = [], hardest_points = []
 
   var runs = filtered_data.length, total_jumps = null, total_deaths = null, avg_runs = null
 
   filtered_data.forEach(x => {
     scores.push(x.total)
-    easy.push(x.easy)
-    medium.push(x.medium)
-    hard.push(x.hard)
-    hardest.push(x.hardest)
+    easy_points.push(x.easy_points)
+    medium_points.push(x.medium_points)
+    hard_points.push(x.hard_points)
+    hardest_points.push(x.hardest_points)
     total_jumps += x.jumps
     total_deaths += x.deaths
   })
@@ -37,16 +37,16 @@ export const Data = (props) => {
 
     var sum_of_best = hundredths(total(filtered_jumps.map(x => Math.max(...x))))
 
-    var total_easy = hundredths(total(easy))
+    var total_easy = hundredths(total(easy_points))
     var avg_easy = hundredths(total_easy / runs )
 
-    var total_medium = hundredths(total(medium))
+    var total_medium = hundredths(total(medium_points))
     var avg_medium = hundredths(total_medium / runs )
 
-    var total_hard = hundredths(total(hard))
+    var total_hard = hundredths(total(hard_points))
     var avg_hard = hundredths(total_hard / runs )
 
-    var total_hardest = hundredths(total(hardest))
+    var total_hardest = hundredths(total(hardest_points))
     var avg_hardest = hundredths(total_hardest / runs )
 
   } else { runs = null }

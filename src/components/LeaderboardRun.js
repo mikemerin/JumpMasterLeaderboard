@@ -52,7 +52,7 @@ export default class LeaderboardRun extends Component {
 
     const type = n === 0 ? [0,1] : [2,3]
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
-    
+
     var all_points_0 = [], all_jumps_0 = [], all_streaks_0 = []
 
     jump_names[type[0]].forEach(jump => {
