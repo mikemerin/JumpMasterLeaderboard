@@ -49,7 +49,7 @@ return (
   <div>
     <Statistic.Group widths={4}>
       <Statistic size='mini'>
-        <div className='outlinePB'>JUMP PBs</div>
+        <div className='outlinePB'>JUMP Pt PBs</div>
         { pbs }
       </Statistic>
       <Statistic size='mini'>
@@ -61,7 +61,7 @@ return (
         { run.global_place }
       </Statistic>
       <Statistic size='mini'>
-        <div className='outlineWR'>JUMP WRs</div>
+        <div className='outlineWR'>JUMP Pt WRs</div>
         { wrs }
       </Statistic>
     </Statistic.Group>
