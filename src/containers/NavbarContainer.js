@@ -64,10 +64,16 @@ export const NavbarContainer = (props) => {
       <Menu.Item name='links' position='right' fitted='vertically'>
 
         <Popup position='bottom center' trigger={
-          <a href='http://www.delicious-fruit.com' target="_blank" rel="noopener noreferrer">
+          <a href='http://delicious-fruit.com/ratings/game_details.php?id=19781' target="_blank" rel="noopener noreferrer">
             <Icon name='download' />
           </a>
         } content='download the game' />
+
+        <Popup position='bottom center' trigger={
+          <a href=' https://discord.gg/UfCZe7A' target="_blank" rel="noopener noreferrer">
+            <Icon name='discord' />
+          </a>
+        } content='Discord' />
 
         <Popup position='bottom center' trigger={
           <a href="http://twitch.tv/shadowsdieaway" target="_blank" rel="noopener noreferrer">
