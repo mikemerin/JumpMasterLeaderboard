@@ -71,7 +71,7 @@ export const NavbarContainer = (props) => {
 
         <Popup position='bottom center' trigger={
           <a href=' https://discord.gg/UfCZe7A' target="_blank" rel="noopener noreferrer">
-            <Icon name='discord' />
+            <Icon name='discord square' />
           </a>
         } content='Discord' />
 
