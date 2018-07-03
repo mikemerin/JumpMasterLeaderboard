@@ -21,6 +21,7 @@ export default class App extends Component {
     super(props)
     this.state = {
       all_data: [],
+      url: '',
       visible: false,
       username: "All Users",
       run: {}
@@ -37,6 +38,7 @@ export default class App extends Component {
       this.setState({ all_data: data })
 
       var path = this.context.router.route.location.pathname
+      this.setState({ url: path })
 
       if (!!path.match(/^\/username\/(\w+)/)) {
         this.setState({ username: path.match(/^\/username\/(\w+)/)[1] })
@@ -169,7 +171,7 @@ export default class App extends Component {
 
   render() {
 
-    const { all_data, username, run, visible } = this.state
+    const { all_data, username, run, visible, url } = this.state
 
     this.addPlacesAndFormatCA(all_data)
     const filtered_data = this.filterData()
@@ -195,7 +197,7 @@ export default class App extends Component {
             user_list={ user_list } username={ username } visible={ visible } run={ run } />
         </div>
 
-        <LeaderboardContainer all_data={ all_data } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps }
+        <LeaderboardContainer all_data={ all_data } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } url={ url }
             username={ username } visible={ visible } handleNameClick={ this.handleNameClick } handleRunClick={ this.handleRunClick } />
 
       </div>

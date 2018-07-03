@@ -18,7 +18,7 @@ export default class DataContainer extends Component {
 
   render() {
 
-    const { all_data, all_jumps, user_list, filtered_data, filtered_jumps, handleNameChange, handleNameClick, handleHome, username, visible, run } = this.props
+    const { all_data, all_jumps, user_list, filtered_data, filtered_jumps, handleNameChange, handleNameClick, handleHome, username, visible, run, unique_users } = this.props
 
     return(
       <Switch>

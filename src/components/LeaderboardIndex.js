@@ -9,6 +9,7 @@ export default class LeaderboardIndex extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      unique_users: false,
       column: null,
       data: [],
       direction: null,
@@ -19,7 +20,21 @@ export default class LeaderboardIndex extends Component {
 
     // sort data by high score (tiebreaker lowest deaths)
     var sorted_data = nextProps.filtered_data.sort((a, b) => b.total - a.total || a.deaths - b.deaths )
-    this.setState({ column: null, data: sorted_data, direction: null })
+
+    if (this.props.username === 'All Users') {
+      var unique_user_runs = [];
+
+      sorted_data.forEach(x => {
+        var unique_users = unique_user_runs.map(r => r.username);
+        if (!unique_users.includes(x.username)) { unique_user_runs.push(x) }
+      })
+
+      this.setState({ column: null, data: unique_user_runs, direction: null })
+
+    } else {
+      this.setState({ column: null, data: sorted_data, direction: null })
+    }
+
     window.scrollTo(0, 0)
   }
 
