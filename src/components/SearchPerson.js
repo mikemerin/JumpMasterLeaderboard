@@ -6,6 +6,7 @@ export const SearchPerson = (props) => {
   var { user_list, all_data, username, handleNameChange } = props
 
   // map keys/values/text for user_list
+  user_list = user_list.sort((a,b) => a.toLowerCase().localeCompare(b.toLowerCase()) );
   user_list = user_list.map((x, i) => ({key: i+1, value: x, text: x }) )
   user_list.unshift({key: 0, value: "All Users", text: "All Users" })
 
