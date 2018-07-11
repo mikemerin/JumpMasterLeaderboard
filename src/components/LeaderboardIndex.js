@@ -9,7 +9,6 @@ export default class LeaderboardIndex extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      unique_users: false,
       column: null,
       data: [],
       direction: null,
@@ -20,14 +19,15 @@ export default class LeaderboardIndex extends Component {
 
     // sort data by high score (tiebreaker lowest deaths)
     var sorted_data = nextProps.filtered_data.sort((a, b) => b.total - a.total || a.deaths - b.deaths )
-
-    if (this.props.username === 'All Users') {
+    console.log(this.props)
+    if (this.props.username === 'All Unique Users') {
       var unique_user_runs = [];
 
       sorted_data.forEach(x => {
         var unique_users = unique_user_runs.map(r => r.username);
         if (!unique_users.includes(x.username)) { unique_user_runs.push(x) }
       })
+      unique_user_runs.forEach((x,i) => unique_user_runs[i]['unique_place'] = i+1 )
 
       this.setState({ column: null, data: unique_user_runs, direction: null })
 
@@ -70,18 +70,27 @@ export default class LeaderboardIndex extends Component {
   // toggle table for all runs vs. one user's
 
   globalHeader() {
-    return (this.props.username === "All Users" ? "" : "Global " ) + "Rank"
+    var header_name = "";
+    if (this.props.username !== "All Users") {
+        header_name = "Global ";
+    }
+    return header_name + "Rank"
   }
 
   localHeader(column, direction) {
     if (this.props.username !== "All Users") {
-      return <Table.HeaderCell sorted={column === 'local_place' ? direction : null} onClick={this.handleSort('local_place')}>Local Rank</Table.HeaderCell>
+      var header_name = this.props.username === "All Unique Users" ? "Unique Rank" : "Local Rank";
+      return <Table.HeaderCell sorted={column === 'local_place' ? direction : null} onClick={this.handleSort('local_place')}>{header_name}</Table.HeaderCell>
     }
   }
 
-  localCell(local_place, id, username) {
+  localCell(local_place, id, username, unique_place) {
     if (this.props.username !== "All Users" ) {
-      return <Table.Cell> {local_place} </Table.Cell>
+      if (this.props.username === "All Unique Users") {
+          return <Table.Cell> {unique_place} </Table.Cell>
+      } else {
+          return <Table.Cell> {local_place} </Table.Cell>
+      }
     }
   }
 
@@ -105,17 +114,17 @@ export default class LeaderboardIndex extends Component {
                 <Table.HeaderCell sorted={column === 'total' ? direction : null} onClick={this.handleSort('total')}>Score</Table.HeaderCell>
                 <Table.HeaderCell sorted={column === 'jumps' ? direction : null} onClick={this.handleSort('jumps')}>Jumps</Table.HeaderCell>
                 <Table.HeaderCell sorted={column === 'deaths' ? direction : null} onClick={this.handleSort('deaths')}>Deaths</Table.HeaderCell>
-                <Table.HeaderCell sorted={column === 'created_at_formatted' ? direction : null} onClick={this.handleSort('created_at_formatted')}>Run Time</Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'created_at_formatted' ? direction : null} onClick={this.handleSort('created_at_formatted')}>Run Time (UTC)</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
 
 
             <Table.Body>
-              {_.map(data, ({ id, global_place, local_place, username, total, jumps, deaths, created_at_formatted }) => (
+              {_.map(data, ({ id, global_place, local_place, username, total, jumps, deaths, created_at_formatted, unique_place}) => (
                 <Table.Row key={global_place}>
                   <Table.Cell selectable><Link to={`/run/${id}`} onClick={ handleRunClick } > Link </Link></Table.Cell>
                   <Table.Cell> {global_place} </Table.Cell>
-                  { this.localCell(local_place, id, username) }
+                  { this.localCell(local_place, id, username, unique_place) }
                   <Table.Cell selectable><Link to={`/username/${username}`} onClick={ handleNameClick }> {username} </Link></Table.Cell>
                   <Table.Cell>{hundredths(total)}</Table.Cell>
                   <Table.Cell>{jumps}</Table.Cell>

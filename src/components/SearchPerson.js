@@ -8,7 +8,8 @@ export const SearchPerson = (props) => {
   // map keys/values/text for user_list
   user_list = user_list.sort((a,b) => a.toLowerCase().localeCompare(b.toLowerCase()) );
   user_list = user_list.map((x, i) => ({key: i+1, value: x, text: x }) )
-  user_list.unshift({key: 0, value: "All Users", text: "All Users" })
+  user_list.unshift({key: 0.5, value: "All Users", text: "All Users" })
+  user_list.unshift({key: 0, value: "All Unique Users", text: "All Unique Users" })
 
   if (all_data.length > 0 && !user_list.map(x => x.text.toLowerCase()).includes(username.toLowerCase()) ) {
     alert(`Sorry, no runs for '${username}' were found.\n\nPlease choose another name from the dropdown menu.`)
@@ -24,7 +25,7 @@ export const SearchPerson = (props) => {
       <Statistic size='mini'>
         <Dropdown fluid search selection labeled
 
-                  placeholder="All Users"
+                  placeholder="All Unique Users"
                   selected="custom"
                   value={ username }
                   scrolling={true}

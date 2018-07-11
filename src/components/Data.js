@@ -25,7 +25,7 @@ export const Data = (props) => {
     function hundredths(type) { return Math.round(type * 100 ) / 100 }
 
     var total_points = hundredths(total(scores))
-    if (username === "All Users") {
+    if (["All Unique Users", "All Users"].includes(username)) {
       avg_runs = Math.round(runs / user_list.length * 100 ) / 100
     } else {
       avg_runs = "N/A"

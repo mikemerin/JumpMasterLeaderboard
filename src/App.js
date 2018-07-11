@@ -23,7 +23,7 @@ export default class App extends Component {
       all_data: [],
       url: '',
       visible: false,
-      username: "All Users",
+      username: "All Unique Users",
       run: {}
     }
   }
@@ -66,13 +66,13 @@ export default class App extends Component {
       { this.setState({ visible: true }) }
 
     if ( prevState.username !== this.state.username ) {
-      if ( this.state.username === "All Users" )
+      if ( ["All Unique Users", "All Users", "All"].includes(this.state.username) )
         { this.context.router.history.push('/') }
       else if ( this.state.run.id === undefined )
         { this.context.router.history.push(`/username/${this.state.username}`) }
     }
 
-    if ( this.state.username !== "All Users" && prevState.run.id !== undefined && this.state.run.id === undefined )
+    if ( !["All Unique Users", "All Users", "All"].includes(this.state.username) && prevState.run.id !== undefined && this.state.run.id === undefined )
       { this.context.router.history.push(`/username/${this.state.username}`) }
 
   }
@@ -83,7 +83,7 @@ export default class App extends Component {
     // sort by high score (low death tiebreker), add place and format, then resort by id
     return data_dup.sort((a, b) => b.total - a.total || a.deaths - b.deaths ).map((x, i) => {
        x['global_place'] = i+1
-       x['created_at_formatted'] = `${x.created_at.slice(0,10)} - ${x.created_at.slice(11,19)} UTC`
+       x['created_at_formatted'] = `${x.created_at.slice(0,10)} - ${x.created_at.slice(11,19)}`
        return x
     }).sort((a, b) => a.id - b.id )
   }
@@ -96,7 +96,7 @@ export default class App extends Component {
 
     return this.state.all_data.filter(x => (
       // if all, filter everything, else filter by the username picked
-      this.state.username === "All Users" ? x : x.username === this.state.username
+      ["All Unique Users", "All Users"].includes(this.state.username) ? x : x.username === this.state.username
     )).sort((a, b) => b.total - a.total || a.deaths - b.deaths ).map((x,i) => {
        x['local_place'] = i+1
        return x
@@ -141,7 +141,7 @@ export default class App extends Component {
   }
 
   handleHome = (event) => {
-    this.setState({ username: "All Users", run: {} })
+    this.setState({ username: "All Unique Users", run: {} })
   }
 
   handleNameChange = (event, result) => {

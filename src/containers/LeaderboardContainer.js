@@ -28,7 +28,7 @@ export default class LeaderboardContainer extends Component {
           }} />
 
           <Route path="/" render={routerProps => {
-            return <LeaderboardIndex filtered_data={ filtered_data } username={ "All Users" } run={ run }
+            return <LeaderboardIndex filtered_data={ filtered_data } username={ this.props.username } run={ run }
                           handleNameClick={ handleNameClick } handleRunClick={ handleRunClick } visible={ visible } />
           }} />
 

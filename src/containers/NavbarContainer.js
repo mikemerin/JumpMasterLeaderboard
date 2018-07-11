@@ -32,9 +32,13 @@ export const NavbarContainer = (props) => {
 
       <Menu.Item name='I Wanna Be the Jump Master' fitted='vertically' >
 
-        <Popup position='right center' trigger={
-          <Link to="/" onClick={ handleHome } >I Wanna Be the Jump Master</Link>
+        <Popup position='bottom center' trigger={
+          <Link to="/" onClick={ handleHome } >IWBT Jump Master Runs  |</Link>
         } content='Return to Main Screen' />
+
+        <Popup position='bottom center' trigger={
+          <Link to="/" onClick={ handleHome } >  Jump Leaderboards </Link>
+        } content='Load Individual Jump Leaderboards' />
 
 
       </Menu.Item>
@@ -67,13 +71,13 @@ export const NavbarContainer = (props) => {
           <a href='http://delicious-fruit.com/ratings/game_details.php?id=19781' target="_blank" rel="noopener noreferrer">
             <Icon name='download' />
           </a>
-        } content='download the game' />
+        } content='Download the Game!' />
 
         <Popup position='bottom center' trigger={
           <a href=' https://discord.gg/UfCZe7A' target="_blank" rel="noopener noreferrer">
-            <Icon name='discord' />
+            <Icon name='group' />
           </a>
-        } content='Discord' />
+        } content='Join our Discord Group!' />
 
         <Popup position='bottom center' trigger={
           <a href="http://twitch.tv/shadowsdieaway" target="_blank" rel="noopener noreferrer">
