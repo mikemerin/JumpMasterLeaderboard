@@ -20,6 +20,7 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      jump_data: [],
       all_data: [],
       url: '',
       visible: false,
@@ -31,9 +32,14 @@ export default class App extends Component {
   componentWillMount() {
     console.log("mounting");
     window.onpopstate = e => window.history.go(1);
+    ScoreAdapter.jumps().then(jump_data => {
+      this.setState({ jump_data: jump_data})
+    })
+    
     ScoreAdapter.all().then(data => {
       data.forEach(x => {
-        x.username = encodeURIComponent(x.username === "" ? "Anonymous" : x.username)
+        delete x.ipa;
+        x.username = encodeURIComponent(x.username === "" ? "Anonymous" : x.username);
       })
       this.setState({ all_data: data })
 
