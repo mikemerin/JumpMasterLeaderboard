@@ -4,7 +4,7 @@ import { Menu, Icon, Popup, Modal, Image } from 'semantic-ui-react'
 
 export const NavbarContainer = (props) => {
 
-  const { handleHome, username } = props
+  const { handleHome, handleJumps, username } = props
 
   const modal = (
     <Modal size='small' dimmer='blurring' closeIcon trigger={<a><Popup position='bottom center' trigger={
@@ -37,7 +37,7 @@ export const NavbarContainer = (props) => {
         } content='Return to Main Screen' />
 
         <Popup position='bottom center' trigger={
-          <Link to="/" onClick={ handleHome } >  Jump Leaderboards </Link>
+          <Link to="/jumps" onClick={ handleJumps } >  Jump Leaderboards </Link>
         } content='Load Individual Jump Leaderboards' />
 
 

@@ -3,16 +3,21 @@ import { Route, Switch } from 'react-router-dom'
 
 import LeaderboardIndex from '../components/LeaderboardIndex'
 import LeaderboardRun from '../components/LeaderboardRun'
+import LeaderboardJumps from '../components/LeaderboardJumps'
 
 export default class LeaderboardContainer extends Component {
 
   render() {
 
-    const { all_data, filtered_data, filtered_jumps, handleNameClick, handleRunClick, visible, run } = this.props
+    const { all_data, jump_data, filtered_data, filtered_jumps, handleNameClick, handleRunClick, visible, run } = this.props
 
     return (
 
         <Switch>
+
+          <Route exact path="/jumps" render={routerProps => {
+            return <LeaderboardJumps jump_data={ jump_data } handleRunClick={ handleRunClick } visible={ visible } />
+          }} />
 
           <Route exact path="/run/:id" render={routerProps => {
             const id = routerProps.match.params.id

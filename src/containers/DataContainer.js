@@ -22,6 +22,14 @@ export default class DataContainer extends Component {
 
     return(
       <Switch>
+
+        <Route exact path="/jumps" render={routerProps => {
+          return (
+            <Grid columns='equal' relaxed textAlign="center" verticalAlign="middle" padded >
+            </Grid>
+          )
+        }} />
+
         <Route exact path="/run/:id" render={routerProps => {
           return (
             <Grid columns='equal' relaxed textAlign="center" verticalAlign="middle" padded >

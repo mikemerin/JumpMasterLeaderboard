@@ -19,7 +19,7 @@ export default class LeaderboardIndex extends Component {
 
     // sort data by high score (tiebreaker lowest deaths)
     var sorted_data = nextProps.filtered_data.sort((a, b) => b.total - a.total || a.deaths - b.deaths )
-    console.log(this.props)
+    
     if (this.props.username === 'All Unique Users') {
       var unique_user_runs = [];
 

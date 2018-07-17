@@ -35,7 +35,7 @@ export default class App extends Component {
     ScoreAdapter.jumps().then(jump_data => {
       this.setState({ jump_data: jump_data})
     })
-    
+
     ScoreAdapter.all().then(data => {
       data.forEach(x => {
         delete x.ipa;
@@ -74,7 +74,7 @@ export default class App extends Component {
     if ( prevState.username !== this.state.username ) {
       if ( ["All Unique Users", "All Users", "All"].includes(this.state.username) )
         { this.context.router.history.push('/') }
-      else if ( this.state.run.id === undefined )
+      else if ( this.state.username !== "All Jumps" && this.state.run.id === undefined )
         { this.context.router.history.push(`/username/${this.state.username}`) }
     }
 
@@ -150,6 +150,10 @@ export default class App extends Component {
     this.setState({ username: "All Unique Users", run: {} })
   }
 
+  handleJumps = (event) => {
+    this.setState({ username: "All Jumps", run: {} })
+  }
+
   handleNameChange = (event, result) => {
     this.setState({ username: result.value })
   }
@@ -177,7 +181,7 @@ export default class App extends Component {
 
   render() {
 
-    const { all_data, username, run, visible, url } = this.state
+    const { all_data, jump_data, username, run, visible, url } = this.state
 
     this.addPlacesAndFormatCA(all_data)
     const filtered_data = this.filterData()
@@ -194,7 +198,7 @@ export default class App extends Component {
       <div>
         { this.loading_screen() }
         <div className="App-header">
-          <NavbarContainer handleHome={ this.handleHome } username={ username } run={ run } />
+          <NavbarContainer handleHome={ this.handleHome } handleJumps={ this.handleJumps } username={ username } run={ run } />
         </div>
 
         <div className="Data-fixed">
@@ -203,7 +207,7 @@ export default class App extends Component {
             user_list={ user_list } username={ username } visible={ visible } run={ run } />
         </div>
 
-        <LeaderboardContainer all_data={ all_data } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } url={ url }
+        <LeaderboardContainer all_data={ all_data } jump_data={ jump_data } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } url={ url }
             username={ username } visible={ visible } handleNameClick={ this.handleNameClick } handleRunClick={ this.handleRunClick } />
 
       </div>
