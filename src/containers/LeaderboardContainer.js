@@ -9,14 +9,15 @@ export default class LeaderboardContainer extends Component {
 
   render() {
 
-    const { all_data, jump_data, filtered_data, filtered_jumps, handleNameClick, handleRunClick, visible, run } = this.props
+    const { all_data, jump_data, extra_jump_data, extra_jump_top_data, filtered_data, filtered_jumps, handleNameClick, handleRunClick, visible, run } = this.props
 
     return (
 
         <Switch>
 
           <Route exact path="/jumps" render={routerProps => {
-            return <LeaderboardJumps jump_data={ jump_data } handleRunClick={ handleRunClick } visible={ visible } />
+            return <LeaderboardJumps jump_data={ jump_data } extra_jump_data={ extra_jump_data } extra_jump_top_data={ extra_jump_top_data }
+                    handleRunClick={ handleRunClick } visible={ visible } />
           }} />
 
           <Route exact path="/run/:id" render={routerProps => {

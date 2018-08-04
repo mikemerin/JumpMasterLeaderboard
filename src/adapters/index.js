@@ -52,6 +52,30 @@ export class ScoreAdapter {
       })
   }
 
+  static extra_jumps() {
+    return fetch(score_URL + "jumps").then((res) => {
+      if (res.ok)
+        { return res.json() }
+      else
+        { throw new Error('Something went wrong') }
+      }).catch((error) => {
+        alert("Sorry something went wrong and no extra jump data was found.\n\nPlease try again shortly.\n\nIf this problem persists please contact ShadowsDieAway on discord.")
+        // return [fail_data_jumps]
+      })
+  }
+
+  static extra_jumps_top() {
+    return fetch(score_URL + "extra_jumps").then((res) => {
+      if (res.ok)
+        { return res.json() }
+      else
+        { throw new Error('Something went wrong') }
+      }).catch((error) => {
+        alert("Sorry something went wrong and no extra jump top score data was found.\n\nPlease try again shortly.\n\nIf this problem persists please contact ShadowsDieAway on discord.")
+        // return [fail_data_jumps]
+      })
+  }
+
   static new(data) {
     return fetch(score_URL, {
         method: 'POST',

@@ -20,6 +20,8 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      extra_jump_data: [],
+      extra_jump_top_data: [],
       jump_data: [],
       all_data: [],
       url: '',
@@ -64,6 +66,23 @@ export default class App extends Component {
       }
 
     })
+
+    ScoreAdapter.extra_jumps().then(data => {
+      data.forEach(x => {
+        delete x.ipa;
+        x.username = encodeURIComponent(x.username === "" ? "Anonymous" : x.username);
+      })
+      this.setState({ extra_jump_data: data })
+    })
+
+    ScoreAdapter.extra_jumps_top().then(data => {
+      for (var key in data) {
+      	data[key].username = encodeURIComponent(data[key].username === "" ? "Anonymous" : data[key].username)
+      }
+      this.setState({ extra_jump_top_data: data })
+    })
+
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -181,7 +200,7 @@ export default class App extends Component {
 
   render() {
 
-    const { all_data, jump_data, username, run, visible, url } = this.state
+    const { all_data, jump_data, extra_jump_data, extra_jump_top_data, username, run, visible, url } = this.state
 
     this.addPlacesAndFormatCA(all_data)
     const filtered_data = this.filterData()
@@ -207,7 +226,8 @@ export default class App extends Component {
             user_list={ user_list } username={ username } visible={ visible } run={ run } />
         </div>
 
-        <LeaderboardContainer all_data={ all_data } jump_data={ jump_data } filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } url={ url }
+        <LeaderboardContainer all_data={ all_data } jump_data={ jump_data } extra_jump_data={ extra_jump_data } extra_jump_top_data={ extra_jump_top_data }
+            filtered_data={ filtered_data } filtered_jumps={ filtered_jumps } url={ url }
             username={ username } visible={ visible } handleNameClick={ this.handleNameClick } handleRunClick={ this.handleRunClick } />
 
       </div>
