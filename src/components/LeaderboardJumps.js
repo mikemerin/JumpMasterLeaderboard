@@ -52,6 +52,11 @@ export default class LeaderboardJumps extends Component {
     }
   }
 
+  // const { jump_data, extra_jump_top_data } = props;
+
+  // console.log(props)
+
+
   headers = (n) => {
 
     return jump_names[n].map((jump, i) => (
@@ -70,19 +75,18 @@ export default class LeaderboardJumps extends Component {
     switch(n) {
       case 0: type = [0,1]; break;
       case 1: type = [2,3]; break;
-      case 2: type = [0,1]; break;
-      case 3: type = [2,3]; break;
-      case 4: type = [4]; break;
+      case 2: type = [4,5]; break;
+      case 3: type = [6,7]; break;
+      case 4: type = [8]; break;
+      default: type = '';
     }
     // const type = n === 0 ? [0,1] : [2,3]
     // debugger
     const jd = this.props.jump_data;
+    const ejd = this.props.extra_jump_top_data;
 
     var all_points_0 = [], all_jumps_0 = [], all_streaks_0 = []
     var all_jumps_1 = [], all_streaks_1 = [], all_points_1 = []
-    var all_jumps_2 = [], all_streaks_2 = [], all_points_2 = []
-    var all_jumps_3 = [], all_streaks_3 = [], all_points_3 = []
-    var all_jumps_4 = [], all_streaks_4 = [], all_points_4 = []
 
     if (n < 2) {
       jump_names[type[0]].forEach(jump => {
@@ -172,156 +176,193 @@ export default class LeaderboardJumps extends Component {
         }
       })
     } else if (n < 4) {
-      // to do here
       jump_names[type[0]].forEach(jump => {
-        if (jd.gate_points) {
-          if (jd[jump + "_points"]["id"]) {
-            all_points_2.push(
-              <Table.Cell selectable key={jump} verticalAlign='middle'>
-                <Link to={ '/run/' + jd[jump + "_points"]["id"] } onClick={ this.props.handleRunClick } >
-                  <span className='outlinePB'>
-                    { jd[`${jump}_points`]['number'] }
-                  </span> <br />
-                    { jd[`${jump}_points`]['username'] }
-                </Link>
-              </Table.Cell>)
-          } else {
-            all_points_2.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ jd[`${jump}_points`]['number'] }</span> <br /> { jd[`${jump}_points`]['username'] }</Table.Cell>)
-          }
-          if (jd[jump + "_jumps"]["id"]) {
-            all_jumps_2.push(
-              <Table.Cell selectable key={jump} verticalAlign='middle'>
-                <Link to={ '/run/' + jd[jump + "_jumps"]["id"] } onClick={ this.props.handleRunClick } >
-                  <span className='outlinePB'>
-                    { jd[`${jump}_jumps`]['number'] }
-                  </span> <br />
-                    { jd[`${jump}_jumps`]['username'] }
-                </Link>
-              </Table.Cell>)
-          } else {
-            all_jumps_2.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ jd[`${jump}_jumps`]['number'] }</span> <br /> { jd[`${jump}_jumps`]['username'] }</Table.Cell>)
-          }
-          if (jd[jump + "_streak"]["id"]) {
-            all_streaks_2.push(
-              <Table.Cell selectable key={jump} verticalAlign='middle'>
-                <Link to={ '/run/' + jd[jump + "_streak"]["id"] } onClick={ this.props.handleRunClick } >
-                  <span className='outlinePB'>
-                    { jd[`${jump}_streak`]['number'] }
-                  </span> <br />
-                    { jd[`${jump}_streak`]['username'] }
-                </Link>
-              </Table.Cell>)
-          } else {
-            all_streaks_2.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ jd[`${jump}_streak`]['number'] }</span> <br /> { jd[`${jump}_streak`]['username'] }</Table.Cell>)
-          }
+        if (ejd['16px_jumps']) {
+          // to do: will enble once individual jump info is added
+          // if (ejd[jump + "_points"]["id"]) {
+          //   all_points_0.push(
+          //     <Table.Cell selectable key={jump} verticalAlign='middle'>
+          //       <Link to={ '/jumps/' + ejd[jump + "_points"]["id"] } onClick={ this.props.handleRunClick } >
+          //         <span className='outlinePB'>
+          //           { ejd[`${jump}_points`]['number'] }
+          //         </span> <br />
+          //           { ejd[`${jump}_points`]['username'] }
+          //       </Link>
+          //     </Table.Cell>)
+          // } else {
+            all_points_0.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_points`]['number'] }</span> <br /> { ejd[`${jump}_points`]['username'] }</Table.Cell>)
+          // }
+          // to do: will enble once individual jump info is added
+          // if (ejd[jump + "_jumps"]["id"]) {
+          //   all_jumps_0.push(
+          //     <Table.Cell selectable key={jump} verticalAlign='middle'>
+          //       <Link to={ '/jumps/' + ejd[jump + "_jumps"]["id"] } onClick={ this.props.handleRunClick } >
+          //         <span className='outlinePB'>
+          //           { ejd[`${jump}_jumps`]['number'] }
+          //         </span> <br />
+          //           { ejd[`${jump}_jumps`]['username'] }
+          //       </Link>
+          //     </Table.Cell>)
+          // } else {
+            all_jumps_0.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_jumps`]['number'] }</span> <br /> { ejd[`${jump}_jumps`]['username'] }</Table.Cell>)
+          // }
+          // to do: will enble once individual jump info is added
+          // if (ejd[jump + "_streak"]["id"]) {
+          //   all_streaks_0.push(
+          //     <Table.Cell selectable key={jump} verticalAlign='middle'>
+          //       <Link to={ '/jumps/' + ejd[jump + "_streak"]["id"] } onClick={ this.props.handleRunClick } >
+          //         <span className='outlinePB'>
+          //           { ejd[`${jump}_streak`]['number'] }
+          //         </span> <br />
+          //           { ejd[`${jump}_streak`]['username'] }
+          //       </Link>
+          //     </Table.Cell>)
+          // } else {
+            all_streaks_0.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_streak`]['number'] }</span> <br /> { ejd[`${jump}_streak`]['username'] }</Table.Cell>)
+          // }
         }
       })
       jump_names[type[1]].forEach(jump => {
-        if (jd.gate_points) {
-          if (jd[jump + "_points"]["id"]) {
-            all_points_3.push(
-              <Table.Cell selectable key={jump} verticalAlign='middle'>
-                <Link to={ '/run/' + jd[jump + "_points"]["id"] } onClick={ this.props.handleRunClick } >
-                  <span className='outlinePB'>
-                    { jd[`${jump}_points`]['number'] }
-                  </span> <br />
-                    { jd[`${jump}_points`]['username'] }
-                </Link>
-              </Table.Cell>)
-          } else {
-            all_points_3.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ jd[`${jump}_points`]['number'] }</span> <br /> { jd[`${jump}_points`]['username'] }</Table.Cell>)
-          }
-          if (jd[jump + "_jumps"]["id"]) {
-            all_jumps_3.push(
-              <Table.Cell selectable key={jump} verticalAlign='middle'>
-                <Link to={ '/run/' + jd[jump + "_jumps"]["id"] } onClick={ this.props.handleRunClick } >
-                  <span className='outlinePB'>
-                    { jd[`${jump}_jumps`]['number'] }
-                  </span> <br />
-                    { jd[`${jump}_jumps`]['username'] }
-                </Link>
-              </Table.Cell>)
-          } else {
-            all_jumps_3.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ jd[`${jump}_jumps`]['number'] }</span> <br /> { jd[`${jump}_jumps`]['username'] }</Table.Cell>)
-          }
-          if (jd[jump + "_streak"]["id"]) {
-            all_streaks_3.push(
-              <Table.Cell selectable key={jump} verticalAlign='middle'>
-                <Link to={ '/run/' + jd[jump + "_streak"]["id"] } onClick={ this.props.handleRunClick } >
-                  <span className='outlinePB'>
-                    { jd[`${jump}_streak`]['number'] }
-                  </span> <br />
-                    { jd[`${jump}_streak`]['username'] }
-                </Link>
-              </Table.Cell>)
-          } else {
-            all_streaks_3.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ jd[`${jump}_streak`]['number'] }</span> <br /> { jd[`${jump}_streak`]['username'] }</Table.Cell>)
-          }
+        if (ejd['16px_jumps']) {
+          // to do: will enble once individual jump info is added
+          // if (ejd[jump + "_points"]["id"]) {
+          //   all_points_1.push(
+          //     <Table.Cell selectable key={jump} verticalAlign='middle'>
+          //       <Link to={ '/jumps/' + ejd[jump + "_points"]["id"] } onClick={ this.props.handleRunClick } >
+          //         <span className='outlinePB'>
+          //           { ejd[`${jump}_points`]['number'] }
+          //         </span> <br />
+          //           { ejd[`${jump}_points`]['username'] }
+          //       </Link>
+          //     </Table.Cell>)
+          // } else {
+            all_points_1.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_points`]['number'] }</span> <br /> { ejd[`${jump}_points`]['username'] }</Table.Cell>)
+          // }
+          // to do: will enble once individual jump info is added
+          // if (ejd[jump + "_jumps"]["id"]) {
+          //   all_jumps_1.push(
+          //     <Table.Cell selectable key={jump} verticalAlign='middle'>
+          //       <Link to={ '/jumps/' + ejd[jump + "_jumps"]["id"] } onClick={ this.props.handleRunClick } >
+          //         <span className='outlinePB'>
+          //           { ejd[`${jump}_jumps`]['number'] }
+          //         </span> <br />
+          //           { ejd[`${jump}_jumps`]['username'] }
+          //       </Link>
+          //     </Table.Cell>)
+          // } else {
+            all_jumps_1.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_jumps`]['number'] }</span> <br /> { ejd[`${jump}_jumps`]['username'] }</Table.Cell>)
+          // }
+          // to do: will enble once individual jump info is added
+          // if (ejd[jump + "_streak"]["id"]) {
+          //   all_streaks_1.push(
+          //     <Table.Cell selectable key={jump} verticalAlign='middle'>
+          //       <Link to={ '/jumps/' + ejd[jump + "_streak"]["id"] } onClick={ this.props.handleRunClick } >
+          //         <span className='outlinePB'>
+          //           { ejd[`${jump}_streak`]['number'] }
+          //         </span> <br />
+          //           { ejd[`${jump}_streak`]['username'] }
+          //       </Link>
+          //     </Table.Cell>)
+          // } else {
+            all_streaks_1.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_streak`]['number'] }</span> <br /> { ejd[`${jump}_streak`]['username'] }</Table.Cell>)
+          // }
+        }
+      })
+    } else if (n === 4) {
+      jump_names[type[0]].forEach(jump => {
+        if (jump === "secret5") { jump = "?????" }
+        if (ejd['16px_jumps']) {
+          // to do: will enble once individual jump info is added
+          // if (ejd[jump + "_points"]["id"]) {
+          //   all_points_0.push(
+          //     <Table.Cell selectable key={jump} verticalAlign='middle'>
+          //       <Link to={ '/jumps/' + ejd[jump + "_points"]["id"] } onClick={ this.props.handleRunClick } >
+          //         <span className='outlinePB'>
+          //           { ejd[`${jump}_points`]['number'] }
+          //         </span> <br />
+          //           { ejd[`${jump}_points`]['username'] }
+          //       </Link>
+          //     </Table.Cell>)
+          // } else {
+            all_points_0.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_points`]['number'] }</span> <br /> { ejd[`${jump}_points`]['username'] }</Table.Cell>)
+          // }
+          // to do: will enble once individual jump info is added
+          // if (ejd[jump + "_jumps"]["id"]) {
+          //   all_jumps_0.push(
+          //     <Table.Cell selectable key={jump} verticalAlign='middle'>
+          //       <Link to={ '/jumps/' + ejd[jump + "_jumps"]["id"] } onClick={ this.props.handleRunClick } >
+          //         <span className='outlinePB'>
+          //           { ejd[`${jump}_jumps`]['number'] }
+          //         </span> <br />
+          //           { ejd[`${jump}_jumps`]['username'] }
+          //       </Link>
+          //     </Table.Cell>)
+          // } else {
+            all_jumps_0.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_jumps`]['number'] }</span> <br /> { ejd[`${jump}_jumps`]['username'] }</Table.Cell>)
+          // }
+          // to do: will enble once individual jump info is added
+          // if (ejd[jump + "_streak"]["id"]) {
+          //   all_streaks_0.push(
+          //     <Table.Cell selectable key={jump} verticalAlign='middle'>
+          //       <Link to={ '/jumps/' + ejd[jump + "_streak"]["id"] } onClick={ this.props.handleRunClick } >
+          //         <span className='outlinePB'>
+          //           { ejd[`${jump}_streak`]['number'] }
+          //         </span> <br />
+          //           { ejd[`${jump}_streak`]['username'] }
+          //       </Link>
+          //     </Table.Cell>)
+          // } else {
+            all_streaks_0.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_streak`]['number'] }</span> <br /> { ejd[`${jump}_streak`]['username'] }</Table.Cell>)
+          // }
         }
       })
     }
 
 
-    return (
-      <Table.Body>
-        <Table.Row>
-          <Table.Cell><h4>Points</h4></Table.Cell>
-          { all_points_0 }
-          <Table.Cell><h4>Points</h4></Table.Cell>
-          { all_points_1 }
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell><h4>Jumps</h4></Table.Cell>
-          { all_jumps_0 }
-          <Table.Cell><h4>Jumps</h4></Table.Cell>
-          { all_jumps_1 }
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell><h4>Streak</h4></Table.Cell>
-          { all_streaks_0 }
-          <Table.Cell><h4>Streak</h4></Table.Cell>
-          { all_streaks_1 }
-        </Table.Row>
-      </Table.Body>
-    )
-
+    if (n < 4) {
+      return (
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell><h4>Points</h4></Table.Cell>
+            { all_points_0 }
+            <Table.Cell><h4>Points</h4></Table.Cell>
+            { all_points_1 }
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell><h4>Jumps</h4></Table.Cell>
+            { all_jumps_0 }
+            <Table.Cell><h4>Jumps</h4></Table.Cell>
+            { all_jumps_1 }
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell><h4>Streak</h4></Table.Cell>
+            { all_streaks_0 }
+            <Table.Cell><h4>Streak</h4></Table.Cell>
+            { all_streaks_1 }
+          </Table.Row>
+        </Table.Body>
+      )
+    } else {
+      return (
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell><h4>Points</h4></Table.Cell>
+            { all_points_0 }
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell><h4>Jumps</h4></Table.Cell>
+            { all_jumps_0 }
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell><h4>Streak</h4></Table.Cell>
+            { all_streaks_0 }
+          </Table.Row>
+        </Table.Body>
+      )
+    }
   }
 
   render() {
-
-    const { extra_jump_data } = this.props;
-
-    if (this.props.extra_jump_data.length > 0) {
-      var jump_types = [];
-
-      for (let i = 4; i < 9; i++) {
-        jump_names[i].forEach(jump => {
-          ['_jumps', '_streak', '_points'].forEach(type => {
-            jump_types.push(jump + type);
-          })
-        })
-      }
-
-      var jumps = {};
-
-      jump_types.forEach(type => {
-        jumps[type] = { 'username': '', 'multi': {}, 'id': '', 'number': 0 };
-      })
-
-      for (let i = 4; i < 9; i++) {
-        jump_names[i].forEach(jump => {
-          if (jump === "secret5") { jump = "?????" }
-          var scores = extra_jump_data.filter(extra => extra.jump_name === jump)
-          // debugger
-          scores.forEach(score => {
-
-          })
-        })
-      }
-
-      // debugger
-
-    }
 
     return (
       <Transition visible={ this.props.visible } animation='slide down' duration={1200}>
