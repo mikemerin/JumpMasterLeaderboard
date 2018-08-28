@@ -236,7 +236,7 @@ export default class LeaderboardJumps extends Component {
           //       </Link>
           //     </Table.Cell>)
           // } else {
-            all_points_1.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_points`]['number'] }</span> <br /> { ejd[`${jump}_points`]['username'] }</Table.Cell>)
+            all_points_1.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_points`]['number'] }</span> <br /> { ejd[`${jump}_points`]['username'].replace("%20", " ") }</Table.Cell>)
           // }
           // to do: will enble once individual jump info is added
           // if (ejd[jump + "_jumps"]["id"]) {
@@ -250,7 +250,7 @@ export default class LeaderboardJumps extends Component {
           //       </Link>
           //     </Table.Cell>)
           // } else {
-            all_jumps_1.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_jumps`]['number'] }</span> <br /> { ejd[`${jump}_jumps`]['username'] }</Table.Cell>)
+            all_jumps_1.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_jumps`]['number'] }</span> <br /> { ejd[`${jump}_jumps`]['username'].replace("%20", " ") }</Table.Cell>)
           // }
           // to do: will enble once individual jump info is added
           // if (ejd[jump + "_streak"]["id"]) {
@@ -264,7 +264,7 @@ export default class LeaderboardJumps extends Component {
           //       </Link>
           //     </Table.Cell>)
           // } else {
-            all_streaks_1.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_streak`]['number'] }</span> <br /> { ejd[`${jump}_streak`]['username'] }</Table.Cell>)
+            all_streaks_1.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_streak`]['number'] }</span> <br /> { ejd[`${jump}_streak`]['username'].replace("%20", " ") }</Table.Cell>)
           // }
         }
       })
@@ -284,7 +284,7 @@ export default class LeaderboardJumps extends Component {
           //       </Link>
           //     </Table.Cell>)
           // } else {
-            all_points_0.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_points`]['number'] }</span> <br /> { ejd[`${jump}_points`]['username'] }</Table.Cell>)
+            all_points_0.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_points`]['number'] }</span> <br /> { ejd[`${jump}_points`]['username'].replace("%20", " ") }</Table.Cell>)
           // }
           // to do: will enble once individual jump info is added
           // if (ejd[jump + "_jumps"]["id"]) {
@@ -298,7 +298,7 @@ export default class LeaderboardJumps extends Component {
           //       </Link>
           //     </Table.Cell>)
           // } else {
-            all_jumps_0.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_jumps`]['number'] }</span> <br /> { ejd[`${jump}_jumps`]['username'] }</Table.Cell>)
+            all_jumps_0.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_jumps`]['number'] }</span> <br /> { ejd[`${jump}_jumps`]['username'].replace("%20", " ") }</Table.Cell>)
           // }
           // to do: will enble once individual jump info is added
           // if (ejd[jump + "_streak"]["id"]) {
@@ -312,7 +312,7 @@ export default class LeaderboardJumps extends Component {
           //       </Link>
           //     </Table.Cell>)
           // } else {
-            all_streaks_0.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_streak`]['number'] }</span> <br /> { ejd[`${jump}_streak`]['username'] }</Table.Cell>)
+            all_streaks_0.push(<Table.Cell key={jump} verticalAlign='middle'><span className='outlinePB'>{ ejd[`${jump}_streak`]['number'] }</span> <br /> { ejd[`${jump}_streak`]['username'].replace("%20", " ") }</Table.Cell>)
           // }
         }
       })
@@ -426,7 +426,7 @@ export default class LeaderboardJumps extends Component {
           <Table celled color="blue" inverted striped fixed compact="very" size="small" textAlign="center" >
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell><h4>Secret</h4></Table.HeaderCell>
+                <Table.HeaderCell><h4>Final</h4></Table.HeaderCell>
                 { this.headers(8) }
               </Table.Row>
             </Table.Header>
